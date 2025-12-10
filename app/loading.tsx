@@ -1,5 +1,5 @@
-import css from "./loading.module.css";
+import styles from "./loading.module.css";
 
 export default function Loading() {
-  return <p className={css.loading}>Loading, please wait...</p>;
+  return <div className={styles.loader}>Loading...</div>;
 }
