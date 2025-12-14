@@ -1,0 +1,171 @@
+.footer {
+  background-color: #f3e6f9;
+  padding: 50px 0;
+}
+
+.container {
+  max-width: 375px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+  padding: 0 20px;
+}
+
+.wraper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 8px;
+  gap: 32px;
+}
+
+.logo {
+  position: relative;
+  width: 159px;
+  height: 29px;
+  flex-shrink: 0;
+}
+
+.logoImg {
+  object-fit: contain;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: center;
+}
+
+.navLink {
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 1.5;
+  color: #000;
+  text-decoration-color: currentColor;
+  transition: text-decoration 150ms ease;
+}
+
+.social {
+  align-items: center;
+  display: flex;
+  gap: 12px;
+}
+.socialBtn {
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  border: 2px solid transparent;
+  color: #000;
+  text-decoration: none;
+  transition: border-color 150ms ease, color 150ms ease;
+}
+
+.socialBtn:hover,
+.socialBtn:focus-visible {
+  border-color: #000;
+}
+
+.socialBtn:active {
+  border-color: #8808cc;
+  color: #8808cc;
+}
+
+.socialIcon {
+  width: 24px;
+  height: 24px;
+  display: block;
+  fill: currentColor;
+  stroke: currentColor;
+}
+
+.navLink:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 1.5px;
+  text-decoration-color: currentColor;
+}
+
+.navLink:active {
+  color: #8808cc;
+  text-decoration: underline;
+  text-decoration-color: currentColor;
+  text-underline-offset: 3px;
+}
+
+.divider {
+  width: 100%;
+  max-width: 335px;
+  border: 0;
+  border-top: 2px solid #000;
+}
+.copy {
+  font-size: 12px;
+  line-height: 1.5;
+  color: #000;
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 704px;
+    padding: 0 32px;
+  }
+
+  .nav {
+    flex-direction: row;
+  }
+
+  .divider {
+    max-width: 704px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .footer {
+    padding: 82px 0;
+  }
+
+  .container {
+    max-width: 1312px;
+    padding: 0 64px;
+  }
+
+  .wraper {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 48px;
+  }
+
+  .nav {
+    justify-content: center;
+    flex: 1;
+  }
+
+  .logo {
+    width: 83px;
+    height: 15px;
+    flex-shrink: 0;
+  }
+  .social {
+    flex-shrink: 0;
+  }
+
+  .navLink {
+    font-size: 14px;
+  }
+
+  .divider {
+    max-width: none;
+  }
+
+  .copy {
+    font-size: 14px;
+  }
+}
