@@ -1,0 +1,45 @@
+.header {
+  background-color: #fff;
+}
+
+.container {
+  max-width: 375px;
+  margin: 0 auto;
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+/* кнопка 40x40, padding 8, бордер 2, радіус 6 */
+.menuBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 12px;
+
+  width: 40px;
+  height: 40px;
+  padding: 8px;
+
+  border: 2px solid #000;
+  border-radius: 6px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.menuBtn:focus-visible {
+  outline: 3px solid rgba(0, 0, 0, 0.3);
+  outline-offset: 3px;
+}
+
+.menuIcon {
+  display: block;
+}
