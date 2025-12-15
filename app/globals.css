@@ -11,6 +11,12 @@ body {
   background-color: #f8f9fa;
 }
 
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 ul,
 ol {
   list-style-type: none;
