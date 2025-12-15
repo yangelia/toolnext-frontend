@@ -1,6 +1,7 @@
 import "./globals.css";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
+import TanStackProvider from "../components/TanStackProvider/TanStackProvider";
 
 export const metadata = {
   title: "ToolNext",
@@ -9,17 +10,15 @@ export const metadata = {
 
 export default function RootLayout({
   children,
-}: {
-  children: React.ReactNode;
-}) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
       <body>
-        <div className="layout">
+        <TanStackProvider>
           <Header />
           <main>{children}</main>
           <Footer />
-        </div>
+        </TanStackProvider>
       </body>
     </html>
   );
