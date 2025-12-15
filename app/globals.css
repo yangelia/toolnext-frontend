@@ -53,3 +53,46 @@ button {
 main {
   flex: 1;
 }
+
+ul,
+ol {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  /* font-style: normal;
+    color: inherit; */
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: 100%;
+}
+
+button {
+  cursor: pointer;
+}
+
+main {
+  flex: 1;
+}
+
+.layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
