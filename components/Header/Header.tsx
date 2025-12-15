@@ -33,7 +33,7 @@ export default function Header() {
               Опублікувати оголошення
             </Link>
           )}
-          <HeaderMenu isAuth={false} user={user} />
+          <HeaderMenu isAuth={isAuth} user={user} />
         </div>
         <HeaderDesktopNav isAuth={isAuth} user={user} />
       </div>

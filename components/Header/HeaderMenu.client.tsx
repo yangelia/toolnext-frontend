@@ -14,7 +14,7 @@ interface HeaderMenuProps {
   user: User;
 }
 
-const HeaderMenu = ({ isAuth, user }: HeaderMenuProps) => {
+export default function HeaderMenu({ isAuth, user }: HeaderMenuProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const iconId = isMenuOpen ? "icon-close" : "icon-menu";
@@ -22,12 +22,14 @@ const HeaderMenu = ({ isAuth, user }: HeaderMenuProps) => {
 
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setIsMenuOpen(false);
+      if (e.key === "Escape") closeMenu();
     };
+
     if (isMenuOpen) {
       document.addEventListener("keydown", onKeyDown);
       document.body.style.overflow = "hidden";
     }
+
     return () => {
       document.removeEventListener("keydown", onKeyDown);
       document.body.style.overflow = "";
@@ -40,28 +42,28 @@ const HeaderMenu = ({ isAuth, user }: HeaderMenuProps) => {
         className={css.menuBtn}
         type="button"
         aria-label={isMenuOpen ? "Close menu" : "Open menu"}
+        aria-expanded={isMenuOpen}
+        aria-controls="mobile-menu"
         onClick={() => setIsMenuOpen((v) => !v)}
       >
         <svg className={css.menuIcon} width="24" height="24" aria-hidden="true">
           <use href={`/icons/sprite.svg#${iconId}`} />
         </svg>
-
-        {isMenuOpen && (
-          <div className={css.backdrop} onClick={closeMenu}>
-            <div
-              id="mobile-menu"
-              className={css.menuPanel}
-              role="dialog"
-              aria-modal="true"
-              onClick={(e) => e.stopPropagation()} // прибрала закриття меню кліком на панельці
-            >
-              <HeaderNav isAuth={isAuth} user={user} onClose={closeMenu} />
-            </div>
-          </div>
-        )}
       </button>
+
+      {isMenuOpen && (
+        <div className={css.backdrop} onClick={closeMenu}>
+          <div
+            id="mobile-menu"
+            className={css.menuPanel}
+            role="dialog"
+            aria-modal="true"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <HeaderNav isAuth={isAuth} user={user} onClose={closeMenu} />
+          </div>
+        </div>
+      )}
     </>
   );
-};
-
-export default HeaderMenu;
+}
