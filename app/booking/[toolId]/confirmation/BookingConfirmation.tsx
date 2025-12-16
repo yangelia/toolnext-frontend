@@ -5,16 +5,11 @@ export default function BookingConfirmationPage() {
   return (
     <main className={styles.page}>
       <section className={styles.card}>
-        <h1 className={styles.title}>
-          Інструмент успішно
-          <br />
-          заброньовано
-        </h1>
+        <h1 className={styles.title}>Інструмент успішно заброньовано</h1>
 
         <p className={styles.text}>
-          Власник інструменту скоро з вами зв’яжеться
-          <br />
-          стосовно деталей та оплати вашої броні
+          Власник інструменту скоро з вами зв’яжеться стосовно деталей та оплати
+          вашої броні
         </p>
 
         <Link href="/" className={styles.button}>
