@@ -1,3 +1,42 @@
+import Link from "next/link";
+import Image from "next/image";
+import css from "./Header.module.css";
+import HeaderMenu from "./HeaderMenu.client";
+import HeaderDesktopNav from "./HeaderDesktopNav";
+
 export default function Header() {
-  return <header>{/* TODO: Add navigation */}</header>;
+  //! test
+  const isAuth = false;
+  // const isAuth = true;
+
+  const user = {
+    name: "Антон Петренко",
+    avatarUrl: "",
+  };
+
+  return (
+    <header className={css.header}>
+      <div className={css.container}>
+        <Link href="/" className={css.logo} aria-label="ToolNext home">
+          <Image
+            src="/images/Tool-Next.svg"
+            alt="ToolNext"
+            width={124}
+            height={20}
+            priority
+          />
+        </Link>
+
+        <div className={css.actions}>
+          {isAuth && (
+            <Link href="/tools/create" className={css.publishBtn}>
+              Опублікувати оголошення
+            </Link>
+          )}
+          <HeaderMenu isAuth={isAuth} user={user} />
+        </div>
+        <HeaderDesktopNav isAuth={isAuth} user={user} />
+      </div>
+    </header>
+  );
 }
