@@ -42,8 +42,8 @@ export default function RegisterPage() {
     onSubmit: async (values, { setSubmitting, setStatus }) => {
       setStatus(undefined);
       try {
-        const endpoint = `${API_URL}/auth/register`;
-        const res = await fetch(endpoint, {
+        // const endpoint = `${API_URL}/auth/register`;
+        const res = await fetch("/auth/register", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           credentials: "include",
