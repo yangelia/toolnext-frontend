@@ -6,8 +6,8 @@ import HeaderDesktopNav from "./HeaderDesktopNav";
 
 export default function Header() {
   //! test
-  // const isAuth = false;
-  const isAuth = true;
+  const isAuth = false;
+  // const isAuth = true;
 
   const user = {
     name: "Антон Петренко",
