@@ -1,7 +1,8 @@
-"use client";
+'use client';
 
 import axios from "axios";
-import { useAuthStore } from "@/lib/store/authStore";
+import { useAuthStore } from "../store/authStore";
+// import { useAuthStore } from "@/lib/store/authStore";
 
 export const api = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
@@ -17,7 +18,7 @@ api.interceptors.request.use((config) => {
   }
 
   return config;
-});
+}); 
 
 // Optional error handling
 api.interceptors.response.use(
@@ -27,3 +28,4 @@ api.interceptors.response.use(
     throw error;
   }
 );
+
