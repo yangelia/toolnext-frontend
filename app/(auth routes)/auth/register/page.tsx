@@ -91,9 +91,9 @@ export default function RegisterPage() {
       <div className={styles.page}>
         <div className={styles.card}>
           <div className={styles.formSection}>
-            {/* <Link href="/" className={styles.logo}>
+            <Link href="/" className={styles.logo}>
               <Image
-                src="/svg/logo.svg"
+                src="../../../icon.svg"
                 alt="ToolNext"
                 width={28}
                 height={28}
@@ -101,7 +101,7 @@ export default function RegisterPage() {
                 priority
               />
               <span>ToolNext</span>
-            </Link> */}
+            </Link>
 
             <div>
               <h1 className={styles.title}>Реєстрація</h1>
