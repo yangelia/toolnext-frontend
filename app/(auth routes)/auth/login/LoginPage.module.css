@@ -1,0 +1,206 @@
+/* Основна стилізація для сторінки входу */
+
+.container {
+  /* Робимо компонент повноекранним або максимально доступним */
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.page {
+  /* Обмеження максимальної ширини контенту */
+  width: 100%;
+  max-width: 1200px;
+}
+
+.card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: grid;
+  /* На десктопі: 1 колонка для форми, 1 для зображення */
+  grid-template-columns: 1fr 1fr;
+  min-height: 70vh; 
+  overflow: hidden; /* Обрізаємо кути зображення */
+}
+
+/* Секція форми (ліва колонка) */
+.formSection {
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; 
+  align-items: center; 
+  text-align: center;
+}
+
+/* Секція зображення (права колонка, прихована на мобільних) */
+.imageSection {
+  position: relative;
+  /* Використовуємо Image fill в компоненті, тому тут min-height */
+  min-height: 100%;
+  background-color: #333; 
+}
+
+/* //================================================= */
+
+/* Адаптивність (Мобільні пристрої) */
+
+@media (max-width: 768px) {
+  .card {
+    /* На мобільних пристроях: лише одна колонка (форма) */
+    grid-template-columns: 1fr;
+  }
+
+  .imageSection {
+    /* Приховуємо зображення на маленьких екранах */
+    display: none;
+  }
+
+  .formSection {
+    padding: 20px;
+  }
+}
+
+/* //================================================= */
+
+/* Типографіка та елементи форми */
+
+.title {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.form {
+  width: 100%;
+  max-width: 400px; /* Обмеження ширини полів */
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Відступ між полями */
+  margin-bottom: 20px;
+}
+
+.field {
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  font-size: 0.9rem;
+  color: #333;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.input {
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+
+.input:focus {
+  border-color: #5d3ebc; /* Фіолетовий колір при фокусі */
+  outline: none;
+}
+
+.inputError {
+  border-color: #e74c3c; /* Червоний колір при помилці */
+}
+
+.errorText {
+  color: #e74c3c;
+  font-size: 0.8rem;
+  margin-top: 5px;
+}
+
+/* /* //================================================= */
+
+/* Кнопки та посилання */
+
+.submit {
+  padding: 12px;
+  background-color: #5d3ebc; /* Насичений фіолетовий колір кнопки */
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.submit:hover:not(:disabled) {
+  background-color: #4c30a8;
+}
+
+.submit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.switchAuth {
+  font-size: 1rem;
+  color: #666;
+  margin-top: 20px;
+}
+
+.switchAuth a {
+  color: #5d3ebc;
+  text-decoration: none;
+  font-weight: 600;
+  margin-left: 5px;
+}
+
+.footerNote {
+  font-size: 0.8rem;
+  color: #aaa;
+  margin-top: auto; /* Штовхає елемент до низу контейнера flex */
+  padding-top: 20px;
+}
+
+/* ================================================= */
+
+/* ЛОГОТИП */
+
+.logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #333;
+  font-weight: 700;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.logoIcon {
+  margin-right: 8px;
+}
+
+/* ================================================= */
+
+/* СТАТУС ФОРМИ (Повідомлення про помилку) */
+
+
+.formStatus {
+  padding: 10px;
+  background-color: #fcebeb;
+  border: 1px solid #e74c3c;
+  color: #e74c3c;
+  border-radius: 4px;
+  text-align: center;
+  font-size: 0.9rem;
+}
