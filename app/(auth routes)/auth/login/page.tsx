@@ -8,6 +8,8 @@ import Link from "next/link";
 import * as Yup from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useState } from "react";
+import { useAuthStore } from "@/lib/store/authStore";
+
 
 const validationSchema = Yup.object({
   email: Yup.string()
@@ -22,11 +24,13 @@ const validationSchema = Yup.object({
 export default function LoginPage() {
   const router = useRouter();
   const [error, setError] = useState('');
+  const setUser = useAuthStore((state) => state.setUser);
 
   const handleSubmit = async (values: LoginRequest) => {
     try {
       const res = await login(values);
       if (res) {
+        setUser(res);
         router.push('/profile');
       } else {
         setError('Invalid email or password');
