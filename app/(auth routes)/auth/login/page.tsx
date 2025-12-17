@@ -41,82 +41,88 @@ export default function LoginPage() {
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.page}>
-        <div className={styles.card}>
-          <div className={styles.formSection}>
-            <div>
-              <h1 className={styles.title}>Вхід</h1>
+    <main className={styles.main}>
+      <div className={styles.container}>
+        <div className={styles.page}>
+          <div className={styles.card}>
+            <div className={styles.formSection}>
+              <div>
+                <h1 className={styles.title}>Вхід</h1>
+              </div>
+
+              <Formik
+                initialValues={{ email: '', password: '' }}
+                validationSchema={validationSchema}
+                onSubmit={handleSubmit}
+              >
+                {({ isSubmitting, errors, touched }) => (
+                  <Form className={styles.form}>
+                    <label className={styles.field}>
+
+                      <span className={styles.label}>Пошта*</span>
+      
+                      <Field
+                        type="email"
+                        name="email"
+                        placeholder="Ваша пошта"
+                        className={`${styles.input}
+                        ${errors.email && touched.email
+                            ? styles.inputError
+                            : ''
+                          }`}
+                      />
+                      <ErrorMessage
+                        name="email"
+                        component="div"
+                        className={styles.errorText}
+                      />
+                    </label>
+
+                    <label className={styles.field}>
+                      <span className={styles.label}>Пароль*</span>
+                      <Field
+                        type="password"
+                        name="password"
+                        placeholder="Ваш пароль"
+                        className={`${styles.input}
+                        ${errors.password && touched.password
+                            ? styles.inputError
+                            : ''
+                          }`}
+                      />
+                      <ErrorMessage
+                        name="password"
+                        component="div"
+                        className={styles.errorText}
+                      />
+                    </label>
+
+                    <button
+                      type="submit"
+                      className={styles.submit}
+                      disabled={isSubmitting}
+                    >
+                      Увійти
+                    </button>
+
+                    {error && <p className={styles.errorText}>{error}</p>}
+                  </Form>
+                )}
+              </Formik>
+
+              <div className={styles.switchAuth}>
+                <span>Не маєте аккаунту?</span>
+                <Link href="/auth/register">Реєстрація</Link>
+              </div>
+
+              <p className={styles.footerNote}>© 2025 ToolNext</p>
+
             </div>
 
-            <Formik
-              initialValues={{ email: '', password: '' }}
-              validationSchema={validationSchema}
-              onSubmit={handleSubmit}
-            >
-              {({ isSubmitting, errors, touched }) => (
-                <Form className={styles.form}>
-                  <label className={styles.field}>
-                    Пошта*
-                    <Field
-                      type="email"
-                      name="email"
-                      placeholder="Ваша пошта"
-                      className={`${styles.input}
-                       ${errors.email && touched.email
-                          ? styles.inputError
-                          : ''
-                        }`}
-                    />
-                    <ErrorMessage
-                      name="email"
-                      component="div"
-                      className={styles.errorText}
-                    />
-                  </label>
-
-                  <label className={styles.field}>
-                    Пароль*
-                    <Field
-                      type="password"
-                      name="password"
-                      placeholder="Ваш пароль"
-                      className={`${styles.input}
-                      ${errors.password && touched.password
-                          ? styles.inputError
-                          : ''
-                        }`}
-                    />
-                    <ErrorMessage
-                      name="password"
-                      component="div"
-                      className={styles.errorText}
-                    />
-                  </label>
-
-                  <button
-                    type="submit"
-                    className={styles.submit}
-                    disabled={isSubmitting}
-                  >
-                    Увійти
-                  </button>
-
-                  {error && <p>{error}</p>}
-                </Form>
-              )}
-            </Formik>
-
-            <div className={styles.switchAuth}>
-              <span>Не маєте аккаунту?</span>
-              <Link href="/auth/register">Реєстрація</Link>
-            </div>
-            <p className={styles.footerNote}>© 2025 ToolNext</p>
+            <div className={styles.imageSection} aria-hidden></div>
           </div>
-
-          <div className={styles.imageSection} aria-hidden></div>
         </div>
       </div>
-    </div>
+    </main>
   );
 }
