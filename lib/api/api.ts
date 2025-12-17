@@ -9,7 +9,7 @@ export const api = axios.create({
   withCredentials: true, // cookies-based auth
 });
 
-// Optional error handling
+// Optional global error logging
 api.interceptors.response.use(
   (response) => response,
   (error) => {
