@@ -29,7 +29,7 @@ export default function LoginPage() {
   const handleSubmit = async (values: LoginRequest) => {
     try {
       const res = await login(values);
-      if (res) {
+      if (res && res.id && res.email) {
         setUser(res);
         router.push('/profile');
       } else {
