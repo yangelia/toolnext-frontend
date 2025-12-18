@@ -11,11 +11,6 @@ const inter = Inter({
   display: "swap",
 });
 
-export const metadata = {
-  title: "ToolNext",
-  description: "Платформа оренди інструментів",
-};
-
 export default function RootLayout({
   children,
 }: {
@@ -23,7 +18,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="uk">
-      <body>
+      <body className={inter.variable}>
         <TanStackProvider>
           <Header />
           <main>{children}</main>
