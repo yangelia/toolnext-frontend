@@ -1,0 +1,145 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  background-color: #ffffff;
+  width: 100%;
+}
+.page {
+  width: 100%;
+  background-color: #ffffff;
+  display: grid;
+  grid-template-columns: 1fr;
+}
+.formSection {
+  padding: 87px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.title {
+  font-size: 30px;
+  font-weight: 700;
+  color: #000000;
+  margin-bottom: 32px;
+  line-height: 120%;
+}
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  max-width: 448px;
+}
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  text-align: left; /* Текст лейблів завжди зліва */
+}
+.label {
+  font-size: 16px;
+  font-weight: 400;
+  color: #000000;
+}
+.input {
+  padding: 12px;
+  border: 1.5px solid #000000;
+  border-radius: 12px; /* Закруглення елементів форми */
+  font-size: 16px;
+  color: #000000;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  transition: border-color 0.2s ease;
+}
+.input:focus {
+  border-color: #8808cc;
+}
+.inputError {
+  border-color: #c40202 !important;
+}
+.errorText {
+  color: #c40202;
+  font-size: 12px;
+  margin-top: 4px;
+}
+.submit {
+  padding: 10px 24px;
+  background-color: #8808cc;
+  color: #ffffff;
+  border: none;
+  border-radius: 6px;
+  border: 1px solid;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  cursor: pointer;
+  width: 186px;
+  height: 44px;
+  align-self: center;
+  margin-bottom: 24px;
+  transition: opacity 0.2s ease;
+}
+.submit:hover,
+.submit:focus {
+  opacity: 0.9;
+}
+
+.submit:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+.switchAuth {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  text-align: center;
+  color: #000000;
+  align-self: center;
+}
+.switchAuth a:hover,
+.switchAuth a:focus {
+  color: #8808cc; /* Колір лінка зі специфікації */
+  text-decoration: underline;
+  margin-left: 4px;
+  font-weight: 500;
+}
+.imageSection {
+  display: none;
+}
+@media (min-width: 778) {
+  .formSection {
+    padding: 90px 32px;
+  }
+}
+@media (min-width: 1024px) {
+  .page {
+    grid-template-columns: 1fr 1fr; /* З'являється друга колонка */
+  }
+
+  .formSection {
+    padding: 60px;
+
+    text-align: left;
+  }
+
+  .title {
+    font-weight: 700;
+    font-size: 42px;
+    line-height: 120%;
+    margin-bottom: 40px;
+  }
+
+  .imageSection {
+    display: block; /* Показуємо зображення */
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+
+  .image {
+    object-fit: cover;
+  }
+}
