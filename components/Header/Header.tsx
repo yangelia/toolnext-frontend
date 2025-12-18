@@ -3,16 +3,11 @@ import Image from "next/image";
 import css from "./Header.module.css";
 import HeaderMenu from "./HeaderMenu.client";
 import HeaderDesktopNav from "./HeaderDesktopNav";
+import { getServerCurrentUser } from "@/lib/api/serverApi";
 
-export default function Header() {
-  //! test
-  const isAuth = false;
-  // const isAuth = true;
-
-  const user = {
-    name: "Антон Петренко",
-    avatarUrl: "",
-  };
+export default async function Header() {
+  const user = await getServerCurrentUser();
+  const isAuth = Boolean(user);
 
   return (
     <header className={css.header}>
@@ -33,8 +28,10 @@ export default function Header() {
               Опублікувати оголошення
             </Link>
           )}
+
           <HeaderMenu isAuth={isAuth} user={user} />
         </div>
+
         <HeaderDesktopNav isAuth={isAuth} user={user} />
       </div>
     </header>

@@ -26,7 +26,9 @@
   display: none;
 }
 
-.menuBtn {
+.menuBtn,
+.logoutBtn,
+.logoutBtnDesktop {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -42,19 +44,27 @@
 }
 
 .menuBtn:hover,
-.menuBtn:focus-visible {
+.menuBtn:focus-visible,
+.logoutBtn:hover,
+.logoutBtn:focus-visible,
+.logoutBtnDesktop:hover,
+.logoutBtnDesktop:focus-visible {
   background-color: #e7cdf4;
   border-color: #000;
   color: #000;
 }
 
-.menuBtn:active {
+.menuBtn:active,
+.logoutBtn:active,
+.logoutBtnDesktop:active {
   background-color: #8808cc;
   border-color: #8808cc;
   color: #fff;
 }
 
-.menuBtn:focus {
+.menuBtn:focus,
+.logoutBtn:focus,
+.logoutBtnDesktop:focus {
   outline: none;
 }
 
