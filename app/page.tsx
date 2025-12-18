@@ -1,4 +1,7 @@
 import styles from "./page.module.css";
+import Hero from "@/components/Hero/Hero";
+import Benefits from "@/components/Benefits/Benefits";
+
 
 export default function HomePage() {
   return (
@@ -8,6 +11,8 @@ export default function HomePage() {
       <section>
         <h2>Популярні інструменти</h2>
         {/* tools grid будет здесь */}
+        <Hero/>
+        <Benefits/>
       </section>
     </div>
   );

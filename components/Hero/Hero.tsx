@@ -1,15 +1,15 @@
+import SearchForm from "../searchForm/searchForm";
 import styles from "./Hero.module.css";
 
 export default function Hero() {
   return (
-    <section className={styles.hero}>
+    <section className={styles.container}>
+      <div className={styles.hero}>
       <div className={styles.content}>
-        <h1>ToolNext — ваш надійний сусід</h1>
+        <h1 className={styles.title}>ToolNext — ваш надійний сусід</h1>
 
-        <div className={styles.searchBox}>
-          <input type="text" placeholder="Знайдіть потрібний інструмент" />
-          <button>Пошук</button>
-        </div>
+        <SearchForm/>
+      </div>
       </div>
     </section>
   );
