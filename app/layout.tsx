@@ -1,19 +1,24 @@
 import "./globals.css";
+import { Inter } from "next/font/google";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Footer/Footer";
-import TanStackProvider from "../components/TanStackProvider/TanStackProvider";
+import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
 
-export const metadata = {
-  title: "ToolNext",
-  description: "Tool rental platform",
-};
+const inter = Inter({
+  subsets: ["latin", "cyrillic"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-inter",
+  display: "swap",
+});
 
 export default function RootLayout({
   children,
-}: Readonly<{ children: React.ReactNode }>) {
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html lang="en">
-      <body>
+    <html lang="uk">
+      <body className={inter.variable}>
         <TanStackProvider>
           <Header />
           <main>{children}</main>
