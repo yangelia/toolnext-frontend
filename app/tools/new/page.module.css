@@ -1,0 +1,18 @@
+.page {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 16px;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+/* Desktop */
+@media (min-width: 1200px) {
+  .page {
+    padding: 24px 16px;
+  }
+}
