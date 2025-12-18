@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import axios from "axios";
 
@@ -17,3 +17,4 @@ api.interceptors.response.use(
     throw error;
   }
 );
+
