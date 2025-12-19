@@ -1,5 +1,7 @@
-import styles from "./loading.module.css";
+import OverlayLoader from "@/components/OverlayLoader/OverlayLoader";
 
-export default function Loading() {
-  return <div className={styles.loader}>Loading...</div>;
+function Loading() {
+  return <OverlayLoader />;
 }
+
+export default Loading;
