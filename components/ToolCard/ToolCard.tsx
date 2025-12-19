@@ -1,3 +1,5 @@
+// toolnext-frontend\components\ToolCard\ToolCard.tsx
+
 import Link from "next/link";
 import type { Tool } from "@/types/tool";
 import css from "./ToolCard.module.css";
