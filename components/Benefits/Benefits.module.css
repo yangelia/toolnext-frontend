@@ -1,0 +1,167 @@
+.container{
+    font-family:  "Work Sans", sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+    color: #000000;
+    max-width: 375px;
+    margin-left: auto;  
+    margin-right: auto;
+}
+
+@media screen and (min-width: 768px) {
+    .container {
+        max-width: 768px;
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    .container {
+        max-width:1440px;
+        
+    }
+}
+.benefits{
+    padding: 64px 20px;
+}
+
+@media (min-width: 768px) {
+    .benefits {
+        padding: 64px 32px;
+    }
+}
+@media (min-width: 1440px) {
+    .benefits {
+        padding: 112px 64px;
+    }
+}
+.wrapper{
+    
+}
+@media (min-width: 768px) {
+    .wrapper {
+        
+    }
+}
+@media (min-width: 1440px) {
+    .wrapper {
+        
+    }
+}
+
+.benefitWrapper{
+    margin-bottom: 40px;
+}
+
+@media (min-width: 768px) {
+    .benefitWrapper {
+        
+    }
+}
+@media (min-width: 1440px) {
+    .benefitWrapper {
+        display: flex;
+        gap: 80px;
+        margin-bottom: 80px;
+    }
+}
+
+.benefitTitle{
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 120%;
+    letter-spacing: -0.01em;
+}
+
+@media (min-width: 768px) {
+    .benefitTitle {
+        margin-bottom: 24px;
+    }
+}
+@media (min-width: 1440px) {
+    .benefitTitle {
+        font-size: 40px;
+        width: 616px;
+        margin: 0;
+    }
+}
+
+.benefitText{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    color: #000;
+}
+
+@media (min-width: 768px) {
+    .benefitText {
+    }
+}
+
+@media (min-width: 1440px) {
+    .benefitText {
+        font-size: 18px;
+        width: 616px;
+        letter-spacing: 0.04em;
+    }
+}
+
+.title {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 140%;
+    letter-spacing: -0.01em;
+    margin-bottom: 24px;
+}
+@media (min-width: 1440px) {
+    .title {
+        font-size: 24px;
+    }
+}
+
+.text{
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+}
+@media (min-width: 1440px) {
+    .text {
+        font-size: 16px;
+    }
+}
+
+.list {
+    list-style-type: none;
+    padding-left: 0;
+    
+}
+
+@media (min-width: 1440px) {
+    .list {
+        display: flex;
+        gap: 32px;
+    }
+}
+.item{
+    margin-bottom: 32px;
+}
+@media (min-width: 1440px) {
+    .item {
+        margin-bottom: 0;
+        width: 416px;
+    }
+}
+
+.iconWrapper{
+    color: #000;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+
+.icon {
+    fill: currentColor; 
+    width: 48px; 
+    height: 48px;
+}

@@ -1,9 +1,11 @@
 import axios from "axios";
 import { create } from "zustand";
-interface User {
-  id: string;
-  email: string;
-}
+import { User } from "@/types/user";
+
+// interface User {
+//   id: string;
+//   email: string;
+// }
 
 interface AuthState {
   user: User | null;
