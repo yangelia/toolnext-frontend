@@ -1,7 +1,5 @@
 // lib\api\api.ts
 
-"use client";
-
 import axios from "axios";
 
 const API_URL =
