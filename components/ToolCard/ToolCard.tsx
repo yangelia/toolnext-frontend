@@ -1,11 +1,11 @@
 // toolnext-frontend\components\ToolCard\ToolCard.tsx
 
 import Link from "next/link";
-import type { Tool } from "@/types/tool";
+import type { ToolBasic } from "@/types/tool";
 import css from "./ToolCard.module.css";
 
 interface ToolCardProps {
-  tool: Tool;
+  tool: ToolBasic;
 }
 
 export default function ToolCard({

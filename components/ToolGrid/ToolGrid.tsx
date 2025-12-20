@@ -1,9 +1,11 @@
-import type { Tool } from "@/types/tool";
+// components\ToolGrid\ToolGrid.tsx
+
+import type { ToolBasic } from "@/types/tool";
 import ToolCard from "../ToolCard/ToolCard";
 import css from "./ToolGrid.module.css";
 
 interface ToolGridProps {
-  tools: Tool[];
+  tools: ToolBasic[];
 }
 
 export default function ToolGrid({

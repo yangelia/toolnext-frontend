@@ -1,12 +1,25 @@
-body {
-    background: #f2f2f2;
-    font-family: "Inter", sans-serif;
-}
+/* components/PopularTools/PopularTools.module.css */
 
 .container {
+    font-family: "Inter", sans-serif;
+    color: #000000;
+    max-width: 375px;
     margin: 0px auto;
-    padding: 48px 0px 116px 0px;
-    max-width: 1312px;
+    padding: 64px 20px;
+}
+
+@media screen and (min-width: 768px) {
+    .container {
+        max-width: 768px;
+        padding: 64px 32px;
+    }
+}
+
+@media screen and (min-width: 1440px) {
+    .container {
+        max-width: 1440px;
+        padding: 112px 64px;
+    }
 }
 
 .title {

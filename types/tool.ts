@@ -15,7 +15,7 @@ export interface BookedDate {
   end: string;
 }
 
-export interface ToolCard {
+export interface ToolBasic {
   _id: string;
   owner: string;
   name: string;
@@ -30,7 +30,7 @@ export interface ToolsResponse {
   perPage: number;
   totalTools: number;
   totalPages: number;
-  tools: ToolCard[];
+  tools: ToolBasic[];
 }
 
 export interface ToolDetails {

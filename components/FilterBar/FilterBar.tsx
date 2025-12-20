@@ -2,12 +2,13 @@
 
 "use client";
 
+import type { Category } from "@/types/category";
 import css from "./FilterBar.module.css";
 
 interface FilterBarProps {
-  categories: string[];
-  selected: string;
-  onChange: (category: string) => void;
+  categories: Category[];
+  selected: string | null; // може бути null
+  onChange: (categoryId: string | null) => void;
 }
 
 export default function FilterBar({
@@ -15,33 +16,29 @@ export default function FilterBar({
   selected,
   onChange,
 }: FilterBarProps) {
-  const handleChange = (
-    e: React.ChangeEvent<HTMLSelectElement>
-  ) => {
-    onChange(e.target.value);
-  };
-
-  const handleReset = () => {
-    onChange("All");
-  };
-
   return (
     <div className={css.filterBar}>
       <div className={css.selectWrapper}>
         <select
           className={css.select}
-          value={selected}
-          onChange={handleChange}
+          value={selected ?? "All"}
+          onChange={(e) =>
+            onChange(
+              e.target.value === "All"
+                ? null
+                : e.target.value
+            )
+          }
         >
           <option value="All">
             Усі категорії
           </option>
           {categories.map((cat) => (
             <option
-              key={cat}
-              value={cat}
+              key={cat._id}
+              value={cat._id}
             >
-              {cat}
+              {cat.title}
             </option>
           ))}
         </select>
@@ -49,7 +46,7 @@ export default function FilterBar({
 
       <button
         className={css.reset}
-        onClick={handleReset}
+        onClick={() => onChange(null)}
       >
         Скинути фільтри
       </button>
