@@ -9,6 +9,8 @@ import * as Yup from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useState } from "react";
 import { useAuthStore } from "@/lib/store/authStore";
+import Image from "next/image";
+
 
 
 const validationSchema = Yup.object({
@@ -120,12 +122,18 @@ export default function LoginPage() {
                 <span>Не маєте аккаунту?</span>
                 <Link href="/auth/register">Реєстрація</Link>
               </div>
-
-              <p className={styles.footerNote}>© 2025 ToolNext</p>
-
+              
             </div>
 
-            <div className={styles.imageSection} aria-hidden></div>
+            <div className={styles.imageSection} aria-hidden={true}>
+              <Image
+                src="/images/login_img.webp"
+                alt="Робочі інструменти на полицях"
+                fill
+                priority
+                className={styles.image}
+              />
+            </div>
           </div>
         </div>
       </div>
