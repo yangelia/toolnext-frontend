@@ -176,6 +176,7 @@ export default function BookingToolForm({ toolId, pricePerDay }: Props) {
             </div>
 
             {/* Блок ціни */}
+            <div className={css.input_container}>
             {days > 0 && (
               <div className={css.prise}>
                 <strong>
@@ -186,26 +187,27 @@ export default function BookingToolForm({ toolId, pricePerDay }: Props) {
 
             {/* Конфлікт дат */}
             {serverWarning && (
-              <div className="warning">
+              <div className={css.warning}>
                 {serverWarning}
                {freeSlots.length > 0 && (
-  <ul>
-    {freeSlots.map((slot, i) => (
-      <li key={i}>
-        з {new Date(slot.from).toLocaleDateString("uk-UA")} до{" "}
-        {slot.to
-          ? new Date(slot.to).toLocaleDateString("uk-UA")
-          : "без обмежень"}
-      </li>
-    ))}
-  </ul>
-)}
+                  <ul>
+                    {freeSlots.map((slot, i) => (
+                      <li key={i}>
+                        з {new Date(slot.from).toLocaleDateString("uk-UA")} до{" "}
+                        {slot.to
+                          ? new Date(slot.to).toLocaleDateString("uk-UA")
+                          : "без обмежень"}
+                      </li>
+                    ))}
+                  </ul>
+                )}
               </div>
             )}
 
             <button className={css.btn} type="submit" disabled={isSubmitting}>
               {isSubmitting ? "Завантаження..." : "Забронювати"}
-            </button>
+              </button>
+              </div>
           </Form>
         );
       }}

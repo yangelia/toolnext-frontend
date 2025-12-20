@@ -72,8 +72,7 @@ html {
 }
 
 :focus-visible {
-  outline: 2px solid #7c3aed;
-  outline-offset: 2px;
+  outline: 1px solid #7c3aed;
 }
 
 .react-datepicker-wrapper,
