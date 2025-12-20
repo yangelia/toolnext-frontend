@@ -1,3 +1,5 @@
+// types\category.ts
+
 export interface Category {
   _id: string;
   title: string;

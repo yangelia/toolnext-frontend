@@ -84,7 +84,9 @@
 }
 .submit:hover,
 .submit:focus {
-  opacity: 0.9;
+  background-color: #e7cdf4;
+  border-color: #000;
+  color: #000;
 }
 
 .submit:disabled {
@@ -101,7 +103,7 @@
 }
 .switchAuth a:hover,
 .switchAuth a:focus {
-  color: #8808cc; /* Колір лінка зі специфікації */
+  color: #8808cc;
   text-decoration: underline;
   margin-left: 4px;
   font-weight: 500;
@@ -120,7 +122,7 @@
   }
 
   .formSection {
-    padding: 60px;
+    padding: 83px 32px;
 
     text-align: left;
   }

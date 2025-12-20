@@ -3,11 +3,11 @@ import * as Yup from "yup";
 import { Formik, Form, Field, ErrorMessage, FieldProps} from "formik";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { createBooking } from "@/lib/api/clientApi";
 import DatePicker from "react-datepicker";
 import { uk } from "date-fns/locale";
 import "react-datepicker/dist/react-datepicker.css";
 import css from './BookingToolForm.module.css'
+import { createBooking } from "@/lib/api/booking";
 
 type Props = {
     toolId: string,

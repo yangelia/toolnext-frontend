@@ -1,6 +1,9 @@
+"use client";
+
 import Link from "next/link";
 import css from "./Header.module.css";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 type User = {
   name: string;
@@ -9,13 +12,24 @@ type User = {
 
 interface HeaderNavProps {
   isAuth: boolean;
-  user: User;
+  user?: User | null;
   onClose: () => void;
 }
 
 const HeaderNav = ({ isAuth, user, onClose }: HeaderNavProps) => {
-  console.log(isAuth);
-  console.log(user);
+  const router = useRouter();
+
+  const name = user?.name ?? "Користувач";
+  const avatarUrl = user?.avatarUrl ?? "";
+
+  const handleLogout = async () => {
+    try {
+      await fetch("/api/auth/logout", { method: "POST" });
+    } finally {
+      onClose();
+      router.refresh();
+    }
+  };
 
   return (
     <nav className={css.nav}>
@@ -45,21 +59,17 @@ const HeaderNav = ({ isAuth, user, onClose }: HeaderNavProps) => {
           <Link className={css.navLink} href="/profile" onClick={onClose}>
             Мій профіль
           </Link>
+
           <div className={css.userRow}>
             <div className={css.userLeft}>
               <div className={css.avatar}>
-                {user.avatarUrl ? (
-                  <Image
-                    src={user.avatarUrl}
-                    alt={user.name}
-                    width={32}
-                    height={32}
-                  />
+                {avatarUrl ? (
+                  <Image src={avatarUrl} alt={name} width={32} height={32} />
                 ) : (
                   <span className={css.avatarPlaceholder} aria-hidden="true" />
                 )}
               </div>
-              <p className={css.userName}>{user.name}</p>
+              <p className={css.userName}>{name}</p>
             </div>
 
             <span className={css.userDivider} />
@@ -67,7 +77,7 @@ const HeaderNav = ({ isAuth, user, onClose }: HeaderNavProps) => {
             <button
               className={css.logoutBtn}
               aria-label="Logout"
-              onClick={onClose}
+              onClick={handleLogout}
             >
               <svg width="24" height="24" aria-hidden="true">
                 <use href="/icons/sprite.svg#icon-logout" />

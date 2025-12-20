@@ -1,6 +1,7 @@
 import Link from "next/link";
 import css from "./Footer.module.css";
 import Image from "next/image";
+import { getServerCurrentUser } from "@/lib/api/serverApi";
 
 const guestLinks = [
   { href: "/", label: "Головна" },
@@ -13,15 +14,14 @@ const userLinks = [
   { href: "/", label: "Головна" },
   { href: "/tools", label: "Інструменти" },
   { href: "/profile", label: "Мій профіль" },
-  { href: "/tools/new", label: "Опублікувати оголошення" }, // або /create-tool як у вас прийнято
+  { href: "/tools/create", label: "Опублікувати оголошення" }, // або /create-tool як у вас прийнято
 ];
 
-// перевірка
-const isAuth = true;
-// const isAuth = false;
-const navLinks = isAuth ? userLinks : guestLinks;
+async function Footer() {
+  const user = await getServerCurrentUser();
+  const isAuth = Boolean(user);
+  const navLinks = isAuth ? userLinks : guestLinks;
 
-function Footer() {
   return (
     <footer className={css.footer}>
       <div className={css.container}>

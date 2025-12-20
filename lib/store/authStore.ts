@@ -1,5 +1,3 @@
-"use client";
-
 import axios from "axios";
 import { create } from "zustand";
 import { User } from "@/types/user";
@@ -19,7 +17,7 @@ interface AuthState {
   logout: () => void;
 }
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
+// const API_URL = process.env.NEXT_PUBLIC_API_URL || "";
 
 export const useAuthStore = create<AuthState>((set) => ({
   user: null,
@@ -37,7 +35,7 @@ export const useAuthStore = create<AuthState>((set) => ({
     set({ loading: true });
 
     try {
-      const res = await axios.get<User>(`/api/auth/me`, {
+      const res = await axios.get<User>(`/api/users/me`, {
         withCredentials: true,
       });
 
@@ -59,11 +57,7 @@ export const useAuthStore = create<AuthState>((set) => ({
 
   logout: async () => {
     try {
-      await axios.post(
-        `${API_URL}/api/auth/logout`,
-        {},
-        { withCredentials: true }
-      );
+      await axios.post(`/api/auth/logout`, {}, { withCredentials: true });
     } catch {
       // даже если сервер упал — чистим локально
     }

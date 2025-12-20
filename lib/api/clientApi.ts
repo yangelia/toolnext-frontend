@@ -1,34 +1,23 @@
-import { CreateBookingPayload, ToolResponce } from "@/types/booking";
-import { api } from './api';
+"use client";
 import { User } from "@/types/user";
 
-export async function createBooking(
-  toolId: string,
-  payload: CreateBookingPayload
-): Promise<ToolResponce> {
-  try {
-    console.log("payload", payload);
-    
-    const res = await api.post(`/bookings/${toolId}`, payload);
-    return res.data;
-  } catch (err) {
+import axios from "axios";
 
-    
-      throw err;
-  }
-}
-
-
+export const api = axios.create({
+  baseURL: "/api",
+  withCredentials: true,
+});
 
 export type RegisterRequest = {
   username: string;
   email: string;
   password: string;
+  confirmPassword: string;
 };
 export async function register(data: RegisterRequest) {
   const res = await api.post<User>("/auth/register", data);
   return res.data;
-};
+}
 
 export type LoginRequest = {
   email: string;
