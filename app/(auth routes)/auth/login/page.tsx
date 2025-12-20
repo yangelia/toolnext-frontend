@@ -49,10 +49,8 @@ export default function LoginPage() {
   };
 
   return (
-    <main className={styles.main}>
-      <div className={styles.container}>
+      <section className={styles.container}>
         <div className={styles.page}>
-          <div className={styles.card}>
             <div className={styles.formSection}>
               <div>
                 <h1 className={styles.title}>Вхід</h1>
@@ -134,9 +132,7 @@ export default function LoginPage() {
                 className={styles.image}
               />
             </div>
-          </div>
         </div>
-      </div>
-    </main>
+      </section>
   );
 }
