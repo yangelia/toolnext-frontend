@@ -1,6 +1,9 @@
+"use client";
+
 import Image from "next/image";
 import css from "./Header.module.css";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 type User = {
   name: string;
@@ -9,10 +12,23 @@ type User = {
 
 interface HeaderDesktopProps {
   isAuth: boolean;
-  user: User;
+  user?: User | null;
 }
 
 const HeaderDesktopNav = ({ isAuth, user }: HeaderDesktopProps) => {
+  const router = useRouter();
+
+  const name = user?.name ?? "Користувач";
+  const avatarUrl = user?.avatarUrl ?? "";
+
+  const handleLogout = async () => {
+    try {
+      await fetch("/api/auth/logout", { method: "POST" });
+    } finally {
+      router.refresh();
+    }
+  };
+
   return (
     <nav className={css.desktopNav}>
       <Link className={css.desktopLink} href="/">
@@ -43,19 +59,14 @@ const HeaderDesktopNav = ({ isAuth, user }: HeaderDesktopProps) => {
 
           <div className={css.userDesktop}>
             <div className={css.avatarDesktop}>
-              {user.avatarUrl ? (
-                <Image
-                  src={user.avatarUrl}
-                  alt={user.name}
-                  width={32}
-                  height={32}
-                />
+              {avatarUrl ? (
+                <Image src={avatarUrl} alt={name} width={32} height={32} />
               ) : (
                 <span className={css.avatarPlaceholder} aria-hidden="true" />
               )}
             </div>
 
-            <span className={css.userNameDesktop}>{user.name}</span>
+            <span className={css.userNameDesktop}>{name}</span>
 
             <span className={css.userDividerDesktop} aria-hidden="true" />
 
@@ -63,6 +74,7 @@ const HeaderDesktopNav = ({ isAuth, user }: HeaderDesktopProps) => {
               className={css.logoutBtnDesktop}
               type="button"
               aria-label="Logout"
+              onClick={handleLogout}
             >
               <svg width="24" height="24" aria-hidden="true">
                 <use href="/icons/sprite.svg#icon-logout" />
