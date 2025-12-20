@@ -9,12 +9,14 @@ interface FilterBarProps {
   categories: Category[];
   selected: string | null; // може бути null
   onChange: (categoryId: string | null) => void;
+  onReset?: () => void; // додатковий проп для скидання всіх фільтрів
 }
 
 export default function FilterBar({
   categories,
   selected,
   onChange,
+  onReset,
 }: FilterBarProps) {
   return (
     <div className={css.filterBar}>
@@ -46,7 +48,13 @@ export default function FilterBar({
 
       <button
         className={css.reset}
-        onClick={() => onChange(null)}
+        onClick={() => {
+          if (onReset) {
+            onReset(); // викликаємо скидання всіх фільтрів
+          } else {
+            onChange(null); // fallback: тільки категорія
+          }
+        }}
       >
         Скинути фільтри
       </button>
