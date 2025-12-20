@@ -10,7 +10,7 @@ import { useAuthStore } from "@/lib/store/authStore";
 import { register } from "@/lib/api/clientApi";
 import { ApiError } from "@/app/api/api";
 import { useEffect, useState } from "react";
-import iziToast from "izitoast";
+//import iziToast from "izitoast";
 import Image from "next/image";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
