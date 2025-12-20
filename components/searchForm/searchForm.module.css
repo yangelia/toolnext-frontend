@@ -31,7 +31,11 @@
     max-width: 335px;
     height: 37px;
     background: none;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255);
+    
+}
+.input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
 }
 
 @media (min-width: 768px) {
@@ -53,7 +57,7 @@
     padding: 10px 24px;
     max-width: 335px;
     height: 41px;
-    color: rgba(255, 255, 255, 0.6);
+    color: rgba(255, 255, 255, 1);
 }
 
 @media (min-width: 768px) {
