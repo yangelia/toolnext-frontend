@@ -1,7 +1,5 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
-import Header from "@/components/Header/Header";
-import Footer from "@/components/Footer/Footer";
 import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
 
 const inter = Inter({
@@ -19,11 +17,7 @@ export default function RootLayout({
   return (
     <html lang="uk">
       <body className={inter.variable}>
-        <TanStackProvider>
-          <Header />
-          <main>{children}</main>
-          <Footer />
-        </TanStackProvider>
+        <TanStackProvider>{children}</TanStackProvider>
       </body>
     </html>
   );
