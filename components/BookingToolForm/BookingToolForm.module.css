@@ -54,7 +54,6 @@
 .input_container {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     gap: 24px;
     width: 100%;
     margin-bottom: 24px;
@@ -83,22 +82,48 @@
     border: 2px solid #c40202;
     color: #c40202;
 }
-
-.warning{
-    
+.container_prise {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
+.input_error {
+    border: 2px solid #c40202;
+}
+
+.error {
+    color: #c40202;
+    font-weight: 400;
+        font-size: 16px;
+        font-family: "Inter", sans-serif;
+    font-size: 12px;
+    margin-top: 4px;
+}
 
 @media (min-width: 768px) {
     .input_container {
         flex-direction: row;
+        justify-content: space-between;
+        gap: 24px;
     }
+        .input_container li {
+            width: 100%;
+        }
 
     .input_container label {
         width: 100%;
     }
-    .btn{
-        width: 155px;   
+    .container_prise {
+        flex-direction: row;
+        align-items: center;
+    }
+    .prise {
+        margin-right: auto;
+    }
+    .btn {
+        width: 155px;
+        margin-left: auto;
     }
 }
 

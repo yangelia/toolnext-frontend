@@ -1,7 +1,5 @@
 import { notFound } from "next/navigation";
 import css from './booking.module.css'
-// import Header from "@/components/Header/Header";
-// import Footer from "@/components/Footer/Footer";
 import BookingToolForm from "@/components/BookingToolForm/BookingToolForm";
 
 
@@ -24,11 +22,8 @@ export default async function BookingPage({ params }: PageProps) {
 
   return (
     <div className={css.container}>
-      {/* <Header/> */}
           <h1 className={css.title}>Підтвердження бронювання</h1>
-
           <BookingToolForm toolId={toolId} pricePerDay={tool} />
-          {/* <Footer/> */}
     </div>
   );
 }
