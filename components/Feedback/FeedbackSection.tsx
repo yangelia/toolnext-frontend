@@ -11,7 +11,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
-import styles from "./FeedbackSection.module.css";
+import styles from './FeedbackSection.module.css';
 
 interface Feedback {
   _id: string;
@@ -48,8 +48,8 @@ const FeedbackSection: React.FC = () => {
           clickable: true,
         },
         navigation: {
-          nextEl: '.next-btn-js',
-          prevEl: '.prev-btn-js',
+          nextEl: `.${styles.nextBtn}`,
+          prevEl: `.${styles.prevBtn}`,
         },
         slidesPerView: 1,
         spaceBetween: 20,
@@ -63,11 +63,11 @@ const FeedbackSection: React.FC = () => {
   }, [feedbacks]);
 
   return (
-    <section className="section-feedback">
-      <div className="container">
-        <h2 className="feedback-name">Відгуки клієнтів</h2>
+    <section className={styles.sectionFeedback}>
+      <div className={styles.container}>
+        <h2 className={styles.feedbackName}>Останні відгуки</h2>
         
-        <div className="swiper feedback-swiper" ref={swiperContainerRef}>
+        <div className={`swiper ${styles.feedbackSwiper}`} ref={swiperContainerRef}>
           <div className="swiper-wrapper">
             {Array.isArray(feedbacks) && feedbacks.map((item) => (
               <div className="swiper-slide" key={item._id}>
@@ -76,11 +76,11 @@ const FeedbackSection: React.FC = () => {
             ))}
           </div>
           
-          <div className="feedback-controls">
+          <div className={styles.feedbackControls}>
             <div className="swiper-pagination feedback-pagination"></div>
-            <div className="feedback-nav-buttons">
-              <button className="nav-btn prev-btn-js" aria-label="Previous">←</button>
-              <button className="nav-btn next-btn-js" aria-label="Next">→</button>
+            <div className={styles.feedbackNavButtons}>
+              <button className={`${styles.navBtn} ${styles.prevBtn}`} aria-label="Previous">←</button>
+              <button className={`${styles.navBtn} ${styles.nextBtn}`} aria-label="Next">→</button>
             </div>
           </div>
         </div>
