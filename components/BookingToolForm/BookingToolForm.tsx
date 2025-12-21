@@ -6,7 +6,7 @@ import DatePicker from "react-datepicker";
 import { uk } from "date-fns/locale";
 import "react-datepicker/dist/react-datepicker.css";
 import css from "./BookingToolForm.module.css";
-import { createBooking } from "@/lib/api/booking";
+import { createBooking, getToolId } from "@/lib/api/booking";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { AxiosError } from "axios";
@@ -53,6 +53,8 @@ lastName: Yup.string()
 
 export default function BookingToolForm({ toolId, pricePerDay }: Props) {
   const router = useRouter();
+
+  
 
   return (
     <>

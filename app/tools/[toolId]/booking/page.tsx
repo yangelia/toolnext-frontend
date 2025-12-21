@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import css from './booking.module.css'
 import BookingToolForm from "@/components/BookingToolForm/BookingToolForm";
+import { getToolId } from "@/lib/api/booking";
 
 
 type PageProps = {
@@ -12,7 +13,7 @@ type PageProps = {
 export default async function BookingPage({ params }: PageProps) {
  
   const { toolId } = await params;
-  const tool = 1000;
+  const tool = await getToolId(toolId)
  
   
 
@@ -23,7 +24,7 @@ export default async function BookingPage({ params }: PageProps) {
   return (
     <div className={css.container}>
           <h1 className={css.title}>Підтвердження бронювання</h1>
-          <BookingToolForm toolId={toolId} pricePerDay={tool} />
+          <BookingToolForm toolId={toolId} pricePerDay={tool.pricePerDay} />
     </div>
   );
 }

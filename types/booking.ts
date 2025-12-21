@@ -19,7 +19,6 @@ type FreeSlot = {
 }
 
 export interface ToolResponce {
-
   status: number;
   message: string;
   freeSlots?: FreeSlot[];
