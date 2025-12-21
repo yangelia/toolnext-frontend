@@ -42,8 +42,8 @@ const FeedbackSection: React.FC = () => {
       const swiper = new Swiper(swiperContainerRef.current, {
         modules: [Navigation, Pagination],
         pagination: {
-          el: '.feedback-pagination',
-          dynamicMainBullets: 3,
+          el: `.${styles.feedbackPagination}`,
+          dynamicMainBullets: 1,
           dynamicBullets: true,
           clickable: true,
         },
@@ -77,7 +77,7 @@ const FeedbackSection: React.FC = () => {
           </div>
           
           <div className={styles.feedbackControls}>
-            <div className="swiper-pagination feedback-pagination"></div>
+            <div className={`swiper-pagination ${styles.feedbackPagination}`}></div>
             <div className={styles.feedbackNavButtons}>
               <button className={`${styles.navBtn} ${styles.prevBtn}`} aria-label="Previous">←</button>
               <button className={`${styles.navBtn} ${styles.nextBtn}`} aria-label="Next">→</button>

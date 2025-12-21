@@ -9,10 +9,6 @@
     font-size: 32px;
 }
 
-/* .feedback-p {
-    margin-top: 24px;
-} */
-
 .feedbackSwiper {
     margin-top: 80px;
     display: flex;
@@ -21,78 +17,73 @@
     width: 100%;
 }
 
-/* .feedback-swiper {
-    width: 100%;
-} */
-
 .feedbackControls {
     display: flex;
-    flex-wrap: wrap;
     align-items: center;
-    justify-content: right;
-    gap: 16px;
+    justify-content: space-between;
     width: 100%;
 }
 
-@media only screen and (min-width: 375px) {
-    /* .feedbackControls {
-        justify-content: center;
-    } */
-
-    .feedbackNavButtons {
-        margin-left: 0;
-    }
+.feedbackPagination {
+    position: relative !important;
+    width: 80px !important;
+    overflow: hidden;
+    display: block !important;
+    margin: 0 !important;
+    flex-shrink: 0;
+    bottom: auto !important;
+    top: auto !important;
+    left: auto !important;
+    transform: none !important;
 }
 
-/* .feedbackPagination {
-    display: flex;
-    justify-content: flex-start;
-    gap: 8px;
-} */
+.feedbackPagination :global(.swiper-pagination-lock) {
+    display: none;
+}
 
-/* .swiper-pagination-bullet {
+.feedbackPagination :global(.swiper-pagination-bullet) {
     width: 8px;
     height: 8px;
     background: #080c09;
     opacity: 0.5;
     border-radius: 50%;
-} */
+}
 
-/* .swiper-pagination-bullet-active {
+.feedbackPagination :global(.swiper-pagination-bullet-active) {
+  background: #080c09 !important;
+  opacity: 1;
+}
+
+.feedbackPagination :global(.swiper-pagination-bullets-dynamic) {
+    left: 0 !important;
+    transform: none !important;
+    white-space: nowrap;
+    display: flex !important;
+    align-items: center;
+    transition: 0.3s transform;
+}
+
+.feedbackPagination :global(.swiper-pagination-bullet-active-main) {
+    transform: scale(1) !important;
     opacity: 1;
-    background: #080c09 !important;
-} */
+}
 
-/* html.dark .swiper-pagination-bullet {
-    background: #fff !important;
-} */
+.feedbackPagination :global(.swiper-pagination-bullet-active-prev),
+.feedbackPagination :global(.swiper-pagination-bullet-active-next) {
+    transform: scale(0.8) !important;
+    opacity: 0.7;
+}
 
-/* html.dark .swiper-pagination-bullet-active {
-    background: #fff !important;
-} */
-
+.feedbackPagination :global(.swiper-pagination-bullet-active-prev-prev),
+.feedbackPagination :global(.swiper-pagination-bullet-active-next-next) {
+    transform: scale(0.6) !important;
+    opacity: 0.4;
+}
 
 .feedbackNavButtons {
     display: flex;
     gap: 16px;
-    margin-left: 20px;
-}
-
-@media only screen and (max-width: 375px) {
-    .feedback-nav-buttons {
-        margin-left: 0;
-    }
-}
-
-.feedback-pagination.swiper-pagination {
-    position: static !important;
-    width: auto !important;
-    transform: none !important;
-    left: auto !important;
-    right: auto !important;
-    top: auto !important;
-    bottom: auto !important;
-    margin: 0 !important;
+    flex-shrink: 0;
 }
 
 .navBtn {
@@ -127,66 +118,50 @@
     pointer-events: none;
 }
 
-.feedback-card {
-    background-color: none;
-    text-align: center;
-}
+.feedbackCard {
+    margin-bottom: 48px;
+}---
 
-.star-rating {
+.starRating {
     display: flex;
     gap: 4px;
-    margin-bottom: 24px;
-    color: yellow;
+    margin-bottom: 32px;
 }
 
-.star-rating svg {
+.starRating svg {
     fill: #080c09;
 }
 
-html.dark .star-rating svg {
-    fill: #fff;
+.feedbackText {
+    margin-top: 32px;
+    max-width: 335px;
+    font-size: 16px;
 }
 
-.section-feedback .star {
-    width: 20px;
-    height: 20px;
-}
-
-.feedback-text {
-    text-align: left;
-    max-width: 287px;
-}
-
-.feedback-author {
-    margin-top: 24px;
-    font-family: var(--font-family);
-    font-weight: 700;
+.feedbackAuthor {
+    margin-top: 32px;
+    font-weight: 600;
     font-size: 16px;
     line-height: 160%;
     text-align: left;
-    /* color: var(--color-scheme-1-text); */
 }
 
 @media only screen and (min-width: 768px) {
-    .section-feedback {
-        padding: 32px 0;
+    .sectionFeedback {
+        padding: 64px 32px;
     }
 
-    /* .feedback-controls {
-        justify-content: space-between;
-    } */
-
-    .feedback-text {
-        max-width: 292px;
+    .feedbackText {
+        max-width: 336px;
     }
 }
 
 @media only screen and (min-width: 1440px) {
-    .section-feedback {
-        padding: 64px 0;
+    .sectionFeedback {
+        padding: 112px 64px;
     }
 
-    .feedback-text {
-        max-width: 373px;
+    .feedbackText {
+        max-width: 416px;
     }
 }

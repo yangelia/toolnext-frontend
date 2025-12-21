@@ -1,5 +1,7 @@
 import React from 'react';
 
+import styles from './FeedbackSection.module.css';
+
 interface FeedbackProps {
   rate: number;
   description: string;
@@ -27,7 +29,7 @@ const FeedbackCard: React.FC<FeedbackProps> = ({ rate, description, name }) => {
       }
 
       stars.push(
-        <svg key={i} className="star" width="23" height="23">
+        <svg key={i} className="star" width="24" height="24">
           <use href={`/icons/sprite.svg#${iconId}`}></use>
         </svg>
       );
@@ -36,10 +38,10 @@ const FeedbackCard: React.FC<FeedbackProps> = ({ rate, description, name }) => {
   };
 
   return (
-    <div className="feedback-card">
-      <div className="star-rating">{renderStars(rate)}</div>
-      <div className="feedback-text">{description}</div>
-      <div className="feedback-author">{name}</div>
+    <div className={styles.feedbackCard}>
+      <div className={styles.starRating}>{renderStars(rate)}</div>
+      <p className={styles.feedbackText}>{description}</p>
+      <div className={styles.feedbackAuthor}>{name}</div>
     </div>
   );
 };
