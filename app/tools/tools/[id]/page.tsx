@@ -1,40 +1,58 @@
-import { Tool } from "@/types/tool";
+"use client";
+
+import { useEffect, useState } from "react";
+import { useParams } from "next/navigation";
+import axios from "axios";
+
+import styles from "./toolDetails.module.css";
+import ToolGallery from "@/components/ToolGallery/ToolGallery";
 import ToolInfoBlock from "@/components/ToolInfoBlock/ToolInfoBlock";
+import { Tool } from "@/types/tool";
 
-interface PageProps {
-  params: {
-    toolId: string;
-  };
-}
+const api = axios.create({
+  baseURL: "http://localhost:3000",
+  withCredentials: true,
+});
 
-async function getToolById(id: string): Promise<Tool> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/tools/${id}`, {
-    cache: "no-store",
-  });
+export default function ToolByIdPage() {
+  const params = useParams();
+  const id = params?.id as string; // 👈 ОСТАВЛЯЕМ КАК ТЫ ПРОСИЛ
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch tool");
+  const [tool, setTool] = useState<Tool | null>(null);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+  useEffect(() => {
+    if (!id) return;
+
+    const fetchData = async () => {
+      try {
+        const toolResponse = await api.get(`/tools/${id}`);
+        setTool(toolResponse.data);
+
+        try {
+          const userResponse = await api.get("/auth/me");
+          setIsAuthenticated(Boolean(userResponse.data));
+        } catch {
+          setIsAuthenticated(false);
+        }
+      } catch (e: any) {
+        console.log("message:", e.message);
+        console.log("status:", e.response?.status);
+        console.log("data:", e.response?.data);
+      }
+    };
+
+    fetchData();
+  }, [id]);
+
+  if (!tool) {
+    return <div>Loading...</div>;
   }
 
-  return res.json();
-}
-
-async function getCurrentUser() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/me`, {
-    credentials: "include",
-    cache: "no-store",
-  });
-
-  if (!res.ok) {
-    return null;
-  }
-
-  return res.json();
-}
-
-export default async function ToolPage({ params }: PageProps) {
-  const tool = await getToolById(params.toolId);
-  const user = await getCurrentUser();
-
-  return <ToolInfoBlock tool={tool} isAuthenticated={Boolean(user)} />;
+  return (
+    <section className={`${styles.page} container`}>
+      <ToolGallery images={tool.images} />
+      <ToolInfoBlock tool={tool} />
+    </section>
+  );
 }

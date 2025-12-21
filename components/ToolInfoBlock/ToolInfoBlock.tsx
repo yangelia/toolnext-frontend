@@ -1,88 +1,81 @@
 "use client";
-
+import { useRouter } from "next/navigation";
+import css from "./ToolInfoBlock.module.css";
+import { User } from "@/types/user";
 import Link from "next/link";
-import Image from "next/image";
-import { useState } from "react";
-
-import AuthRequiredModal from "@/components/Modal/AuthRequiredModal/AuthRequiredModal";
+import { useAuthStore } from "@/lib/store/authStore";
 import { Tool } from "@/types/tool";
+import { useState } from "react";
+import AuthRequiredModal from "@/components/Modal/AuthRequiredModal/AuthRequiredModal";
 
-import styles from "./ToolInfoBlock.module.css";
+import Image from "next/image";
 
-interface ToolInfoBlockProps {
-  tool: Tool;
-  isAuthenticated: boolean;
-}
-
-export default function ToolInfoBlock({
-  tool,
-  isAuthenticated,
-}: ToolInfoBlockProps) {
+export default function ToolInfoBlock({ tool }: { tool: Tool }) {
+  const router = useRouter();
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const user = useAuthStore((state) => state.user);
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
-  const handleBookingClick = () => {
-    if (!isAuthenticated) {
+  const isOwner = Boolean(user?.id && user.id === tool.owner._id);
+
+  const handleBookClick = () => {
+    if (isAuthenticated) {
+      router.push(`/manage-tools/${tool._id}/booking`);
+    } else {
       setIsAuthModalOpen(true);
-      return;
     }
   };
-
+  const owner = tool.owner;
   return (
-    <>
-      <section className={styles.wrapper}>
-        <h1 className={styles.title}>{tool.name}</h1>
-        <p className={styles.price}>{tool.pricePerDay} грн / день</p>
-        <div className={styles.owner}>
-          <Image
-            src={tool.owner.avatar}
-            alt={tool.owner.username}
-            width={40}
-            height={40}
-            className={styles.avatar}
-          />
-
-          <div>
-            <p className={styles.ownerName}>{tool.owner.username}</p>
-            <Link
-              href={`/profile/${tool.owner._id}`}
-              className={styles.profileLink}
-            >
-              Переглянути профіль
-            </Link>
+    <section className={css.toolInfo}>
+      <div className="container">
+        <h1 className={css.toolTitle}>{tool.name}</h1>
+        <p className={css.toolPrice}>{tool.pricePerDay} грн/день</p>
+        {isOwner && (
+          <div className={css.toolOwner}>
+            <img
+              src={owner.avatar || "/avatar-placeholder.png"}
+              alt={owner.username}
+              className={css.ownerAvatar}
+            />
+            <div className={css.ownerInfo}>
+              <p className={css.ownerName}>{owner.username}</p>
+              <Link
+                href={`/profile/${owner._id}`}
+                className={`{css.ownerLink} button button--secondary`}
+              >
+                Переглянути профіль
+              </Link>
+            </div>
           </div>
-        </div>
-
-        <p className={styles.description}>{tool.description}</p>
-
-        <ul className={styles.specifications}>
-          {Object.entries(tool.specifications).map(([key, value]) => (
-            <li key={key}>
-              <span>{key}:</span> {value}
-            </li>
-          ))}
-        </ul>
-
-        <div className={styles.rentalTerms}>
-          <h3>Умови оренди</h3>
-          <p>{tool.rentalTerms}</p>
-        </div>
-
-        {isAuthenticated ? (
-          <Link href={`/booking/${tool._id}`} className={styles.bookButton}>
-            Забронювати
-          </Link>
-        ) : (
-          <button className={styles.bookButton} onClick={handleBookingClick}>
-            Забронювати
-          </button>
         )}
-      </section>
 
-      {/* Модалка */}
-      <AuthRequiredModal
-        isOpen={isAuthModalOpen}
-        onClose={() => setIsAuthModalOpen(false)}
-      />
-    </>
+        <p className={css.toolDescr}>{tool.description}</p>
+        <div className={css.toolSpec}>
+          {Object.entries(tool.specifications).map(([key, value]) => (
+            <p key={key}>
+              <strong className={css.toolSpecTitle}>{key}: </strong>
+              {value}
+            </p>
+          ))}
+          {tool.rentalTerms && (
+            <p key="rentalTerms">
+              <strong className={css.toolSpecTitle}>Умови оренди: </strong>
+              {tool.rentalTerms}
+            </p>
+          )}
+        </div>
+        <button
+          className={`${css.toolBut} button button--primary`}
+          onClick={handleBookClick}
+        >
+          Забронювати
+        </button>
+        <AuthRequiredModal
+          isOpen={isAuthModalOpen}
+          onClose={() => setIsAuthModalOpen(false)}
+        />
+      </div>
+    </section>
   );
 }
