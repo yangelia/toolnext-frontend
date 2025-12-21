@@ -1,7 +1,7 @@
 // types/tool.ts
 
-import type { Category } from "./category";
-import type { User, UserPublic } from "./user";
+import type { Category } from './category';
+import type { User, UserPublic } from './user';
 
 export interface Feedback {
   _id: string;
@@ -53,4 +53,19 @@ export interface ToolDetails {
 
   createdAt: string;
   updatedAt: string;
+}
+export type Tool = ToolBasic;
+
+export interface UserToolsResponse {
+  status: string;
+  message: string;
+  data: {
+    tools: ToolBasic[];
+    pagination: {
+      page: number;
+      limit: number;
+      totalPages: number;
+      totalTools: number;
+    };
+  };
 }
