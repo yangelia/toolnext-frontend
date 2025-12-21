@@ -48,7 +48,7 @@
 //   }
 // }
 
-// //? код зі збереженням атрибутів cookies (httpOnly, sameSite, secure, maxAge) та сесії
+//? код зі збереженням атрибутів cookies (httpOnly, sameSite, secure, maxAge) та сесії
 import { NextRequest, NextResponse } from "next/server";
 import { api, ApiError } from "../../api";
 
