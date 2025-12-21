@@ -1,6 +1,26 @@
+// const nextConfig = {
+//   output: "standalone",
+//   trailingSlash: false,
+// };
+
+// module.exports = nextConfig;
+
+
+
+/** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: "standalone",
-  trailingSlash: false,
+  images: {
+    domains: ["ftp.goit.study"],
+  },
+  async rewrites() {
+    return [
+      {
+        source: "/api/:path*",
+        destination: "http://localhost:3000/:path*", // или /api/:path*
+      },
+    ];
+  },
 };
+
 
 module.exports = nextConfig;
