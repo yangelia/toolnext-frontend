@@ -1,0 +1,80 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.25);
+  z-index: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.modal {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 335px;
+  overflow-y: auto;
+  background-color: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  padding: 16px;
+  border: 1px solid #dee2e6;
+  padding: 64px 20px;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 40px;
+  height: 40px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid transparent;
+  color: #000;
+  border-radius: 6px;
+  background-color: transparent;
+  transition: background-color 150ms ease, border-color 150ms ease,
+    color 150ms ease;
+}
+
+.closeIcon {
+  width: 24px;
+  height: 24px;
+  display: block;
+  stroke: currentColor;
+}
+
+.closeBtn:hover,
+.closeBtn:focus-visible {
+  background-color: #e7cdf4;
+  border-color: #000;
+  color: #000;
+}
+
+.closeBtn:active {
+  background-color: #8808cc;
+  border-color: #8808cc;
+  color: #fff;
+}
+
+.closeBtn:focus {
+  outline: none;
+}
+
+@media (min-width: 768px) {
+  .modal {
+    max-width: 704px;
+    border-radius: 12px;
+    padding: 64px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .modal {
+    max-width: 768px;
+  }
+}
