@@ -23,8 +23,8 @@ export default async function BookingPage({ params }: PageProps) {
 
   return (
     <div className={css.container}>
-          <h1 className={css.title}>Підтвердження бронювання</h1>
-          <BookingToolForm toolId={toolId} pricePerDay={tool.pricePerDay} />
+      <h1 className={css.title}>Підтвердження бронювання</h1>
+      <BookingToolForm toolId={toolId} pricePerDay={tool.pricePerDay} />
     </div>
   );
 }
