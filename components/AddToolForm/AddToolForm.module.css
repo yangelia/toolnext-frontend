@@ -4,9 +4,9 @@
   gap: 16px;
 }
 
-/* Image */
 .imageBlock {
   position: relative;
+  width: 100%;
   height: 180px;
   background: #f1f1f1;
   border-radius: 8px;
@@ -27,24 +27,24 @@
   object-fit: cover;
 }
 
-/* Fields */
-label {
+.field {
   display: flex;
   flex-direction: column;
   gap: 6px;
   font-size: 14px;
 }
 
-input,
-select,
-textarea {
+.input,
+.select,
+.textarea {
   height: 40px;
   padding: 0 12px;
   border-radius: 6px;
   border: 1px solid #ccc;
+  font-size: 14px;
 }
 
-textarea {
+.textarea {
   min-height: 90px;
   padding: 10px 12px;
   resize: none;
@@ -55,35 +55,38 @@ textarea {
   color: #d32f2f;
 }
 
-/* Buttons */
 .buttons {
   display: flex;
   flex-direction: column;
   gap: 12px;
 }
 
-button {
+.submitButton {
   height: 44px;
   border-radius: 8px;
   border: none;
   background: #7b2cbf;
   color: #fff;
   font-weight: 600;
+  cursor: pointer;
 }
 
-.cancel {
+.cancelButton {
+  height: 44px;
+  border-radius: 8px;
   background: transparent;
   border: 1px solid #ccc;
   color: #111;
+  font-weight: 600;
+  cursor: pointer;
 }
 
-/* Tablet */
 @media (min-width: 768px) {
   .buttons {
     flex-direction: row;
   }
 
-  .buttons button {
+  .buttons > * {
     flex: 1;
   }
 
@@ -92,7 +95,6 @@ button {
   }
 }
 
-/* Desktop */
 @media (min-width: 1200px) {
   .form {
     max-width: 560px;

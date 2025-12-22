@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import styles from './AddToolForm.module.css';
 
-export type AddToolFormValues = {
+type FormValues = {
   name: string;
   pricePerDay: string;
   category: string;
@@ -16,41 +16,32 @@ export type AddToolFormValues = {
   image: File | null;
 };
 
-type Props = {
-  initialValues?: AddToolFormValues;
-  onSubmit: (values: AddToolFormValues) => Promise<void>;
-  submitText?: string;
-};
-
 const validationSchema = Yup.object({
   name: Yup.string().required('Обовʼязкове поле'),
   pricePerDay: Yup.number().required('Обовʼязкове поле'),
   category: Yup.string().required('Оберіть категорію'),
 });
 
-const defaultValues: AddToolFormValues = {
-  name: '',
-  pricePerDay: '',
-  category: '',
-  rentalTerms: '',
-  description: '',
-  specifications: '',
-  image: null,
-};
-
-export default function AddToolForm({
-  initialValues = defaultValues,
-  onSubmit,
-  submitText = 'Опублікувати',
-}: Props) {
+export default function AddToolForm() {
   const [preview, setPreview] = useState<string | null>(null);
 
+  const initialValues: FormValues = {
+    name: '',
+    pricePerDay: '',
+    category: '',
+    rentalTerms: '',
+    description: '',
+    specifications: '',
+    image: null,
+  };
+
   return (
-    <Formik<AddToolFormValues>
+    <Formik<FormValues>
       initialValues={initialValues}
       validationSchema={validationSchema}
-      enableReinitialize
-      onSubmit={onSubmit}
+      onSubmit={(values) => {
+        console.log('ADD TOOL', values);
+      }}
     >
       {({ isSubmitting, setFieldValue }) => (
         <Form className={styles.form}>
@@ -60,7 +51,12 @@ export default function AddToolForm({
             onClick={() => document.getElementById('imageInput')?.click()}
           >
             {preview ? (
-              <Image src={preview} alt="preview" fill className={styles.image} />
+              <Image
+                src={preview}
+                alt="preview"
+                fill
+                className={styles.image}
+              />
             ) : (
               <div className={styles.placeholder}>Фото інструменту</div>
             )}
@@ -79,48 +75,76 @@ export default function AddToolForm({
             />
           </div>
 
-          <label>
+          <label className={styles.field}>
             Назва
-            <Field name="name" />
+            <Field name="name" className={styles.input} />
             <ErrorMessage name="name" component="p" className={styles.error} />
           </label>
 
-          <label>
+          <label className={styles.field}>
             Ціна / день
-            <Field name="pricePerDay" type="number" />
-            <ErrorMessage name="pricePerDay" component="p" className={styles.error} />
+            <Field
+              name="pricePerDay"
+              type="number"
+              className={styles.input}
+            />
+            <ErrorMessage
+              name="pricePerDay"
+              component="p"
+              className={styles.error}
+            />
           </label>
 
-          <label>
+          <label className={styles.field}>
             Категорія
-            <Field as="select" name="category">
+            <Field as="select" name="category" className={styles.select}>
               <option value="">Оберіть категорію</option>
               <option value="tools">Інструменти</option>
             </Field>
-            <ErrorMessage name="category" component="p" className={styles.error} />
+            <ErrorMessage
+              name="category"
+              component="p"
+              className={styles.error}
+            />
           </label>
 
-          <label>
+          <label className={styles.field}>
             Умови оренди
-            <Field as="textarea" name="rentalTerms" />
+            <Field
+              as="textarea"
+              name="rentalTerms"
+              className={styles.textarea}
+            />
           </label>
 
-          <label>
+          <label className={styles.field}>
             Опис
-            <Field as="textarea" name="description" />
+            <Field
+              as="textarea"
+              name="description"
+              className={styles.textarea}
+            />
           </label>
 
-          <label>
+          <label className={styles.field}>
             Характеристики
-            <Field as="textarea" name="specifications" />
+            <Field
+              as="textarea"
+              name="specifications"
+              className={styles.textarea}
+            />
           </label>
 
           <div className={styles.buttons}>
-            <button type="submit" disabled={isSubmitting}>
-              {isSubmitting ? 'Завантаження…' : submitText}
+            <button
+              type="submit"
+              className={styles.submitButton}
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? 'Завантаження…' : 'Опублікувати'}
             </button>
 
-            <button type="button" className={styles.cancel}>
+            <button type="button" className={styles.cancelButton}>
               Відмінити
             </button>
           </div>
