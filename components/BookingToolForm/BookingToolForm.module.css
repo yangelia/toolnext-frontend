@@ -1,0 +1,129 @@
+.booking_form{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    width: 100%;
+}
+
+.booking_form label{
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    color: #000;
+    display: flex;
+    flex-direction: column;
+    
+}
+.input {
+    display: block;
+    width: 100%;
+    margin-top: 8px;
+    border: 2px solid #000;
+    border-radius: 6px;
+    padding: 8px 12px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0);
+}
+.input:hover,
+.input:focus,
+.input:active {
+    background: rgba(255, 255, 255, 0);
+    border: 2px solid #8808cc;
+}
+
+.btn {
+    border: 1px solid #8808cc;
+    border-radius: 6px;
+    padding: 10px 24px;
+    width: 335px;
+    height: 44px;
+    background: #8808cc;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    color: #fff;
+    font-family: "Inter", sans-serif;
+}
+.btn:hover, .btn:focus, .btn:active {
+    background: #e7cdf4;
+    border: 2px solid #000;
+    color: #000;
+}
+
+.input_container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    width: 100%;
+    margin-bottom: 24px;
+}
+.label_hidden{
+    position: absolute;
+        left: -100000px;
+}
+.label_title{
+    font-weight: 400;
+    font-family: "Inter", sans-serif;
+        font-size: 16px;
+        line-height: 150%;
+        color: #000;
+        margin-top: 24px;
+}
+
+.prise{
+    margin-bottom: 24px;
+}
+.input_valid{
+    background: #f3e6f9;
+}
+.input_error{
+    background: rgba(255, 255, 255, 0);
+    border: 2px solid #c40202;
+    color: #c40202;
+}
+.container_prise {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.input_error {
+    border: 2px solid #c40202;
+}
+
+.error {
+    color: #c40202;
+    font-weight: 400;
+        font-size: 16px;
+        font-family: "Inter", sans-serif;
+    font-size: 12px;
+    margin-top: 4px;
+}
+
+@media (min-width: 768px) {
+    .input_container {
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 24px;
+    }
+        .input_container li {
+            width: 100%;
+        }
+
+    .input_container label {
+        width: 100%;
+    }
+    .container_prise {
+        flex-direction: row;
+        align-items: center;
+    }
+    .prise {
+        margin-right: auto;
+    }
+    .btn {
+        width: 155px;
+        margin-left: auto;
+    }
+}
+

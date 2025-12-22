@@ -11,7 +11,6 @@ export default function ProfilePlaceholder({
   isOwner,
 }: ProfilePlaceholderProps) {
   if (isOwner) {
-    // Власник профілю - опублікувати інструмент
     return (
       <div className={css.placeholder}>
         <div className={css.content}>
@@ -19,7 +18,7 @@ export default function ProfilePlaceholder({
             У вас ще не опубліковано жодного інструменту
           </h2>
           <p className={css.description}>
-            Мершій обулікуйте своє перше оголошення, щоб почати отримувати
+            Мерщій опублікуйте своє перше оголошення, щоб почати отримувати
             пасивний дохід
           </p>
           <Link
@@ -33,7 +32,6 @@ export default function ProfilePlaceholder({
     );
   }
 
-  // Публічний перегляд - переглянути всі інструменти
   return (
     <div className={css.placeholder}>
       <div className={css.content}>

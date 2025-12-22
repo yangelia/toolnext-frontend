@@ -1,4 +1,6 @@
 .card {
+    width: 100%;
+    max-width: 100%;
     border-radius: 8px;
     overflow: hidden;
     display: flex;
@@ -77,4 +79,13 @@
 .stars {
     color: #000;
     font-size: 20px;
+}
+
+.starRating {
+    display: flex;
+    gap: 4px;
+}
+
+.star {
+    fill: currentColor;
 }

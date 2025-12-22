@@ -1,10 +1,12 @@
-import styles from "./ProfilePage.module.css";
+import { redirect } from 'next/navigation';
+import { getServerCurrentUser } from '@/lib/api/serverApi';
 
-export default function ProfilePage() {
-  return (
-    <div className={styles.container}>
-      <h1>My Profile</h1>
-      {/* Тут буде особистий профіль користувача */}
-    </div>
-  );
+export default async function PrivateProfilePage() {
+  const user = await getServerCurrentUser();
+
+  if (!user) {
+    redirect('/auth/login');
+  }
+
+  redirect(`/profile/${user._id}`);
 }

@@ -1,0 +1,127 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
+  list-style: none;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.image {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+}
+
+.content {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.stars {
+  color: #fbbf24;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.name {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin: 0;
+  line-height: 1.4;
+  overflow: hidden;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  gap: 8px;
+}
+
+.price {
+  font-size: 18px;
+  font-weight: 700;
+  color: #6366f1;
+}
+
+.link {
+  padding: 10px 20px;
+  background: #6366f1;
+  color: #ffffff;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  text-align: center;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+
+.link:hover {
+  background: #4f46e5;
+}
+
+.ownerActions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.editButton {
+  padding: 10px 20px;
+  background: #6366f1;
+  color: #ffffff;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  text-align: center;
+  transition: background 0.2s;
+  white-space: nowrap;
+}
+
+.editButton:hover {
+  background: #4f46e5;
+}
+
+.deleteButton {
+  padding: 10px;
+  background: #ffffff;
+  color: #ef4444;
+  border: 2px solid #ef4444;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.deleteButton:hover {
+  background: #ef4444;
+  color: #ffffff;
+}
+
+@media (min-width: 768px) {
+  .content {
+    padding: 20px;
+  }
+
+  .name {
+    font-size: 18px;
+  }
+}
