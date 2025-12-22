@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import css from "./ToolInfoBlock.module.css";
-import { User } from "@/types/user";
+import { UserPublic } from "@/types/user";
 import Link from "next/link";
 import { useAuthStore } from "@/lib/store/authStore";
 import { Tool } from "@/types/tool";
@@ -42,7 +42,7 @@ export default function ToolInfoBlock({ tool }: { tool: Tool }) {
               <p className={css.ownerName}>{owner.username}</p>
               <Link
                 href={`/profile/${owner._id}`}
-                className={`{css.ownerLink} button button--secondary`}
+                className={`${css.ownerLink} button button--secondary`}
               >
                 Переглянути профіль
               </Link>

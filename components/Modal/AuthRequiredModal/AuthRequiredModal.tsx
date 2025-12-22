@@ -17,23 +17,23 @@ export default function AuthRequiredModal({
   return (
     <div className={styles.overlay} onClick={onClose}>
       <div className={styles.modal} onClick={(e) => e.stopPropagation()}>
-        {/* Close button */}
-        <button
-          className={styles.close}
-          onClick={onClose}
-          aria-label="Close modal"
-        >
-          ✕
+        <button className={styles.close} onClick={onClose}>
+          <svg className={styles.closeIcon}>
+            <use
+              className={styles.closeIconSwg}
+              href="/svg/sprite.svg#icon-close"
+            />
+          </svg>
         </button>
 
         <h2 className={styles.title}>Спочатку авторизуйтесь</h2>
 
         <p className={styles.text}>
-          Щоб забронювати інструмент, потрібно увійти або зареєструватися на
-          платформі
+          Щоб забрронювати інструмент, треба спочатку зареєструватись, або
+          авторизуватись на платформі
         </p>
 
-        <div className={styles.actions}>
+        <div className={styles.wrap}>
           <Link href="/login" className={styles.login}>
             Вхід
           </Link>

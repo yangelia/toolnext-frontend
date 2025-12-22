@@ -6,7 +6,7 @@
     padding-bottom: 64px;
     max-width: 1440px;
 
-    /* пременно, удалить при пуше */
+    /* временно, удалить при пуше */
     padding-left: 20px;
     padding-right: 20px;
 }
@@ -14,6 +14,10 @@
 @media (min-width: 768px) {
   .page {
     grid-template-columns: 1fr;
+
+    /* временно, удалить при пуше */
+    padding-left: 32px;
+    padding-right: 32px;
   }
 }
 
@@ -24,5 +28,9 @@
     flex-direction: row;
     padding-top: 48px;
     padding-bottom: 112px;
+
+    /* временно, удалить при пуше */
+    padding-left: 64px;
+    padding-right: 64px;
   }
 }

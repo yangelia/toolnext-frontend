@@ -1,66 +1,172 @@
 .overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0, 0, 0, 0.5);
-  z-index: 1000;
-
+  background-color: rgba(0, 0, 0, 0.25);
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 1000;
+  height: 100%;
 }
 
 .modal {
-  background: #ffffff;
-  border-radius: 16px;
-  padding: 24px;
-  width: 100%;
-  max-width: 360px;
   position: relative;
+  background: #fff;
+  border-radius: 16px;
+  width: 100%;
+  padding: 64px 20px;
   text-align: center;
+/* удалить */
+  margin-left: 16px;
+  margin-right: 16px;
 }
 
 .close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
   position: absolute;
-  top: 12px;
-  right: 12px;
-  border: none;
+  right: 16px;
+  top: 16px;
   background: transparent;
+  border: none;
   font-size: 18px;
   cursor: pointer;
+  padding: 0;
+  border: 1px solid transparent;
+  border-radius: 6px;
+  transition: 
+    border-color 250ms ease-in-out, background-color 250ms ease-in-out;
+}
+
+.close:hover, .close:focus {
+  border: 1px solid #000;
+  border-radius: 6px;
+  background: #e7cdf4;
+}
+.closeIcon {
+  width: 24px;
+  height: 24px;
+  color: #000;
 }
 
 .title {
-  font-size: 20px;
-  font-weight: 600;
-  margin-bottom: 12px;
+  font-weight: 700;
+  font-size: 34px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-align: center;
+  color: #000;
+  margin-bottom: 16px;
 }
 
 .text {
-  font-size: 14px;
-  color: #666;
-  margin-bottom: 24px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  text-align: center;
+  color: #000;
+  margin-bottom: 48px;
 }
 
-.actions {
+.wrap {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 24px;
 }
 
 .login {
-  padding: 12px;
-  border-radius: 8px;
-  border: 1px solid #ddd;
-  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #000;
   color: #000;
+  background-color: transparent;
+  border-radius: 6px;
+  padding: 10px 24px;
+  width: 100%;
+  height: 41px;
+  cursor: pointer;
+  outline: none;
   font-weight: 500;
+  font-size: 14px;
+  line-height: 1.5;
+  transition:
+    color 250ms ease-in-out,
+    background-color 250ms ease-in-out,
+    border-color 250ms ease-in-out;
+}
+
+.login:hover{
+  background-color: #e7cdf4;
 }
 
 .register {
-  padding: 12px;
-  border-radius: 8px;
-  background: #7b2cff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid #8808cc;
+  background-color: #8808cc;
   color: #fff;
-  text-decoration: none;
+  border-radius: 6px;
+  padding: 10px 24px;
+  width: 100%;
+  height: 41px;
+  cursor: pointer;
+  outline: none;
   font-weight: 500;
+  font-size: 14px;
+  line-height: 1.5;
+  transition:
+    color 250ms ease-in-out,
+    background-color 250ms ease-in-out,
+    border-color 250ms ease-in-out;
+}
+
+.register:hover {
+  background-color: transparent;
+  color: #000;
+}
+
+@media only screen and (min-width: 768px) {
+  .modal {
+    max-width: 704px;
+    padding: 64px 32px;
+    /* удалить */
+    margin-left: 32px;
+    margin-right: 32px;
+  }
+
+  .wrap {
+    flex-direction: row;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .modal {
+    padding: 64px;
+    min-width: 768px;
+  }
+
+  .close {
+    width: 32px;
+    height: 32px;
+  }
+
+  .title {
+    font-size: 48px;
+  }
+
+  .text {
+    font-size: 18px;
+  }
+
+  .login,
+  .register {
+    height: 44px;
+    font-size: 16px;
+  }
+
 }

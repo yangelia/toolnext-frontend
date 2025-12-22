@@ -16,7 +16,7 @@ const api = axios.create({
 
 export default function ToolByIdPage() {
   const params = useParams();
-  const id = params?.id as string; // 👈 ОСТАВЛЯЕМ КАК ТЫ ПРОСИЛ
+  const id = params?.id as string;
 
   const [tool, setTool] = useState<Tool | null>(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
