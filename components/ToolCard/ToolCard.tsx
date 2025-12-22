@@ -9,6 +9,7 @@ interface ToolCardProps {
 }
 
 // Рендер зірочок
+// додатковий комент
 
 const roundRating = (rating: number) => {
   if (rating >= 0 && rating <= 1.2) return 1;
