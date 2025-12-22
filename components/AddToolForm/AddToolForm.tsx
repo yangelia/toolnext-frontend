@@ -6,7 +6,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import styles from './AddToolForm.module.css';
 
-type FormValues = {
+export type AddToolFormValues = {
   name: string;
   pricePerDay: string;
   category: string;
@@ -16,30 +16,41 @@ type FormValues = {
   image: File | null;
 };
 
+type Props = {
+  initialValues?: AddToolFormValues;
+  onSubmit: (values: AddToolFormValues) => Promise<void>;
+  submitText?: string;
+};
+
 const validationSchema = Yup.object({
   name: Yup.string().required('Обовʼязкове поле'),
   pricePerDay: Yup.number().required('Обовʼязкове поле'),
   category: Yup.string().required('Оберіть категорію'),
 });
 
-export default function AddToolForm() {
+const defaultValues: AddToolFormValues = {
+  name: '',
+  pricePerDay: '',
+  category: '',
+  rentalTerms: '',
+  description: '',
+  specifications: '',
+  image: null,
+};
+
+export default function AddToolForm({
+  initialValues = defaultValues,
+  onSubmit,
+  submitText = 'Опублікувати',
+}: Props) {
   const [preview, setPreview] = useState<string | null>(null);
 
   return (
-    <Formik<FormValues>
-      initialValues={{
-        name: '',
-        pricePerDay: '',
-        category: '',
-        rentalTerms: '',
-        description: '',
-        specifications: '',
-        image: null,
-      }}
+    <Formik<AddToolFormValues>
+      initialValues={initialValues}
       validationSchema={validationSchema}
-      onSubmit={(values) => {
-        console.log('ADD TOOL', values);
-      }}
+      enableReinitialize
+      onSubmit={onSubmit}
     >
       {({ isSubmitting, setFieldValue }) => (
         <Form className={styles.form}>
@@ -106,7 +117,7 @@ export default function AddToolForm() {
 
           <div className={styles.buttons}>
             <button type="submit" disabled={isSubmitting}>
-              {isSubmitting ? 'Завантаження…' : 'Опублікувати'}
+              {isSubmitting ? 'Завантаження…' : submitText}
             </button>
 
             <button type="button" className={styles.cancel}>

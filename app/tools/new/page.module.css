@@ -10,7 +10,6 @@
   margin-bottom: 24px;
 }
 
-/* Desktop */
 @media (min-width: 1200px) {
   .page {
     padding: 24px 16px;
