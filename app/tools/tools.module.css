@@ -1,0 +1,49 @@
+.page {
+  padding: 24px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Заголовок страницы */
+.title {
+  font-size: 22px;
+  font-weight: 700;
+  color: #111;
+}
+
+/* Контейнер для фильтров + списка */
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* =====================
+   TABLET
+===================== */
+@media (min-width: 768px) {
+  .page {
+    padding: 32px;
+  }
+
+  .title {
+    font-size: 26px;
+  }
+}
+
+/* =====================
+   DESKTOP
+===================== */
+@media (min-width: 1200px) {
+  .page {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .content {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 32px;
+  }
+}

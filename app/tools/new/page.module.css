@@ -1,17 +1,19 @@
 .page {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 16px;
+  padding: 24px 16px;
 }
 
 .title {
-  font-size: 28px;
-  font-weight: 700;
   margin-bottom: 24px;
+  font-size: 22px;
+  font-weight: 700;
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 768px) {
   .page {
-    padding: 24px 16px;
+    padding: 32px;
+  }
+
+  .title {
+    font-size: 26px;
   }
 }
