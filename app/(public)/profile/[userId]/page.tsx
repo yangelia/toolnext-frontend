@@ -12,7 +12,6 @@ interface PageProps {
   params: Promise<{ userId: string }>;
 }
 
-// Генерація метаданих
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
@@ -70,19 +69,19 @@ export default async function ProfilePage({ params }: PageProps) {
     );
   }
 
-  // Отримую інструменти користувача
+  // Отримую перші 8 інструментів
   let toolsData;
   try {
     toolsData = await getUserTools(userId, {
       page: 1,
-      limit: 12,
+      limit: 8,
       sortBy: 'createdAt',
       sortOrder: 'desc',
     });
   } catch {
     toolsData = {
       tools: [],
-      pagination: { page: 1, limit: 12, totalPages: 0, totalTools: 0 },
+      pagination: { page: 1, limit: 8, totalPages: 0, totalTools: 0 },
     };
   }
 
@@ -98,11 +97,7 @@ export default async function ProfilePage({ params }: PageProps) {
         />
 
         {/* Заголовок секції інструментів */}
-        {isOwner && (
-          <h2 className={css.title}>{hasTools ? 'Інструменти' : ''}</h2>
-        )}
-
-        {!isOwner && hasTools && <h2 className={css.title}>Інструменти</h2>}
+        <h2 className={css.title}>Інструменти</h2>
 
         {/* Інструменти або Placeholder */}
         {hasTools ? (
@@ -112,17 +107,13 @@ export default async function ProfilePage({ params }: PageProps) {
             <UserToolsGrid
               tools={toolsData.tools}
               isOwner={isOwner}
+              userId={userId}
+              initialPage={1}
+              totalPages={toolsData.pagination.totalPages}
             />
           </Suspense>
         ) : (
           <ProfilePlaceholder isOwner={isOwner} />
-        )}
-
-        {/* Кнопка "Показати більше" якщо є ще інструменти */}
-        {hasTools && toolsData.pagination.totalPages > 1 && (
-          <div className={css.loadMoreWrapper}>
-            <button className={css.loadMoreButton}>Показати більше</button>
-          </div>
         )}
       </main>
     </div>
