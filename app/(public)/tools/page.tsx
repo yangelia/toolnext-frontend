@@ -6,14 +6,11 @@ import type { Category } from "@/types/category";
 import css from "./tools.module.css";
 
 export default async function ToolsPage() {
-  const categories: Category[] =
-    await fetchCategoriesServer();
+  const categories: Category[] = await fetchCategoriesServer();
 
   return (
     <div className={css.container}>
-      <h2 className={css.title}>
-        Всі інструменти
-      </h2>
+      <h2 className={css.title}>Всі інструменти</h2>
 
       <ToolsClient categories={categories} />
     </div>

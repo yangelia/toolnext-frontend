@@ -4,9 +4,27 @@ body {
 }
 
 .container {
-    margin: 0px auto;
+    font-family: "Inter", sans-serif;
+    color: #000;
+    max-width: 375px;
+    margin: 0 auto;
     padding: 48px 0px 116px 0px;
-    max-width: 1312px;
+}
+
+/* tablet */
+@media screen and (min-width: 768px) {
+    .container {
+        max-width: 768px;
+        padding: 64px 32px;
+    }
+}
+
+/* desktop */
+@media screen and (min-width: 1440px) {
+    .container {
+        max-width: 1440px;
+        padding: 48px 0px 116px 0px;
+    }
 }
 
 .title {
