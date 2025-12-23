@@ -1,7 +1,6 @@
 // types/tool.ts
 
 import type { Category } from "./category";
-import type { User, UserPublic } from "./user";
 
 export interface Feedback {
   _id: string;
@@ -35,7 +34,7 @@ export interface ToolsResponse {
 
 export interface ToolDetails {
   _id: string;
-  owner: User | UserPublic;
+  owner: string;
   category: Category;
 
   name: string;

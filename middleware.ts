@@ -24,8 +24,8 @@ import type { NextRequest } from "next/server";
 function isPrivateRoute(pathname: string) {
   // приватні tools
   if (pathname === "/tools/new") return true;
-  if (pathname.startsWith("/tools/update")) return true;
   if (/^\/tools\/[^/]+\/booking\/?$/.test(pathname)) return true;
+  if (/^\/tools\/[^/]+\/edit\/?$/.test(pathname)) return true;
 
   return false;
 }

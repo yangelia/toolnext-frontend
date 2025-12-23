@@ -1,5 +1,7 @@
 // lib/api/serverApi.ts
 import { api } from "@/app/api/api";
+import { ToolDetails } from "@/types/tool";
+import { User } from "@/types/user";
 import { cookies } from "next/headers";
 import { cache } from "react";
 
@@ -41,4 +43,23 @@ export const checkServerSession = async () => {
   });
   // Повертаємо повний респонс, щоб middleware мав доступ до нових cookie
   return res;
+};
+
+export async function getToolByIdServer(id: string) {
+  const { data } = await api.get<ToolDetails>(`/tools/${id}`);
+  return data;
+}
+
+export const getCurrentUserServer = async (): Promise<User | null> => {
+  const cookieStore = await cookies();
+  try {
+    const { data } = await api.get("/users/current", {
+      headers: {
+        Cookie: cookieStore.toString(),
+      },
+    });
+    return data?.data?.user ?? null;
+  } catch {
+    return null;
+  }
 };
