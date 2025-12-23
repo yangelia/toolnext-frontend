@@ -1,5 +1,7 @@
+import ToolForm from "@/components/ToolForm/ToolForm";
 import { getCurrentUserServer, getToolByIdServer } from "@/lib/api/serverApi";
 import { notFound, redirect } from "next/navigation";
+
 type MetadataProps = {
   params: Promise<{ id: string }>;
 };
@@ -29,7 +31,12 @@ const ToolEditPage = async ({ params }: ToolEditPageProps) => {
   const currentUserId = currentUser._id;
   if (owner !== currentUserId) notFound();
 
-  return <div>ToolEditPage</div>;
+  return (
+    <>
+      <h2>Редагування інструменту</h2>
+      <ToolForm />
+    </>
+  );
 };
 
 export default ToolEditPage;
