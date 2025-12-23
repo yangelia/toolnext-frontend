@@ -28,3 +28,7 @@ export const login = async (data: LoginRequest) => {
   const res = await api.post<User>("/auth/login", data);
   return res.data;
 };
+
+export const logout = async (): Promise<void> => {
+  await api.post("/auth/logout");
+};
