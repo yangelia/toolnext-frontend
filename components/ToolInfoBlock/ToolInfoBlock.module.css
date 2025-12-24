@@ -1,4 +1,95 @@
-.toolBut {
+.title {
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: #000;
+  margin: 0 0 8px;
+}
+
+.price {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  color: #000;
+  margin-bottom: 24px;
+}
+
+.toolOwner {
+  display: flex;
+  margin-bottom: 24px;
+}
+
+.ownerAvatar {
+  width: 80px;
+  border-radius: 100%;
+  margin-right: 16px;
+}
+
+.ownerInfo {
+  flex: 1;
+  min-width: 0;
+}
+
+.ownerName {
+  margin-bottom: 16px;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #000;
+}
+
+.ownerLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 8px;
+  border: 2px solid #000;
+  border-radius: 6px;
+  background-color: transparent;
+  padding: 8px 20px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.5;
+  width: 192px;
+  height: 37px;
+  cursor: pointer;
+  outline: none;
+  text-decoration: none;
+  color: #000;
+  transition:
+    color 250ms ease-in-out,
+    background-color 250ms ease-in-out,
+    border-color 250ms ease-in-out;
+}
+
+.ownerLink:hover {
+  background-color: #e7cdf4;
+}
+
+.description {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #000;
+  margin-bottom: 24px;
+}
+
+.toolSpec {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #000;
+  margin-bottom: 24px;
+}
+
+.toolSpecTitle {
+  font-weight: 700;
+}
+
+.bookBut {
   width: 100%;
   max-width: 335px;
 
@@ -19,70 +110,8 @@
   color: #000;
 }
 
-.toolTitle {
-  font-weight: 700;
-  font-size: 32px;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-  color: #000;
-  margin-bottom: 8px;
-}
-
-.toolPrice {
-  font-weight: 700;
-  font-size: 20px;
-  line-height: 1.4;
-  letter-spacing: -0.01em;
-  color: #000;
-  margin-bottom: 24px;
-}
-
-.toolDescr {
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 1.5;
-  color: #000;
-  margin-bottom: 24px;
-}
-
-.toolSpec {
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 1.5;
-  color: #000;
-  margin-bottom: 24px;
-}
-
-.toolSpecTitle {
-  font-weight: 700;
-}
-
-.toolOwner {
-  display: flex;
-  margin-bottom: 24px;
-}
-
-.ownerInfo {
-  flex: 1;
-  min-width: 0;
-}
-
-.ownerAvatar {
-  width: 80px;
-  border-radius: 100%;
-  margin-right: 16px;
-}
-
-.ownerName {
-  margin-bottom: 16px;
-  font-weight: 600;
-  font-size: 14px;
-  line-height: 1.5;
-  color: #000;
-}
-
 @media (min-width: 768px) {
-  .toolBut {
+  .bookBut {
     max-width: 704px;
   }
 }
@@ -92,20 +121,20 @@
     padding-left: 0;
     margin-left: 0;
   }
-  .toolTitle {
+  .title {
     font-size: 40px;
   }
-  .toolPrice {
+  .price {
     font-size: 24px;
   }
-  .toolDescr {
+  .description {
     font-size: 16px;
   }
-  .toolBut,
-  .toolPrice,
+  .bookBut,
+  .price,
   .toolSpec,
-  .toolDescr,
-  .toolTitle {
+  .description,
+  .title {
     max-width: 640px;
   }
 }

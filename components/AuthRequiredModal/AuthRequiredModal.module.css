@@ -37,19 +37,11 @@
   padding: 0;
   border: 1px solid transparent;
   border-radius: 6px;
-<<<<<<< HEAD
-  transition:
-    border-color 250ms ease-in-out, background-color 250ms ease-in-out;
-}
-
-.close:hover, .close:focus {
-=======
   transition: border-color 250ms ease-in-out, background-color 250ms ease-in-out;
 }
 
 .close:hover,
 .close:focus {
->>>>>>> origin/testtoolsdetail-y
   border: 1px solid #000;
   border-radius: 6px;
   background: #e7cdf4;
@@ -101,21 +93,11 @@
   font-weight: 500;
   font-size: 14px;
   line-height: 1.5;
-<<<<<<< HEAD
-  transition:
-    color 250ms ease-in-out,
-    background-color 250ms ease-in-out,
-    border-color 250ms ease-in-out;
-}
-
-.login:hover{
-=======
   transition: color 250ms ease-in-out, background-color 250ms ease-in-out,
     border-color 250ms ease-in-out;
 }
 
 .login:hover {
->>>>>>> origin/testtoolsdetail-y
   background-color: #e7cdf4;
 }
 
@@ -135,13 +117,7 @@
   font-weight: 500;
   font-size: 14px;
   line-height: 1.5;
-<<<<<<< HEAD
-  transition:
-    color 250ms ease-in-out,
-    background-color 250ms ease-in-out,
-=======
   transition: color 250ms ease-in-out, background-color 250ms ease-in-out,
->>>>>>> origin/testtoolsdetail-y
     border-color 250ms ease-in-out;
 }
 
@@ -164,10 +140,6 @@
   }
 }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/testtoolsdetail-y
 @media only screen and (min-width: 1440px) {
   .modal {
     padding: 64px;
@@ -193,8 +165,3 @@
     font-size: 16px;
   }
 }
-<<<<<<< HEAD
-
-
-=======
->>>>>>> origin/testtoolsdetail-y

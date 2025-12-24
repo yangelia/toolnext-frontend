@@ -15,20 +15,12 @@
   .page {
     grid-template-columns: 1fr;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/testtoolsdetail-y
     /* временно, удалить при пуше */
     padding-left: 32px;
     padding-right: 32px;
   }
 }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/testtoolsdetail-y
 @media (min-width: 1440px) {
   .page {
     grid-template-columns: 1.2fr 1fr;
@@ -37,10 +29,6 @@
     padding-top: 48px;
     padding-bottom: 112px;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> origin/testtoolsdetail-y
     /* временно, удалить при пуше */
     padding-left: 64px;
     padding-right: 64px;
