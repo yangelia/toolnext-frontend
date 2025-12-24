@@ -1,0 +1,96 @@
+.searchBox {
+    margin-top: 32px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 24px;
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    .searchBox {
+        flex-direction: row;
+        justify-content: space-between;
+        /* display: inline; */
+        width: 555px;
+    }
+}
+
+@media (min-width: 1440px) {
+    .searchBox {
+        width: 555px;
+        height: 44px;
+        
+    }
+}
+
+.input{
+    border: 2px solid white;
+    border-radius: 6px;
+    padding: 8px 12px;
+    max-width: 335px;
+    height: 37px;
+    background: none;
+    color: rgba(255, 255, 255);
+    
+}
+.input::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+@media (min-width: 768px) {
+    .input {
+        width: 428px;
+        height: 37px;
+    }
+}
+
+.input:focus{
+    color: #fff;
+    border: none;
+}
+
+.button{
+    background: #8808CC;
+    border: 1px solid #8808CC;
+    border-radius: 6px;
+    max-width: 335px;
+    padding: 10px 24px;
+    width: 335px;
+    height: 41px;
+    color: rgba(255, 255, 255, 1);
+}
+
+
+
+@media (min-width: 768px) {
+    .button {
+        padding: 10px 24px;
+        width: 95px;
+        height: 41px;
+    }
+}
+
+@media (min-width: 1440px) {
+   .button {
+        width: 101px;
+        height: 44px;
+    }
+}
+
+
+.button:hover,
+.button:focus {
+        color: #000;
+        background-color: #fff; 
+        border: 2px #8808cc;
+        background-color: none;
+}
+
+.button:active {
+        color: #000;
+        background-color: #E7CDF4; 
+        border: 2px #8808cc;
+        width: 95px;
+        height: 41px;
+}

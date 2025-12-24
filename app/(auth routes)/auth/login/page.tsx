@@ -1,15 +1,15 @@
-'use client';
+"use client";
 
 import styles from "./LoginPage.module.css";
-import { useRouter } from 'next/navigation';
-import { login, LoginRequest } from '@/lib/api/clientApi';
-import { ApiError } from '@/app/api/api'
+import { useRouter } from "next/navigation";
+import { login, LoginRequest } from "@/lib/api/clientApi";
+import { ApiError } from "@/app/api/api";
 import Link from "next/link";
 import * as Yup from "yup";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import { useState } from "react";
 import { useAuthStore } from "@/lib/store/authStore";
-
+import Image from "next/image";
 
 const validationSchema = Yup.object({
   email: Yup.string()
@@ -23,112 +23,112 @@ const validationSchema = Yup.object({
 
 export default function LoginPage() {
   const router = useRouter();
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
   const setUser = useAuthStore((state) => state.setUser);
 
   const handleSubmit = async (values: LoginRequest) => {
     try {
       const res = await login(values);
-      
-      console.log('Login response:', res);
+
+      console.log("Login response:", res);
       if (res && res._id && res.email) {
         setUser(res);
-        router.push('/profile');
+        router.push("/profile");
       } else {
-        setError('Invalid email or password');
+        setError("Invalid email or password");
       }
     } catch (error) {
       setError(
         (error as ApiError).response?.data?.error ??
-        (error as ApiError).message ??
-        "Oops... some error"
+          (error as ApiError).message ??
+          "Oops... some error"
       );
     }
   };
 
   return (
-    <main className={styles.main}>
-      <div className={styles.container}>
-        <div className={styles.page}>
-          <div className={styles.card}>
-            <div className={styles.formSection}>
-              <div>
-                <h1 className={styles.title}>Вхід</h1>
-              </div>
+    <section className={styles.container}>
+      <div className={styles.page}>
+        <div className={styles.formSection}>
+          <div>
+            <h1 className={styles.title}>Вхід</h1>
+          </div>
 
-              <Formik
-                initialValues={{ email: '', password: '' }}
-                validationSchema={validationSchema}
-                onSubmit={handleSubmit}
-              >
-                {({ isSubmitting, errors, touched }) => (
-                  <Form className={styles.form}>
-                    <label className={styles.field}>
+          <Formik
+            initialValues={{ email: "", password: "" }}
+            validationSchema={validationSchema}
+            onSubmit={handleSubmit}
+          >
+            {({ isSubmitting, errors, touched }) => (
+              <Form className={styles.form}>
+                <label className={styles.field}>
+                  <span className={styles.label}>Пошта*</span>
 
-                      <span className={styles.label}>Пошта*</span>
-      
-                      <Field
-                        type="email"
-                        name="email"
-                        placeholder="Ваша пошта"
-                        className={`${styles.input}
-                        ${errors.email && touched.email
+                  <Field
+                    type="email"
+                    name="email"
+                    placeholder="Ваша пошта"
+                    className={`${styles.input}
+                        ${
+                          errors.email && touched.email ? styles.inputError : ""
+                        }`}
+                  />
+                  <ErrorMessage
+                    name="email"
+                    component="div"
+                    className={styles.errorText}
+                  />
+                </label>
+
+                <label className={styles.field}>
+                  <span className={styles.label}>Пароль*</span>
+                  <Field
+                    type="password"
+                    name="password"
+                    placeholder="Ваш пароль"
+                    className={`${styles.input}
+                        ${
+                          errors.password && touched.password
                             ? styles.inputError
-                            : ''
-                          }`}
-                      />
-                      <ErrorMessage
-                        name="email"
-                        component="div"
-                        className={styles.errorText}
-                      />
-                    </label>
+                            : ""
+                        }`}
+                  />
+                  <ErrorMessage
+                    name="password"
+                    component="div"
+                    className={styles.errorText}
+                  />
+                </label>
 
-                    <label className={styles.field}>
-                      <span className={styles.label}>Пароль*</span>
-                      <Field
-                        type="password"
-                        name="password"
-                        placeholder="Ваш пароль"
-                        className={`${styles.input}
-                        ${errors.password && touched.password
-                            ? styles.inputError
-                            : ''
-                          }`}
-                      />
-                      <ErrorMessage
-                        name="password"
-                        component="div"
-                        className={styles.errorText}
-                      />
-                    </label>
+                <button
+                  type="submit"
+                  className={styles.submit}
+                  disabled={isSubmitting}
+                >
+                  Увійти
+                </button>
 
-                    <button
-                      type="submit"
-                      className={styles.submit}
-                      disabled={isSubmitting}
-                    >
-                      Увійти
-                    </button>
+                {error && <p className={styles.errorText}>{error}</p>}
+              </Form>
+            )}
+          </Formik>
 
-                    {error && <p className={styles.errorText}>{error}</p>}
-                  </Form>
-                )}
-              </Formik>
-
-              <div className={styles.switchAuth}>
-                <span>Не маєте аккаунту?</span>
-                <Link href="/auth/register">Реєстрація</Link>
-              </div>
-
-              <p className={styles.footerNote}>© 2025 ToolNext</p>
-
-            </div>
-
-            <div className={styles.imageSection} aria-hidden></div>
+          <div className={styles.switchAuth}>
+            <span>Не маєте аккаунту?</span>
+            <Link href="/auth/register">Реєстрація</Link>
           </div>
         </div>
+
+        <div className={styles.imageSection} aria-hidden={true}>
+          <Image
+            src="/images/login_img.webp"
+            alt="Робочі інструменти на полицях"
+            fill
+            priority
+            className={styles.image}
+          />
+        </div>
       </div>
-    </main>
+    </section>
   );
 }

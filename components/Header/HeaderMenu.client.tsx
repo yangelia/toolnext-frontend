@@ -11,7 +11,7 @@ type User = {
 
 interface HeaderMenuProps {
   isAuth: boolean;
-  user: User;
+  user?: User | null;
 }
 
 export default function HeaderMenu({ isAuth, user }: HeaderMenuProps) {
