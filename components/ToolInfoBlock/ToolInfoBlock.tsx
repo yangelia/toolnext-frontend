@@ -29,6 +29,14 @@ export default function ToolInfoBlock({ tool }: ToolInfoBlockProps) {
     }
   };
 
+  // const ownerName =
+  //   "username" in tool.owner ? tool.owner.username : tool.owner.name;
+
+  // const ownerAvatar =
+  //   "avatar" in tool.owner && tool.owner.avatar
+  //     ? tool.owner.avatar
+  //     : "/avatar-placeholder.png";
+
   return (
     <section className={css.toolInfo}>
       <div className={css.container}>

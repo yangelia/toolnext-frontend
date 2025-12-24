@@ -10,11 +10,11 @@ const api = axios.create({
   withCredentials: true,
 });
 
-async function getTool(toolId: string): Promise<ToolDetails | null> {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/tools/${toolId}`,
-    { cache: "no-store" }
-  );
+async function getTool(id: string): Promise<ToolDetails | null> {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/tools/${id}`, {
+    cache: "no-store",
+    credentials: "include",
+  });
 
   if (!res.ok) return null;
   return res.json();
