@@ -1,38 +1,27 @@
+import { notFound } from "next/navigation";
+
 import ToolGallery from "@/components/ToolGallery/ToolGallery";
 import ToolInfoBlock from "@/components/ToolInfoBlock/ToolInfoBlock";
+import { getToolId } from "@/lib/api/booking";
 import { ToolDetails } from "@/types/tool";
+
 import styles from "./toolDetails.module.css";
-import { getUserById } from "@/lib/api/users";
 
-import axios from "axios";
-
-const api = axios.create({
-  baseURL: "http://localhost:3000",
-  withCredentials: true,
-});
-
-async function getToolById(id: string): Promise<ToolDetails | null> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/tools/${id}`, {
-    cache: "no-store",
-  });
-
-  if (!res.ok) return null;
-  return res.json();
+interface PageProps {
+  params: Promise<{
+    id: string;
+  }>;
 }
 
-export default async function ToolDetailsPage({
-  params,
-}: {
-  params: { id: string };
-}) {
-  const tool = await getToolById(params.id);
+export default async function ToolDetailsPage({ params }: PageProps) {
+  const { id } = await params;
 
-  if (!tool) {
-    return (
-      <div className="container">
-        <p>Інструмент не знайдено.</p>
-      </div>
-    );
+  let tool: ToolDetails;
+
+  try {
+    tool = await getToolId(id);
+  } catch {
+    notFound();
   }
 
   return (

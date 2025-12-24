@@ -1,27 +1,18 @@
-// const nextConfig = {
-//   output: "standalone",
-//   trailingSlash: false,
-// };
-
-// module.exports = nextConfig;
-
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: "standalone",
+  trailingSlash: false,
+
   images: {
-    domains: ["ftp.goit.study"],
-  },
-  async rewrites() {
-    return [
+    remotePatterns: [
       {
-        source: "/api/:path*",
-        destination: "http://localhost:3000/:path*", 
+        protocol: "https",
+        hostname: "ftp.goit.study",
+        pathname: "/img/**",
       },
-    ];
+    ],
   },
 };
-
-
-
 
 module.exports = nextConfig;
