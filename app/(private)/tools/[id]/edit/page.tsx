@@ -1,5 +1,9 @@
 import ToolForm from "@/components/ToolForm/ToolForm";
-import { getCurrentUserServer, getToolByIdServer } from "@/lib/api/serverApi";
+import {
+  getCategoriesServer,
+  getCurrentUserServer,
+  getToolByIdServer,
+} from "@/lib/api/serverApi";
 import { notFound, redirect } from "next/navigation";
 
 type MetadataProps = {
@@ -21,20 +25,21 @@ type ToolEditPageProps = {
 
 const ToolEditPage = async ({ params }: ToolEditPageProps) => {
   const { id } = await params;
+
   const tool = await getToolByIdServer(id);
   const owner = tool.owner;
-
-  console.log(owner);
 
   const currentUser = await getCurrentUserServer();
   if (!currentUser) redirect("/auth/login");
   const currentUserId = currentUser._id;
   if (owner !== currentUserId) notFound();
 
+  const categories = await getCategoriesServer();
+
   return (
     <>
       <h2>Редагування інструменту</h2>
-      <ToolForm />
+      <ToolForm categories={categories} />
     </>
   );
 };

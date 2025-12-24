@@ -1,5 +1,6 @@
 // lib/api/serverApi.ts
 import { api } from "@/app/api/api";
+import { Category } from "@/types/category";
 import { ToolDetails } from "@/types/tool";
 import { User } from "@/types/user";
 import { cookies } from "next/headers";
@@ -10,7 +11,6 @@ export type HeaderUser = {
   avatarUrl: string;
 };
 
-// export async function getServerCurrentUser(): Promise<HeaderUser | null> {
 export const getServerCurrentUser = cache(async () => {
   try {
     const cookieStore = await cookies();
@@ -63,3 +63,8 @@ export const getCurrentUserServer = async (): Promise<User | null> => {
     return null;
   }
 };
+
+export async function getCategoriesServer() {
+  const { data } = await api.get<Category[]>("/categories");
+  return data;
+}

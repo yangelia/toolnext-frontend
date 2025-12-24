@@ -9,6 +9,10 @@ export type CategoryOption = {
   title: string;
 };
 
+type ToolFormProps = {
+  categories: CategoryOption[];
+};
+
 const validationSchema = Yup.object({
   name: Yup.string().required("Обовʼязкове поле"),
   pricePerDay: Yup.number()
@@ -17,7 +21,7 @@ const validationSchema = Yup.object({
   category: Yup.string().required("Оберіть категорію"),
 });
 
-export default function ToolForm() {
+export default function ToolForm({ categories }: ToolFormProps) {
   return (
     <Formik initialValues={{}} onSubmit={() => {}}>
       <Form className={styles.form}>
@@ -92,22 +96,22 @@ export default function ToolForm() {
           />
         </label>
 
-        {/* <label className={styles.field}>
-              <span className={styles.label}>Категорія</span>
-              <Field as="select" name="category" className={styles.select}>
-                <option value="">Категорія</option>
-                {categories.map((c) => (
-                  <option key={c._id} value={c._id}>
-                    {c.title}
-                  </option>
-                ))}
-              </Field>
-              <ErrorMessage
-                name="category"
-                component="p"
-                className={styles.error}
-              />
-            </label> */}
+        <label className={styles.field}>
+          <span className={styles.label}>Категорія</span>
+          <Field as="select" name="category" className={styles.select}>
+            <option value="">Категорія</option>
+            {categories.map((c) => (
+              <option key={c._id} value={c._id}>
+                {c.title}
+              </option>
+            ))}
+          </Field>
+          <ErrorMessage
+            name="category"
+            component="p"
+            className={styles.error}
+          />
+        </label>
 
         <label className={styles.field}>
           <span className={styles.label}>Умови оренди</span>
@@ -143,7 +147,7 @@ export default function ToolForm() {
 
         <div className={styles.buttons}>
           <button type="submit" className={styles.submitBtn}>
-            fffff
+            Оновити
           </button>
 
           <button type="button" className={styles.cancelBtn}>
