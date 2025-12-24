@@ -1,29 +1,14 @@
-// import { NextResponse } from "next/server";
-// import type { NextRequest } from "next/server";
-
-// export function middleware(req: NextRequest) {
-//   const accessToken = req.cookies.get("accessToken")?.value;
-
-//   if (req.nextUrl.pathname.startsWith("/profile")) {
-//     if (!accessToken) {
-//       return NextResponse.redirect(new URL("/auth/login", req.url));
-//     }
-//   }
-
-//   return NextResponse.next();
-// }
-
-// export const config = {
-//   matcher: ["/profile/:path*"],
-// };
-
-//! оновлення Header та Footer. Допуск до приватних сторінок
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
+/**
+ * ВРЕМЕННО: разрешаем /tools/new без авторизации
+ * чтобы проверить форму добавления инструмента
+ */
 function isPrivateRoute(pathname: string) {
-  // приватні tools
-  if (pathname === "/tools/new") return true;
+  // временно открыто для разработки
+  if (pathname === "/tools/new") return false;
+
   if (pathname.startsWith("/tools/update")) return true;
   if (/^\/tools\/[^/]+\/booking\/?$/.test(pathname)) return true;
 
@@ -32,7 +17,8 @@ function isPrivateRoute(pathname: string) {
 
 function isAuthRoute(pathname: string) {
   return (
-    pathname.startsWith("/auth/login") || pathname.startsWith("/auth/register")
+    pathname.startsWith("/auth/login") ||
+    pathname.startsWith("/auth/register")
   );
 }
 
@@ -43,7 +29,7 @@ export function middleware(req: NextRequest) {
   const refreshToken = req.cookies.get("refreshToken")?.value;
   const sessionId = req.cookies.get("sessionId")?.value;
 
-  // якщо accessToken протух, але refreshToken+sessionId є => оновлюємо
+  // accessToken протух, але є refresh + session → оновлюємо
   if (!accessToken && refreshToken && sessionId) {
     const url = req.nextUrl.clone();
     url.pathname = "/api/auth/refresh-and-redirect";
@@ -56,7 +42,7 @@ export function middleware(req: NextRequest) {
     return NextResponse.redirect(new URL("/", req.url));
   }
 
-  // приватні маршрути без accessToken → на логін
+  // приватні маршрути без accessToken → логін
   if (!accessToken && isPrivateRoute(pathname)) {
     return NextResponse.redirect(new URL("/auth/login", req.url));
   }

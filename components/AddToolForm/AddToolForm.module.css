@@ -1,11 +1,16 @@
+/* ================= FORM ================= */
+
 .form {
   display: flex;
   flex-direction: column;
   gap: 20px;
   max-width: 720px;
+  margin: 0 auto;
+  padding: 24px;
+  background-color: #ffffff;
 }
 
-/* ---------- IMAGE ---------- */
+/* ================= IMAGE ================= */
 
 .imageBlock {
   position: relative;
@@ -15,7 +20,12 @@
   border-radius: 12px;
   cursor: pointer;
   overflow: hidden;
-  background-color: #f9fafb;
+  background-color: #f3f4f6;
+  transition: border-color 0.2s ease;
+}
+
+.imageBlock:hover {
+  border-color: #7c3aed; /* фирменный фиолетовый */
 }
 
 .image {
@@ -31,13 +41,14 @@
   font-size: 14px;
 }
 
-/* ---------- FIELDS ---------- */
+/* ================= FIELDS ================= */
 
 .field {
   display: flex;
   flex-direction: column;
   gap: 6px;
   font-size: 14px;
+  color: #111827;
 }
 
 .input,
@@ -47,6 +58,16 @@
   border-radius: 8px;
   border: 1px solid #d1d5db;
   font-size: 14px;
+  background-color: #ffffff;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+  outline: none;
+  border-color: #7c3aed;
+  box-shadow: 0 0 0 2px rgba(124, 58, 237, 0.2);
 }
 
 .textarea {
@@ -59,42 +80,88 @@
   color: #dc2626;
 }
 
-/* ---------- BUTTONS ---------- */
+/* ================= BUTTONS ================= */
 
 .buttons {
   display: flex;
   gap: 12px;
-  margin-top: 10px;
+  margin-top: 16px;
 }
 
 .submitButton {
-  padding: 10px 16px;
+  padding: 12px 16px;
   border-radius: 8px;
   border: none;
-  background-color: #2563eb;
+  background-color: #7c3aed;
   color: #ffffff;
   font-size: 14px;
+  font-weight: 500;
   cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.submitButton:hover:not(:disabled) {
+  background-color: #6d28d9;
 }
 
 .submitButton:disabled {
-  background-color: #93c5fd;
+  background-color: #c4b5fd;
   cursor: not-allowed;
 }
 
 .cancelButton {
-  padding: 10px 16px;
+  padding: 12px 16px;
   border-radius: 8px;
   border: 1px solid #d1d5db;
   background-color: transparent;
   font-size: 14px;
   cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
-/* ---------- LOADER ---------- */
+.cancelButton:hover {
+  background-color: #f3f4f6;
+}
+
+/* ================= LOADER ================= */
 
 .loader {
   padding: 40px;
   text-align: center;
   font-size: 16px;
+}
+
+/* ================= TABLET ================= */
+
+@media (max-width: 1024px) {
+  .form {
+    max-width: 640px;
+    padding: 20px;
+  }
+
+  .imageBlock {
+    height: 220px;
+  }
+}
+
+/* ================= MOBILE ================= */
+
+@media (max-width: 767px) {
+  .form {
+    max-width: 100%;
+    padding: 16px;
+  }
+
+  .imageBlock {
+    height: 180px;
+  }
+
+  .buttons {
+    flex-direction: column;
+  }
+
+  .submitButton,
+  .cancelButton {
+    width: 100%;
+  }
 }
