@@ -29,13 +29,9 @@ export default function ToolInfoBlock({ tool }: ToolInfoBlockProps) {
     }
   };
 
-  // const ownerName =
-  //   "username" in tool.owner ? tool.owner.username : tool.owner.name;
+  const ownerName = tool.owner.username;
 
-  // const ownerAvatar =
-  //   "avatar" in tool.owner && tool.owner.avatar
-  //     ? tool.owner.avatar
-  //     : "/avatar-placeholder.png";
+  const ownerAvatar = tool.owner.avatar || "/avatar-placeholder.png";
 
   return (
     <section className={css.toolInfo}>
@@ -45,15 +41,15 @@ export default function ToolInfoBlock({ tool }: ToolInfoBlockProps) {
 
         <div className={css.toolOwner}>
           <Image
-            src={tool.owner.avatar || "/avatar-placeholder.png"}
-            alt={tool.owner.username}
+            src={ownerAvatar}
+            alt={ownerName}
             width={48}
             height={48}
             className={css.ownerAvatar}
           />
 
           <div className={css.ownerInfo}>
-            <p className={css.ownerName}>{tool.owner.username}</p>
+            <p className={css.ownerName}>{ownerName}</p>
 
             <Link href={`/users/${tool.owner._id}`} className={css.ownerLink}>
               Переглянути профіль

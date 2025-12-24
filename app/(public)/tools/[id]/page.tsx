@@ -2,6 +2,7 @@ import ToolGallery from "@/components/ToolGallery/ToolGallery";
 import ToolInfoBlock from "@/components/ToolInfoBlock/ToolInfoBlock";
 import { ToolDetails } from "@/types/tool";
 import styles from "./toolDetails.module.css";
+import { getUserById } from "@/lib/api/users";
 
 import axios from "axios";
 
@@ -10,10 +11,9 @@ const api = axios.create({
   withCredentials: true,
 });
 
-async function getTool(id: string): Promise<ToolDetails | null> {
+async function getToolById(id: string): Promise<ToolDetails | null> {
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/tools/${id}`, {
     cache: "no-store",
-    credentials: "include",
   });
 
   if (!res.ok) return null;
@@ -25,7 +25,7 @@ export default async function ToolDetailsPage({
 }: {
   params: { id: string };
 }) {
-  const tool = await getTool(params.id);
+  const tool = await getToolById(params.id);
 
   if (!tool) {
     return (
