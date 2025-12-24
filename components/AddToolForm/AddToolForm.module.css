@@ -1,17 +1,25 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 20px;
+  max-width: 720px;
 }
+
+/* ---------- IMAGE ---------- */
 
 .imageBlock {
   position: relative;
   width: 100%;
-  height: 180px;
-  background: #f1f1f1;
-  border-radius: 8px;
-  overflow: hidden;
+  height: 260px;
+  border: 2px dashed #d1d5db;
+  border-radius: 12px;
   cursor: pointer;
+  overflow: hidden;
+  background-color: #f9fafb;
+}
+
+.image {
+  object-fit: cover;
 }
 
 .placeholder {
@@ -19,13 +27,11 @@
   align-items: center;
   justify-content: center;
   height: 100%;
-  color: #9a9a9a;
+  color: #6b7280;
   font-size: 14px;
 }
 
-.image {
-  object-fit: cover;
-}
+/* ---------- FIELDS ---------- */
 
 .field {
   display: flex;
@@ -37,71 +43,58 @@
 .input,
 .select,
 .textarea {
-  height: 40px;
-  padding: 0 12px;
-  border-radius: 6px;
-  border: 1px solid #ccc;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
   font-size: 14px;
 }
 
 .textarea {
+  resize: vertical;
   min-height: 90px;
-  padding: 10px 12px;
-  resize: none;
 }
 
 .error {
   font-size: 12px;
-  color: #d32f2f;
+  color: #dc2626;
 }
+
+/* ---------- BUTTONS ---------- */
 
 .buttons {
   display: flex;
-  flex-direction: column;
   gap: 12px;
+  margin-top: 10px;
 }
 
 .submitButton {
-  height: 44px;
+  padding: 10px 16px;
   border-radius: 8px;
   border: none;
-  background: #7b2cbf;
-  color: #fff;
-  font-weight: 600;
+  background-color: #2563eb;
+  color: #ffffff;
+  font-size: 14px;
   cursor: pointer;
+}
+
+.submitButton:disabled {
+  background-color: #93c5fd;
+  cursor: not-allowed;
 }
 
 .cancelButton {
-  height: 44px;
+  padding: 10px 16px;
   border-radius: 8px;
-  background: transparent;
-  border: 1px solid #ccc;
-  color: #111;
-  font-weight: 600;
+  border: 1px solid #d1d5db;
+  background-color: transparent;
+  font-size: 14px;
   cursor: pointer;
 }
 
-@media (min-width: 768px) {
-  .buttons {
-    flex-direction: row;
-  }
+/* ---------- LOADER ---------- */
 
-  .buttons > * {
-    flex: 1;
-  }
-
-  .imageBlock {
-    height: 220px;
-  }
-}
-
-@media (min-width: 1200px) {
-  .form {
-    max-width: 560px;
-    margin: 0 auto;
-  }
-
-  .imageBlock {
-    height: 260px;
-  }
+.loader {
+  padding: 40px;
+  text-align: center;
+  font-size: 16px;
 }
