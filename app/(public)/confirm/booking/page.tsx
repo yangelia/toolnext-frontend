@@ -1,22 +1,13 @@
 import Link from 'next/link';
-import styles from "./BookingConfirmation.module.css";
 
 export default function BookingConfirmationPage() {
   return (
-    <main className={styles.page}>
-      <section className={styles.card}>
-        <h1 className={styles.title}>
-          Інструмент успішно заброньовано
-        </h1>
-
-        <p className={styles.text}>
-          Власник інструменту скоро з вами зв’яжеться стосовно деталей та оплати вашої броні
-        </p>
-
-        <Link href="/" className={styles.button}>
-          На головну
-        </Link>
-      </section>
-    </main>
+    <div>
+      <h1>Інструмент успішно заброньовано</h1>
+      <p>
+        Дякуємо за ваше замовлення! Ми зв&apos;яжемося з вами найближчим часом.
+      </p>
+      <Link href="/">На головну</Link>
+    </div>
   );
 }
