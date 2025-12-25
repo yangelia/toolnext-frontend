@@ -42,7 +42,7 @@ export default function ToolInfoBlock({ tool }: ToolInfoBlockProps) {
         <div className={css.toolOwner}>
           <Image
             src={ownerAvatar}
-            alt={ownerName || "Аватар користувача"}
+            alt={ownerName}
             width={48}
             height={48}
             className={css.ownerAvatar}
