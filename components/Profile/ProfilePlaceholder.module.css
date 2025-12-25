@@ -2,10 +2,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 300px;
+  min-height: 400px;
   padding: 48px 24px;
   background: #f9fafb;
-  border-radius: 12px;
+  border-radius: 16px;
   margin-top: 32px;
 }
 
@@ -31,7 +31,7 @@
 
 .button {
   display: inline-block;
-  padding: 12px 24px;
+  padding: 14px 32px;
   font-size: 16px;
   font-weight: 600;
   color: #ffffff;
@@ -50,9 +50,26 @@
   transform: translateY(0);
 }
 
+/* Tablet */
+@media (max-width: 1024px) {
+  .placeholder {
+    min-height: 350px;
+    padding: 40px 24px;
+  }
+
+  .title {
+    font-size: 22px;
+  }
+
+  .description {
+    font-size: 15px;
+  }
+}
+
+/* Mobile */
 @media (max-width: 768px) {
   .placeholder {
-    min-height: 250px;
+    min-height: 300px;
     padding: 32px 16px;
     margin-top: 24px;
   }
@@ -68,7 +85,7 @@
   }
 
   .button {
-    padding: 10px 20px;
+    padding: 12px 24px;
     font-size: 15px;
   }
 }
