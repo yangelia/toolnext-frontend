@@ -2,9 +2,10 @@
 
 import { useRouter } from "next/navigation";
 import { ToolDetails } from "@/types/tool";
-import ToolForm, { CategoryOption } from "./ToolForm";
+import { CategoryOption } from "./AddEditToolForm";
 import { updateTool } from "@/lib/api/clientApi";
 import { useToolDraftStore } from "@/lib/store/toolsStore";
+import AddEditToolForm from "./AddEditToolForm";
 
 type Props = {
   categories: CategoryOption[];
@@ -23,7 +24,7 @@ export default function ToolEditFormClient({
   const draftKey = `tool:${toolId}`;
 
   return (
-    <ToolForm
+    <AddEditToolForm
       categories={categories}
       toolId={draftKey}
       tool={tool}

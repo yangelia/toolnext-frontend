@@ -5,6 +5,7 @@ import {
 } from "@/lib/api/serverApi";
 import { notFound, redirect } from "next/navigation";
 import ToolEditFormClient from "@/components/ToolForm/ToolEditFormClient";
+import styles from "./ToolEdit.module.css";
 
 type MetadataProps = {
   params: Promise<{ id: string }>;
@@ -23,7 +24,7 @@ type ToolEditPageProps = {
   params: Promise<{ id: string }>;
 };
 
-const ToolEditPage = async ({ params }: ToolEditPageProps) => {
+const EditToolPage = async ({ params }: ToolEditPageProps) => {
   const { id } = await params;
 
   const tool = await getToolByIdServer(id);
@@ -37,12 +38,12 @@ const ToolEditPage = async ({ params }: ToolEditPageProps) => {
   const categories = await getCategoriesServer();
 
   return (
-    <>
-      <h2>Редагування інструменту</h2>
+    <div className={styles.page}>
+      <h2 className={styles.title}>Редагування інструменту</h2>
       {/* <ToolForm categories={categories} tool={tool} toolId={id} /> */}
       <ToolEditFormClient categories={categories} toolId={id} tool={tool} />
-    </>
+    </div>
   );
 };
 
-export default ToolEditPage;
+export default EditToolPage;

@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { useFormikContext } from "formik";
-import styles from "./ToolForm.module.css";
+import styles from "./AddEditToolForm.module.css";
 import type { ToolDraft } from "@/types/tool";
 import { useMemo, useEffect, useState, useId } from "react";
 
@@ -78,15 +78,21 @@ export default function ImageTool({ initialImageUrl }: Props) {
         onChange={handleFileChange}
       />
 
-      <label htmlFor={inputId} className={styles.uploadBtn}>
-        Завантажити фото
-      </label>
+      <div className={styles.buttonsImg}>
+        <label htmlFor={inputId} className={styles.uploadBtn}>
+          Завантажити фото
+        </label>
 
-      {values.image && (
-        <button type="button" onClick={handleClear} className={styles.clearBtn}>
-          Скасувати вибір
-        </button>
-      )}
+        {values.image && (
+          <button
+            type="button"
+            onClick={handleClear}
+            className={styles.clearBtn}
+          >
+            Скасувати вибір
+          </button>
+        )}
+      </div>
 
       {error && <p className={styles.error}>{error}</p>}
     </div>

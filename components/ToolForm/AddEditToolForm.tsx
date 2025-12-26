@@ -1,7 +1,7 @@
 "use client";
 
 import { Formik, Form, Field, ErrorMessage, FieldArray } from "formik";
-import styles from "./ToolForm.module.css";
+import styles from "./AddEditToolForm.module.css";
 import { ToolDraft } from "@/types/tool";
 import { useMemo } from "react";
 import ToolDraftSync from "./ToolDraftSync";
@@ -12,6 +12,7 @@ import {
   toolEditSchema,
 } from "@/lib/validation/toolValidation";
 import OverlayLoader from "../OverlayLoader/OverlayLoader";
+import CategorySelect from "../CategorySelect/CategorySelect";
 
 export type CategoryOption = {
   _id: string;
@@ -39,7 +40,7 @@ type ToolFormProps = {
 
 const IMAGE_FIELD = "image";
 
-export default function ToolForm({
+export default function AddEditToolForm({
   categories,
   toolId,
   tool,
@@ -147,14 +148,19 @@ export default function ToolForm({
 
             <label className={styles.field}>
               <span className={styles.label}>Категорія</span>
-              <Field as="select" name="category" className={styles.select}>
+              {/* <Field as="select" name="category" className={styles.select}>
                 <option value="">Категорія</option>
                 {categories.map((c) => (
                   <option key={c._id} value={c._id}>
                     {c.title}
                   </option>
                 ))}
-              </Field>
+              </Field> */}
+              <CategorySelect<ToolDraft>
+                name="category"
+                placeholder="Категорія"
+                options={categories}
+              />
               <ErrorMessage
                 name="category"
                 component="span"
@@ -167,7 +173,7 @@ export default function ToolForm({
               <Field
                 as="textarea"
                 name="rentalTerms"
-                className={styles.textarea}
+                className={styles.textareaRT}
               />
               <ErrorMessage
                 name="rentalTerms"
@@ -192,7 +198,7 @@ export default function ToolForm({
 
             <label className={styles.field}>
               <span className={styles.label}>
-                Характеристики (ключ-значення)
+                Характеристики (назва - опис)
               </span>
               <FieldArray name="specifications">
                 {({ push, remove }) => (
@@ -214,7 +220,14 @@ export default function ToolForm({
                           onClick={() => remove(idx)}
                           disabled={values.specifications.length === 1}
                         >
-                          ✕
+                          <svg
+                            className={styles.menuDelete}
+                            width="24"
+                            height="24"
+                            aria-hidden="true"
+                          >
+                            <use href="/icons/sprite.svg#icon-close" />
+                          </svg>
                         </button>
                       </div>
                     ))}

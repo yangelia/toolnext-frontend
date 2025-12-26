@@ -4,7 +4,7 @@ import { useToolDraftStore } from "@/lib/store/toolsStore";
 import { ToolDraft } from "@/types/tool";
 import { useFormikContext } from "formik";
 import { useRouter } from "next/navigation";
-import styles from "./ToolForm.module.css";
+import styles from "./AddEditToolForm.module.css";
 
 type Props = {
   toolId: string;

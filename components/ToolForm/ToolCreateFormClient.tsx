@@ -1,9 +1,10 @@
 "use client";
 
-import ToolForm, { CategoryOption } from "./ToolForm";
+import { CategoryOption } from "./AddEditToolForm";
 import { createTool } from "@/lib/api/clientApi";
 import { useRouter } from "next/navigation";
 import { useToolDraftStore } from "@/lib/store/toolsStore";
+import AddEditToolForm from "./AddEditToolForm";
 
 type Props = {
   categories: CategoryOption[];
@@ -16,7 +17,7 @@ export default function ToolCreateFormClient({ categories }: Props) {
   const draftKey = "tool:new"; // ключ для чорнетки
 
   return (
-    <ToolForm
+    <AddEditToolForm
       categories={categories}
       toolId={draftKey}
       tool={null}
