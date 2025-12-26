@@ -1,130 +1,79 @@
-import { Suspense } from 'react';
-import { Metadata } from 'next';
-import { getUserById, getUserTools } from '@/lib/api/users';
-import { getCurrentUser } from '@/lib/api/users';
+import { notFound } from 'next/navigation';
 import { cookies } from 'next/headers';
 import UserProfile from '@/components/Profile/UserProfile';
 import UserToolsGrid from '@/components/Profile/UserToolsGrid';
 import ProfilePlaceholder from '@/components/Profile/ProfilePlaceholder';
-import css from './ProfilePage.module.css';
+import { getUserById, getUserTools } from '@/lib/api/users';
+import { ToolBasic } from '@/types/tool';
+import { api } from '@/lib/api/api';
+
+async function getCurrentUserId(): Promise<string | null> {
+  try {
+    const cookieStore = await cookies();
+    const accessToken = cookieStore.get('accessToken');
+
+    if (!accessToken) {
+      return null;
+    }
+
+    const response = await api.get('/users/current', {
+      headers: {
+        Cookie: cookieStore.toString(),
+      },
+    });
+
+    return response.data.data.user._id;
+  } catch {
+    return null;
+  }
+}
 
 interface PageProps {
   params: Promise<{ userId: string }>;
 }
 
-// Генерація метаданих
-export async function generateMetadata({
-  params,
-}: PageProps): Promise<Metadata> {
-  try {
-    const { userId } = await params;
-    const user = await getUserById(userId);
-
-    return {
-      title: `${user.username} - Профіль | ToolNext`,
-      description: `Профіль користувача ${user.username}. Перегляньте опубліковані інструменти та обладнання для оренди.`,
-      openGraph: {
-        title: `${user.username} - Профіль | ToolNext`,
-        description: `Профіль користувача ${user.username}`,
-        type: 'profile',
-      },
-    };
-  } catch {
-    return {
-      title: 'Профіль не знайдено | ToolNext',
-      description: 'Користувач не знайдений',
-    };
-  }
-}
-
-export default async function ProfilePage({ params }: PageProps) {
+export default async function UserProfilePage({ params }: PageProps) {
   const { userId } = await params;
+  const currentUserId = await getCurrentUserId();
 
-  // Перевіряю чи це власник профілю
-  const cookieStore = await cookies();
-  const accessToken = cookieStore.get('accessToken');
-  let currentUser = null;
-  let isOwner = false;
-
-  if (accessToken) {
-    try {
-      currentUser = await getCurrentUser();
-      isOwner = currentUser._id === userId;
-    } catch {
-      // Користувач не авторизований
-    }
-  }
-
-  // Отримую дані користувача
   let user;
   try {
     user = await getUserById(userId);
-  } catch (error) {
-    return (
-      <div className={css.container}>
-        <div className={css.error}>
-          <h1>Користувача не знайдено</h1>
-          <p>Можливо, профіль було видалено або посилання неправильне.</p>
-        </div>
-      </div>
-    );
+  } catch {
+    console.error('Error: User not found');
+    notFound();
   }
 
-  // Отримую інструменти користувача
-  let toolsData;
+  const isOwner = currentUserId === userId;
+
+  let userTools: ToolBasic[] = [];
   try {
-    toolsData = await getUserTools(userId, {
-      page: 1,
-      limit: 12,
+    const toolsData = await getUserTools(userId, {
+      limit: 20,
       sortBy: 'createdAt',
       sortOrder: 'desc',
     });
+    userTools = toolsData.tools || [];
   } catch {
-    toolsData = {
-      tools: [],
-      pagination: { page: 1, limit: 12, totalPages: 0, totalTools: 0 },
-    };
+    console.error('Error: Unable to fetch user tools');
   }
 
-  const hasTools = toolsData.tools.length > 0;
-
   return (
-    <div className={css.container}>
-      <main className={css.main}>
-        {/* Інформація про користувача */}
-        <UserProfile
-          user={user}
+    <div>
+      <h1>Профіль користувача</h1>
+      <UserProfile
+        user={user}
+        isOwner={isOwner}
+      />
+
+      {userTools.length > 0 ? (
+        <UserToolsGrid
+          tools={userTools}
           isOwner={isOwner}
         />
-
-        {/* Заголовок секції інструментів */}
-        {isOwner && (
-          <h2 className={css.title}>{hasTools ? 'Інструменти' : ''}</h2>
-        )}
-
-        {!isOwner && hasTools && <h2 className={css.title}>Інструменти</h2>}
-
-        {/* Інструменти або Placeholder */}
-        {hasTools ? (
-          <Suspense
-            fallback={<div className={css.loading}>Завантаження...</div>}
-          >
-            <UserToolsGrid
-              tools={toolsData.tools}
-              isOwner={isOwner}
-            />
-          </Suspense>
-        ) : (
-          <ProfilePlaceholder isOwner={isOwner} />
-        )}
-
-        {/* Кнопка "Показати більше" якщо є ще інструменти */}
-        {hasTools && toolsData.pagination.totalPages > 1 && (
-          <div className={css.loadMoreWrapper}>
-            <button className={css.loadMoreButton}>Показати більше</button>
-          </div>
-        )}
-      </main>
+      ) : (
+        <ProfilePlaceholder isOwner={isOwner} />
+      )}
     </div>
   );
 }
