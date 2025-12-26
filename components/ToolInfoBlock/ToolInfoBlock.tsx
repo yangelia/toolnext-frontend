@@ -17,11 +17,18 @@ interface ToolInfoBlockProps {
 
 export default function ToolInfoBlock({ tool }: ToolInfoBlockProps) {
   const router = useRouter();
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+
+  const { isAuthenticated, loading } = useAuthStore((state) => ({
+    isAuthenticated: state.isAuthenticated,
+    loading: state.loading,
+  }));
 
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
   const handleBookClick = () => {
+    // ⛔ Ждём, пока authStore узнает, кто пользователь
+    if (loading) return;
+
     if (isAuthenticated) {
       router.push(`/tools/${tool._id}/booking`);
     } else {
@@ -30,7 +37,6 @@ export default function ToolInfoBlock({ tool }: ToolInfoBlockProps) {
   };
 
   const ownerName = tool.owner.username;
-
   const ownerAvatar = tool.owner.avatar || "/avatar-placeholder.png";
 
   return (
@@ -42,7 +48,7 @@ export default function ToolInfoBlock({ tool }: ToolInfoBlockProps) {
         <div className={css.toolOwner}>
           <Image
             src={ownerAvatar}
-            alt={ownerName}
+            alt={ownerName || "Аватар користувача"}
             width={48}
             height={48}
             className={css.ownerAvatar}
@@ -75,8 +81,12 @@ export default function ToolInfoBlock({ tool }: ToolInfoBlockProps) {
           )}
         </div>
 
-        <button className={css.bookBut} onClick={handleBookClick}>
-          Забронювати
+        <button
+          className={css.bookBut}
+          onClick={handleBookClick}
+          disabled={loading}
+        >
+          {loading ? "Перевірка авторизації..." : "Забронювати"}
         </button>
 
         <AuthRequiredModal
