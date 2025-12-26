@@ -21,7 +21,7 @@ export default function AuthRequiredModal({
           <svg className={styles.closeIcon}>
             <use
               className={styles.closeIconSwg}
-              href="/svg/sprite.svg#icon-close"
+              href="/icons/sprite.svg#icon-close"
             />
           </svg>
         </button>

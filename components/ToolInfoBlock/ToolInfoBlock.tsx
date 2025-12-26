@@ -19,7 +19,9 @@ export default function ToolInfoBlock({ tool }: ToolInfoBlockProps) {
   const router = useRouter();
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
+
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+
 
   const handleBookClick = () => {
     if (isAuthenticated) {
@@ -42,7 +44,7 @@ console.log("isAuthenticated:", isAuthenticated);
         <div className={css.toolOwner}>
           <Image
             src={ownerAvatar}
-            alt={ownerName}
+            alt={ownerName || "Аватар користувача"}
             width={48}
             height={48}
             className={css.ownerAvatar}
