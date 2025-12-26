@@ -28,7 +28,7 @@ export default function ToolInfoBlock({ tool }: ToolInfoBlockProps) {
       setIsAuthModalOpen(true);
     }
   };
-
+console.log("isAuthenticated:", isAuthenticated);
   const ownerName = tool.owner.username;
 
   const ownerAvatar = tool.owner.avatar || "/avatar-placeholder.png";
