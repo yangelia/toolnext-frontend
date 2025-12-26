@@ -1,91 +1,99 @@
 .placeholder {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 400px;
-  padding: 48px 24px;
-  background: #f9fafb;
-  border-radius: 16px;
-  margin-top: 32px;
+  flex-direction: column;
+}
+
+.sectionTitle {
+  font-size: 48px;
+  font-weight: 700;
+  color: #000000;
+  margin: 0 0 112px 0;
+  line-height: 1.2;
 }
 
 .content {
-  max-width: 560px;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
 }
 
 .title {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 700;
-  color: #1a1a1a;
-  margin: 0 0 16px 0;
-  line-height: 1.3;
+  color: #000000;
+  margin: 0;
+  line-height: 1.4;
 }
 
 .description {
   font-size: 16px;
   color: #6b7280;
-  margin: 0 0 32px 0;
+  margin: 0;
   line-height: 1.5;
 }
 
 .button {
   display: inline-block;
-  padding: 14px 32px;
+  padding: 10px 24px;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
   color: #ffffff;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 8px;
+  background: #8808cc;
+  border: 1px solid #8808cc;
+  border-radius: 6px;
   text-decoration: none;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: all 0.2s;
+  margin-top: 8px;
 }
 
 .button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 16px rgba(102, 126, 234, 0.4);
+  background: #6600aa;
+  border-color: #6600aa;
 }
 
 .button:active {
-  transform: translateY(0);
+  background: #8808cc;
+  border-color: #8808cc;
+  color: #ffffff;
 }
 
-/* Tablet */
 @media (max-width: 1024px) {
-  .placeholder {
-    min-height: 350px;
-    padding: 40px 24px;
+  .sectionTitle {
+    font-size: 40px;
+    margin-bottom: 80px;
   }
 
   .title {
-    font-size: 22px;
+    font-size: 18px;
   }
 
   .description {
     font-size: 15px;
   }
+
+  .button {
+    font-size: 15px;
+    padding: 9px 20px;
+  }
 }
 
-/* Mobile */
 @media (max-width: 768px) {
-  .placeholder {
-    min-height: 300px;
-    padding: 32px 16px;
-    margin-top: 24px;
+  .sectionTitle {
+    font-size: 32px;
+    margin-bottom: 64px;
   }
 
   .title {
-    font-size: 20px;
-    margin-bottom: 12px;
+    font-size: 16px;
   }
 
   .description {
     font-size: 14px;
-    margin-bottom: 24px;
   }
 
   .button {
-    padding: 12px 24px;
-    font-size: 15px;
+    font-size: 14px;
+    padding: 8px 18px;
   }
 }

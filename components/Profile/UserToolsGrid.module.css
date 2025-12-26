@@ -1,21 +1,24 @@
 .section {
-  margin-top: 48px;
+  margin-top: 0;
 }
 
 .sectionTitle {
-  font-size: 28px;
+  font-size: 48px;
   font-weight: 700;
-  color: #1a1a1a;
-  margin: 0 0 32px 0;
+  color: #000000;
+  margin: 0 0 48px 0;
+  line-height: 1.2;
 }
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 24px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-/* Tool Card */
 .card {
   background: #ffffff;
   border-radius: 12px;
@@ -31,12 +34,13 @@
 
 .imageLink {
   display: block;
+  text-decoration: none;
 }
 
 .imageWrapper {
   position: relative;
   width: 100%;
-  padding-top: 66.67%; /* 3:2 aspect ratio */
+  padding-top: 75%;
   background: #f3f4f6;
   overflow: hidden;
 }
@@ -51,23 +55,23 @@
 }
 
 .content {
-  padding: 16px;
+  padding: 20px;
 }
 
 .rating {
   display: flex;
   gap: 2px;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
 }
 
 .star,
 .starFilled {
-  font-size: 16px;
-  color: #d1d5db;
+  font-size: 18px;
+  color: #e0e0e0;
 }
 
 .starFilled {
-  color: #fbbf24;
+  color: #ffc107;
 }
 
 .titleLink {
@@ -76,31 +80,32 @@
 }
 
 .title {
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   color: #1a1a1a;
   margin: 0 0 8px 0;
   line-height: 1.4;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
+  max-height: 3.6em;
   overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
 }
 
 .titleLink:hover .title {
-  color: #667eea;
+  color: #8808cc;
 }
 
 .price {
   font-size: 16px;
   font-weight: 700;
-  color: #667eea;
+  color: #000000;
   margin: 0 0 16px 0;
 }
 
 .actions {
   display: flex;
   gap: 8px;
+  align-items: center;
 }
 
 .detailsButton {
@@ -108,9 +113,9 @@
   padding: 10px 16px;
   font-size: 14px;
   font-weight: 600;
-  color: #667eea;
-  background: transparent;
-  border: 1.5px solid #667eea;
+  color: #ffffff;
+  background: #8808cc;
+  border: 1px solid #8808cc;
   border-radius: 6px;
   text-align: center;
   text-decoration: none;
@@ -118,76 +123,92 @@
 }
 
 .detailsButton:hover {
-  background: #667eea;
-  color: #ffffff;
+  background: #6600aa;
+  border-color: #6600aa;
+}
+
+.detailsButton:active {
+  background: #8808cc;
+  border-color: #8808cc;
 }
 
 .editButton {
-  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
   background: transparent;
   border: 1.5px solid #d1d5db;
   border-radius: 6px;
   color: #6b7280;
-  cursor: pointer;
+  text-decoration: none;
   transition: all 0.2s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-shrink: 0;
 }
 
 .editButton:hover {
-  border-color: #667eea;
-  color: #667eea;
+  border-color: #8808cc;
+  color: #8808cc;
+  background: #f3e5f5;
 }
 
-/* Tablet */
-@media (max-width: 1024px) {
-  .section {
-    margin-top: 40px;
-  }
-
-  .sectionTitle {
-    font-size: 24px;
-    margin-bottom: 24px;
-  }
-
+@media (max-width: 1200px) {
   .grid {
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    grid-template-columns: repeat(3, 1fr);
     gap: 20px;
   }
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-  .section {
-    margin-top: 32px;
-  }
 
   .sectionTitle {
-    font-size: 22px;
-    margin-bottom: 20px;
+    font-size: 40px;
+    margin-bottom: 40px;
   }
+}
 
+@media (max-width: 768px) {
   .grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 16px;
   }
 
+  .sectionTitle {
+    font-size: 32px;
+    margin-bottom: 32px;
+  }
+
   .content {
-    padding: 12px;
+    padding: 16px;
   }
 
   .title {
     font-size: 16px;
+    margin-bottom: 10px;
   }
 
   .price {
-    font-size: 15px;
+    font-size: 14px;
     margin-bottom: 12px;
   }
 
   .detailsButton {
-    padding: 8px 12px;
     font-size: 13px;
+    padding: 8px 12px;
+  }
+
+  .editButton {
+    width: 40px;
+    height: 40px;
+  }
+
+  .editButton svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .grid {
+    grid-template-columns: 1fr;
   }
 }
