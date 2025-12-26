@@ -1,20 +1,21 @@
-// app/(public)/tools/new/page.tsx
+import { getCategoriesServer, getCurrentUserServer } from "@/lib/api/serverApi";
+import { redirect } from "next/navigation";
+import ToolCreateFormClient from "@/components/ToolForm/ToolCreateFormClient";
 
-import { redirect } from 'next/navigation';
-import { cookies } from 'next/headers';
+export const metadata = {
+  title: "Створити інструмент",
+};
 
-export default async function AddToolPage() {
-  const cookieStore = await cookies();
-  const accessToken = cookieStore.get('accessToken');
+export default async function ToolNewPage() {
+  const currentUser = await getCurrentUserServer();
+  if (!currentUser) redirect("/auth/login");
 
-  if (!accessToken) {
-    redirect('/auth/login');
-  }
+  const categories = await getCategoriesServer();
 
   return (
-    <div>
-      <h1>Публікація інструменту</h1>
-      <p>Форма створення інструменту (в розробці)</p>
-    </div>
+    <>
+      <h2>Створення інструменту</h2>
+      <ToolCreateFormClient categories={categories} />
+    </>
   );
 }

@@ -32,3 +32,13 @@ export const login = async (data: LoginRequest) => {
 export const logout = async (): Promise<void> => {
   await api.post("/auth/logout");
 };
+
+export async function createTool(formData: FormData) {
+  const res = await api.post("/tools", formData);
+  return res.data;
+}
+
+export async function updateTool(id: string, formData: FormData) {
+  const res = await api.patch(`/tools/${id}`, formData);
+  return res.data;
+}

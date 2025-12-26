@@ -18,60 +18,62 @@
   color: #111;
 }
 
+.imageTool {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
 .imagePreview {
   position: relative;
   width: 100%;
-  height: 150px;
-  border-radius: 16px;
-  background: #e5e5e5;
+  height: 180px;
+  background: #e9e9e9;
+  border-radius: 12px;
   overflow: hidden;
+}
+
+.previewImg {
+  object-fit: contain; /* щоб placeholder не обрізало */
+}
+
+.fileInput {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.uploadBtn {
+  width: 100%;
+  height: 44px;
+  border: 1px solid #111;
+  border-radius: 10px;
+  background: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  outline: none;
-}
-
-.imagePreview:focus-visible {
-  box-shadow: 0 0 0 3px rgba(108, 43, 217, 0.35);
-}
-
-.image {
-  object-fit: cover;
-}
-
-.placeholderImage {
-  object-fit: contain;
-  padding: 18px;
-  opacity: 0.75;
-}
-
-.imageButtons {
-  display: flex;
-  gap: 10px;
-}
-
-.uploadBtn,
-.removeBtn {
-  width: 100%;
-  height: 38px;
-  border-radius: 10px;
-  border: 2px solid #111;
-  background: transparent;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
+}
+
+.uploadBtn:hover {
+  background: #f6f6f6;
+}
+
+.clearBtn {
+  width: 100%;
+  height: 44px;
+  border: 1px solid #d33;
+  border-radius: 10px;
+  background: #fff;
   cursor: pointer;
-}
-
-.uploadBtn:hover,
-.removeBtn:hover {
-  background: rgba(0, 0, 0, 0.04);
-}
-
-.uploadBtn:disabled,
-.removeBtn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
 }
 
 /* ===== Fields ===== */

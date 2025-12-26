@@ -1,10 +1,10 @@
-import ToolForm from "@/components/ToolForm/ToolForm";
 import {
   getCategoriesServer,
   getCurrentUserServer,
   getToolByIdServer,
 } from "@/lib/api/serverApi";
 import { notFound, redirect } from "next/navigation";
+import ToolEditFormClient from "@/components/ToolForm/ToolEditFormClient";
 
 type MetadataProps = {
   params: Promise<{ id: string }>;
@@ -39,7 +39,8 @@ const ToolEditPage = async ({ params }: ToolEditPageProps) => {
   return (
     <>
       <h2>Редагування інструменту</h2>
-      <ToolForm categories={categories} />
+      {/* <ToolForm categories={categories} tool={tool} toolId={id} /> */}
+      <ToolEditFormClient categories={categories} toolId={id} tool={tool} />
     </>
   );
 };

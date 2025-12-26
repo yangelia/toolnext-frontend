@@ -1,8 +1,9 @@
 // lib\store\toolsStore.ts
 
 import { create } from "zustand";
-import type { ToolBasic } from "@/types/tool";
+import type { ToolBasic, ToolDraft } from "@/types/tool";
 import { fetchToolsClient } from "@/lib/api/tools.client";
+import { createJSONStorage, persist } from "zustand/middleware";
 
 interface ToolsState {
   tools: ToolBasic[];
@@ -75,3 +76,45 @@ export const useToolsStore = create<ToolsState>((set, get) => ({
   },
 }));
 
+//! чорнетка
+type ToolDraftStore = {
+  hasHydrated: boolean;
+  setHasHydrated: (v: boolean) => void;
+  draftId: string | null;
+  draft: Partial<ToolDraft>;
+  loadDraft: (id: string, initial: ToolDraft) => void; // для edit
+  setDraft: (data: Partial<ToolDraft>) => void;
+  patchDraft: (data: Partial<ToolDraft>) => void;
+  clearDraft: (id?: string) => void;
+};
+
+export const useToolDraftStore = create<ToolDraftStore>()(
+  persist(
+    (set, get) => ({
+      hasHydrated: false,
+      setHasHydrated: (v) => set({ hasHydrated: v }),
+      draftId: null,
+      draft: {},
+      loadDraft: (id, initial) => {
+        const { draftId, draft } = get();
+        if (draftId === id && Object.keys(draft).length > 0) return;
+        set({ draftId: id, draft: initial });
+      },
+      setDraft: (data) => set({ draft: data }),
+      patchDraft: (data) =>
+        set((state) => ({ draft: { ...state.draft, ...data } })),
+      clearDraft: (id) =>
+        set((state) => {
+          if (id && state.draftId !== id) return state;
+          return { draftId: null, draft: {} };
+        }),
+    }),
+    {
+      name: "tool-edit-draft",
+      storage: createJSONStorage(() => localStorage),
+      onRehydrateStorage: () => (state) => {
+        state?.setHasHydrated(true);
+      },
+    }
+  )
+);
