@@ -17,22 +17,26 @@ interface ToolInfoBlockProps {
 
 export default function ToolInfoBlock({ tool }: ToolInfoBlockProps) {
   const router = useRouter();
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
+  const { isAuthenticated, loading } = useAuthStore((state) => ({
+    isAuthenticated: state.isAuthenticated,
+    loading: state.loading,
+  }));
 
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
-
   const handleBookClick = () => {
+    // ⛔ Ждём, пока authStore узнает, кто пользователь
+    if (loading) return;
+
     if (isAuthenticated) {
       router.push(`/tools/${tool._id}/booking`);
     } else {
       setIsAuthModalOpen(true);
     }
   };
-console.log("isAuthenticated:", isAuthenticated);
-  const ownerName = tool.owner.username;
 
+  const ownerName = tool.owner.username;
   const ownerAvatar = tool.owner.avatar || "/avatar-placeholder.png";
 
   return (
@@ -77,8 +81,12 @@ console.log("isAuthenticated:", isAuthenticated);
           )}
         </div>
 
-        <button className={css.bookBut} onClick={handleBookClick}>
-          Забронювати
+        <button
+          className={css.bookBut}
+          onClick={handleBookClick}
+          disabled={loading}
+        >
+          {loading ? "Перевірка авторизації..." : "Забронювати"}
         </button>
 
         <AuthRequiredModal

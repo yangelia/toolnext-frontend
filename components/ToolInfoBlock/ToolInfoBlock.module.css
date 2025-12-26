@@ -111,10 +111,15 @@
   text-decoration: none;
 }
 
-.toolBut:hover {
+.bookBut:hover {
   background-color: #ffffff;
   border: 2px solid #8808cc;
   color: #000;
+}
+
+.bookBut:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
 }
 
 @media (min-width: 768px) {
