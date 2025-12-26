@@ -3,6 +3,7 @@
 import styles from "./page.module.css";
 import Hero from "@/components/Hero/Hero";
 import Benefits from "@/components/Benefits/Benefits";
+import FeedbackSection from "@/components/Feedback/FeedbackSection";
 
 import PopularTools from "@/components/PopularTools/PopularTools";
 import { fetchPopularTools } from "@/lib/api/tools.server";
@@ -17,6 +18,7 @@ export default async function HomePage() {
         <Benefits />
       </section>
       <PopularTools tools={popularTools} />
+      <FeedbackSection />
     </div>
   );
 }
