@@ -10,44 +10,28 @@ interface ProfilePlaceholderProps {
 export default function ProfilePlaceholder({
   isOwner,
 }: ProfilePlaceholderProps) {
-  if (isOwner) {
-    // Власник профілю - опублікувати інструмент
-    return (
-      <div className={css.placeholder}>
-        <div className={css.content}>
-          <h2 className={css.title}>
-            У вас ще не опубліковано жодного інструменту
-          </h2>
-          <p className={css.description}>
-            Мершій обулікуйте своє перше оголошення, щоб почати отримувати
-            пасивний дохід
-          </p>
-          <Link
-            href="/tools/create"
-            className={css.button}
-          >
-            Опублікувати інструмент
-          </Link>
-        </div>
-      </div>
-    );
-  }
-
-  // Публічний перегляд - переглянути всі інструменти
   return (
     <div className={css.placeholder}>
+      <h2 className={css.sectionTitle}>Інструменти</h2>
+
       <div className={css.content}>
-        <h2 className={css.title}>
-          У цього користувача ще не опубліковано жодного інструменту
-        </h2>
+        <h3 className={css.title}>
+          {isOwner
+            ? 'У вас ще не опубліковано жодного інструменту'
+            : 'У цього користувача ще не опубліковано жодного інструменту'}
+        </h3>
+
         <p className={css.description}>
-          У нас є великий вибір інструментів від інших користувачів
+          {isOwner
+            ? 'Мершій опублікуйте своє перше оголошення, щоб почати отримувати пасивний дохід'
+            : 'У нас є великий вибір інструментів від інших користувачів'}
         </p>
+
         <Link
-          href="/"
+          href={isOwner ? '/tools/new' : '/'}
           className={css.button}
         >
-          Всі інструменти
+          {isOwner ? 'Опублікувати інструмент' : 'Всі інструменти'}
         </Link>
       </div>
     </div>

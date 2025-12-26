@@ -1,12 +1,13 @@
 'use client';
 
-import { Tool } from '@/types/tool';
-import css from './UserToolsGrid.module.css';
+import React from 'react';
+import { ToolBasic } from '@/types/tool';
 import Link from 'next/link';
 import Image from 'next/image';
+import css from './UserToolsGrid.module.css';
 
 interface UserToolsGridProps {
-  tools: Tool[];
+  tools: ToolBasic[];
   isOwner: boolean;
 }
 
@@ -16,30 +17,42 @@ export default function UserToolsGrid({ tools, isOwner }: UserToolsGridProps) {
   }
 
   return (
-    <div className={css.section}>
+    <section className={css.section}>
       <h2 className={css.sectionTitle}>Інструменти</h2>
 
-      <div className={css.grid}>
+      <ul className={css.grid}>
         {tools.map((tool) => (
-          <ToolCard
-            key={tool._id}
-            tool={tool}
-            isOwner={isOwner}
-          />
+          <li key={tool._id}>
+            <ToolCard
+              tool={tool}
+              isOwner={isOwner}
+            />
+          </li>
         ))}
-      </div>
-    </div>
+      </ul>
+    </section>
   );
 }
 
-// Компонент картки інструменту
 interface ToolCardProps {
-  tool: Tool;
+  tool: ToolBasic;
   isOwner: boolean;
 }
 
 function ToolCard({ tool, isOwner }: ToolCardProps) {
-  const imageUrl = tool.images[0] || '/images/placeholder-tool.jpg';
+  const imageUrl = tool.image || '/images/placeholder-tool.jpg';
+
+  const stars: React.ReactElement[] = [];
+  for (let i = 0; i < 5; i++) {
+    stars.push(
+      <span
+        key={i}
+        className={i < Math.floor(tool.rating) ? css.starFilled : css.star}
+      >
+        ★
+      </span>
+    );
+  }
 
   return (
     <div className={css.card}>
@@ -52,25 +65,14 @@ function ToolCard({ tool, isOwner }: ToolCardProps) {
             src={imageUrl}
             alt={tool.name}
             fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
             className={css.image}
           />
         </div>
       </Link>
 
       <div className={css.content}>
-        <div className={css.rating}>
-          {[...Array(5)].map((_, i) => (
-            <span
-              key={i}
-              className={
-                i < Math.floor(tool.rating) ? css.starFilled : css.star
-              }
-            >
-              ★
-            </span>
-          ))}
-        </div>
+        <div className={css.rating}>{stars}</div>
 
         <Link
           href={`/tools/${tool._id}`}
@@ -90,9 +92,9 @@ function ToolCard({ tool, isOwner }: ToolCardProps) {
           </Link>
 
           {isOwner && (
-            <button
+            <Link
+              href={`/tools/${tool._id}/edit`}
               className={css.editButton}
-              aria-label="Редагувати"
             >
               <svg
                 width="20"
@@ -108,7 +110,7 @@ function ToolCard({ tool, isOwner }: ToolCardProps) {
                   strokeLinejoin="round"
                 />
               </svg>
-            </button>
+            </Link>
           )}
         </div>
       </div>

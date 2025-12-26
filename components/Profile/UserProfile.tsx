@@ -1,9 +1,9 @@
 import Image from 'next/image';
+import { UserPublic, User } from '@/types/user';
 import css from './UserProfile.module.css';
-import { UserPublic } from '@/types/user';
 
 interface UserProfileProps {
-  user: UserPublic;
+  user: UserPublic | User;
   isOwner?: boolean;
 }
 
@@ -11,7 +11,6 @@ export default function UserProfile({
   user,
   isOwner = false,
 }: UserProfileProps) {
-  // Перша літера імені для аватара
   const avatarLetter = user.username.charAt(0).toUpperCase();
 
   return (
@@ -26,15 +25,12 @@ export default function UserProfile({
             className={css.avatar}
           />
         ) : (
-          <div className={css.avatarPlaceholder}>
-            <span className={css.avatarLetter}>{avatarLetter}</span>
-          </div>
+          <div className={css.avatarPlaceholder}>{avatarLetter}</div>
         )}
       </div>
 
       <div className={css.userInfo}>
         <h1 className={css.username}>{user.username}</h1>
-        {isOwner && <p className={css.email}>{user.email}</p>}
       </div>
     </div>
   );

@@ -2,7 +2,8 @@
   display: flex;
   align-items: center;
   gap: 24px;
-  margin-bottom: 48px;
+  padding: 48px 0 0 0;
+  margin-bottom: 64px;
 }
 
 .avatarWrapper {
@@ -13,23 +14,20 @@
 }
 
 .avatar {
-  width: 100%;
-  height: 100%;
   border-radius: 50%;
   object-fit: cover;
+  width: 120px;
+  height: 120px;
 }
 
 .avatarPlaceholder {
-  width: 100%;
-  height: 100%;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #8808cc 0%, #6600aa 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.avatarLetter {
   font-size: 48px;
   font-weight: 700;
   color: #ffffff;
@@ -38,28 +36,22 @@
 
 .userInfo {
   flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
 .username {
-  font-size: 32px;
+  font-size: 48px;
   font-weight: 700;
-  color: #1a1a1a;
-  margin: 0 0 8px 0;
-}
-
-.email {
-  font-size: 16px;
-  color: #6b7280;
+  color: #000000;
   margin: 0;
+  line-height: 1.2;
 }
 
-/* Mobile */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .userProfile {
-    flex-direction: column;
-    text-align: center;
-    gap: 16px;
-    margin-bottom: 32px;
+    padding: 40px 0 0 0;
+    margin-bottom: 48px;
   }
 
   .avatarWrapper {
@@ -67,15 +59,46 @@
     height: 100px;
   }
 
-  .avatarLetter {
+  .avatar,
+  .avatarPlaceholder {
+    width: 100px;
+    height: 100px;
+  }
+
+  .avatarPlaceholder {
     font-size: 40px;
   }
 
   .username {
-    font-size: 24px;
+    font-size: 36px;
+  }
+}
+
+@media (max-width: 768px) {
+  .userProfile {
+    flex-direction: column;
+    text-align: center;
+    padding: 32px 0 0 0;
+    margin-bottom: 32px;
+    gap: 16px;
   }
 
-  .email {
-    font-size: 14px;
+  .avatarWrapper {
+    width: 80px;
+    height: 80px;
+  }
+
+  .avatar,
+  .avatarPlaceholder {
+    width: 80px;
+    height: 80px;
+  }
+
+  .avatarPlaceholder {
+    font-size: 32px;
+  }
+
+  .username {
+    font-size: 28px;
   }
 }

@@ -1,8 +1,6 @@
 import { api } from './api';
 import { User, UserPublic } from '@/types/user';
-import { UserToolsResponse } from '@/types/tool';
-
-// Отримання даних поточного користувача (приватний)
+import { ToolBasic } from '@/types/tool';
 
 export async function getCurrentUser(): Promise<User> {
   const res = await api.get<{
@@ -13,8 +11,6 @@ export async function getCurrentUser(): Promise<User> {
   return res.data.data.user;
 }
 
-// Отримання публічних даних користувача за ID
-
 export async function getUserById(userId: string): Promise<UserPublic> {
   const res = await api.get<{
     status: string;
@@ -24,8 +20,6 @@ export async function getUserById(userId: string): Promise<UserPublic> {
   return res.data.data.user;
 }
 
-// Отримання інструментів користувача
-
 export interface GetUserToolsParams {
   page?: number;
   limit?: number;
@@ -33,10 +27,17 @@ export interface GetUserToolsParams {
   sortOrder?: 'asc' | 'desc';
 }
 
+export interface UserToolsData {
+  tools: ToolBasic[];
+  totalTools: number;
+  page: number;
+  totalPages: number;
+}
+
 export async function getUserTools(
   userId: string,
   params?: GetUserToolsParams
-): Promise<UserToolsResponse['data']> {
+): Promise<UserToolsData> {
   const queryParams = new URLSearchParams();
 
   if (params?.page) queryParams.append('page', params.page.toString());
@@ -44,9 +45,11 @@ export async function getUserTools(
   if (params?.sortBy) queryParams.append('sortBy', params.sortBy);
   if (params?.sortOrder) queryParams.append('sortOrder', params.sortOrder);
 
-  const res = await api.get<UserToolsResponse>(
-    `/users/${userId}/tools?${queryParams.toString()}`
-  );
+  const res = await api.get<{
+    status: string;
+    message: string;
+    data: UserToolsData;
+  }>(`/users/${userId}/tools?${queryParams.toString()}`);
 
   return res.data.data;
 }
