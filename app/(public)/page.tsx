@@ -6,7 +6,6 @@ import Benefits from "@/components/Benefits/Benefits";
 
 import PopularTools from "@/components/PopularTools/PopularTools";
 import { fetchPopularTools } from "@/lib/api/tools.server";
-import FeedbackSection from "@/components/Feedback/FeedbackSection";
 
 export default async function HomePage() {
   const popularTools = await fetchPopularTools();
@@ -18,7 +17,6 @@ export default async function HomePage() {
         <Benefits />
       </section>
       <PopularTools tools={popularTools} />
-      <FeedbackSection />
     </div>
   );
 }
