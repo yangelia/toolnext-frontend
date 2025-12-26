@@ -18,7 +18,7 @@ const FeedbackCard: React.FC<FeedbackProps> = ({ rate, description, name }) => {
 
   const renderStars = (rating: number) => {
     const roundedRating = roundRating(rating);
-    const stars = [];
+    const stars: React.ReactNode[] = [];
 
     for (let i = 1; i <= 5; i++) {
       let iconId = 'icon-star';

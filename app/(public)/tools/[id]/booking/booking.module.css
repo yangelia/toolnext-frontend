@@ -1,0 +1,33 @@
+.container {
+    max-width: 375px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 48px;
+    padding: 32px 20px;
+}
+.title{
+font-family: "Inter", sans-serif;
+    font-weight: 700;
+        font-size: 36px;
+        line-height: 120%;
+        letter-spacing: -0.01em;
+        text-align: center;
+        color: #000;
+
+}
+
+@media (min-width: 768px) {
+    .container {
+            max-width: 704px;
+            padding: 32px;
+        }
+}
+
+@media (min-width: 1440px) {
+    .container {
+          
+            padding: 64px;
+        }
+}
