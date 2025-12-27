@@ -22,7 +22,7 @@ export interface ToolBasic {
   pricePerDay: number;
   rating: number;
   images: string[];
-  category: string;
+  category: Category;
 }
 
 export interface ToolsResponse {
