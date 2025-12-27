@@ -1,15 +1,13 @@
-// toolnext-frontend\components\ToolCard\ToolCard.tsx
+"use client";
 
 import Link from "next/link";
 import type { ToolBasic } from "@/types/tool";
 import css from "./ToolCard.module.css";
+import type { ReactElement } from "react";
 
 interface ToolCardProps {
   tool: ToolBasic;
 }
-
-// Рендер зірочок
-// додатковий комент
 
 const roundRating = (rating: number) => {
   if (rating >= 0 && rating <= 1.2) return 1;
@@ -22,7 +20,7 @@ const roundRating = (rating: number) => {
 
 const renderStars = (rating: number) => {
   const roundedRating = roundRating(rating);
-  const stars = [];
+  const stars: ReactElement[] = [];
 
   for (let i = 1; i <= 5; i++) {
     let iconId = "icon-star";
@@ -41,9 +39,7 @@ const renderStars = (rating: number) => {
         height="24"
         aria-hidden="true"
       >
-        <use
-          href={`/icons/sprite.svg#${iconId}`}
-        />
+        <use href={`/icons/sprite.svg#${iconId}`} />
       </svg>
     );
   }
@@ -51,34 +47,25 @@ const renderStars = (rating: number) => {
   return stars;
 };
 
-export default function ToolCard({
-  tool,
-}: ToolCardProps) {
+export default function ToolCard({ tool }: ToolCardProps) {
   return (
     <li className={css.card}>
       <img
-        src={tool.images[0]}
+        src={tool.image}
         alt={tool.name}
         className={css.image}
         loading="lazy"
       />
 
       <div className={css.content}>
-        <div className={css.starRating}>
-          {renderStars(tool.rating)}
-        </div>
+        <div className={css.starRating}>{renderStars(tool.rating)}</div>
 
         <h4 className={css.name}>{tool.name}</h4>
 
         <div className={css.footer}>
-          <span className={css.price}>
-            {tool.pricePerDay} грн/день
-          </span>
+          <span className={css.price}>{tool.pricePerDay} грн/день</span>
 
-          <Link
-            href={`/tools/${tool._id}`}
-            className={css.link}
-          >
+          <Link href={`/tools/${tool._id}`} className={css.link}>
             Детальніше
           </Link>
         </div>

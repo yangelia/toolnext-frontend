@@ -1,8 +1,3 @@
-// types/tool.ts
-
-import type { Category } from './category';
-import type { User, UserPublic } from './user';
-
 export interface Feedback {
   _id: string;
   name: string;
@@ -17,12 +12,12 @@ export interface BookedDate {
 
 export interface ToolBasic {
   _id: string;
-  owner: string; // БД повертає ID (string)
+  owner: string;
   name: string;
   pricePerDay: number;
   rating: number;
   image: string;
-  category: string; // БД повертає ID категорії (string)
+  category: string;
 }
 
 export interface ToolsResponse {
@@ -35,8 +30,8 @@ export interface ToolsResponse {
 
 export interface ToolDetails {
   _id: string;
-  owner: string; // Виправлено: БД повертає ID юзера
-  category: string; // Виправлено: БД повертає ID категорії
+  owner: string;
+  category: string;
 
   name: string;
   description: string;
