@@ -8,18 +8,13 @@ interface ToolGridProps {
   tools: ToolBasic[];
 }
 
-export default function ToolGrid({
-  tools,
-}: ToolGridProps) {
+export default function ToolGrid({ tools }: ToolGridProps) {
   if (!tools || tools.length === 0) return null;
 
   return (
     <ul className={css.grid}>
       {tools.map((tool) => (
-        <ToolCard
-          key={tool._id}
-          tool={tool}
-        />
+        <ToolCard key={tool._id} tool={tool} />
       ))}
     </ul>
   );
