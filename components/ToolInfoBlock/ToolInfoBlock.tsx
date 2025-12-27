@@ -28,7 +28,7 @@ export default function ToolInfoBlock({ tool }: ToolInfoBlockProps) {
       setIsAuthModalOpen(true);
     }
   };
-console.log("isAuthenticated:", isAuthenticated);
+  console.log("isAuthenticated:", isAuthenticated);
   const ownerName = tool.owner.username;
 
   const ownerAvatar = tool.owner.avatar || "/avatar-placeholder.png";
@@ -50,7 +50,6 @@ console.log("isAuthenticated:", isAuthenticated);
 
           <div className={css.ownerInfo}>
             <p className={css.ownerName}>{ownerName}</p>
-
 
             <Link href={`/users/${tool.owner._id}`} className={css.ownerLink}>
               Переглянути профіль
