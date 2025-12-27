@@ -6,6 +6,7 @@ import ProfilePlaceholder from '@/components/Profile/ProfilePlaceholder';
 import { getUserById, getUserTools } from '@/lib/api/users';
 import { ToolBasic } from '@/types/tool';
 import { api } from '@/lib/api/api';
+import css from './page.module.css';
 
 async function getCurrentUserId(): Promise<string | null> {
   try {
@@ -59,8 +60,7 @@ export default async function UserProfilePage({ params }: PageProps) {
   }
 
   return (
-    <div>
-      <h1>Профіль користувача</h1>
+    <div className={css.container}>
       <UserProfile
         user={user}
         isOwner={isOwner}

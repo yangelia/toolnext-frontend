@@ -2,7 +2,6 @@ import { api } from './api';
 import { User, UserPublic } from '@/types/user';
 import { ToolBasic } from '@/types/tool';
 
-// Отримання даних поточного користувача
 export async function getCurrentUser(): Promise<User> {
   const res = await api.get<{
     status: string;
@@ -12,7 +11,6 @@ export async function getCurrentUser(): Promise<User> {
   return res.data.data.user;
 }
 
-// Отримання публічних даних користувача за ID
 export async function getUserById(userId: string): Promise<UserPublic> {
   const res = await api.get<{
     status: string;
@@ -22,7 +20,6 @@ export async function getUserById(userId: string): Promise<UserPublic> {
   return res.data.data.user;
 }
 
-// Параметри для отримання інструментів користувача
 export interface GetUserToolsParams {
   page?: number;
   limit?: number;
@@ -30,7 +27,6 @@ export interface GetUserToolsParams {
   sortOrder?: 'asc' | 'desc';
 }
 
-// Відповідь від API з інструментами користувача
 export interface UserToolsData {
   tools: ToolBasic[];
   totalTools: number;
@@ -38,7 +34,6 @@ export interface UserToolsData {
   totalPages: number;
 }
 
-// Отримання інструментів користувача
 export async function getUserTools(
   userId: string,
   params?: GetUserToolsParams
@@ -58,5 +53,3 @@ export async function getUserTools(
 
   return res.data.data;
 }
-
-

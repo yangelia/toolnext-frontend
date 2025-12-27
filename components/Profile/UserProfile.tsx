@@ -20,8 +20,8 @@ export default function UserProfile({
           <Image
             src={user.avatar}
             alt={user.username}
-            width={100}
-            height={100}
+            width={120}
+            height={120}
             className={css.avatar}
           />
         ) : (
@@ -30,11 +30,7 @@ export default function UserProfile({
       </div>
 
       <div className={css.userInfo}>
-        <h2>Ім&apos;я: {user.username}</h2>
-        {isOwner && 'email' in user && <p>Email: {user.email}</p>}
-        <p>
-          Зареєстрований: {new Date(user.createdAt).toLocaleDateString('uk-UA')}
-        </p>
+        <h1 className={css.username}>{user.username}</h1>
       </div>
     </div>
   );

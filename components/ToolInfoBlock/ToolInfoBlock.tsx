@@ -28,7 +28,7 @@ export default function ToolInfoBlock({ tool }: ToolInfoBlockProps) {
       setIsAuthModalOpen(true);
     }
   };
-
+console.log("isAuthenticated:", isAuthenticated);
   const ownerName = tool.owner.username;
 
   const ownerAvatar = tool.owner.avatar || "/avatar-placeholder.png";
@@ -42,7 +42,7 @@ export default function ToolInfoBlock({ tool }: ToolInfoBlockProps) {
         <div className={css.toolOwner}>
           <Image
             src={ownerAvatar}
-            alt={ownerName || "Аватар користувача"}
+            alt={ownerName}
             width={48}
             height={48}
             className={css.ownerAvatar}
@@ -50,6 +50,7 @@ export default function ToolInfoBlock({ tool }: ToolInfoBlockProps) {
 
           <div className={css.ownerInfo}>
             <p className={css.ownerName}>{ownerName}</p>
+
 
             <Link href={`/users/${tool.owner._id}`} className={css.ownerLink}>
               Переглянути профіль

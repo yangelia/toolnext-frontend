@@ -2,34 +2,33 @@
   display: flex;
   align-items: center;
   gap: 24px;
-  padding: 24px;
-  background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  margin-bottom: 24px;
+  padding: 48px 0 0 0;
+  margin-bottom: 64px;
 }
 
 .avatarWrapper {
   position: relative;
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   flex-shrink: 0;
 }
 
 .avatar {
   border-radius: 50%;
   object-fit: cover;
+  width: 120px;
+  height: 120px;
 }
 
 .avatarPlaceholder {
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #8808cc 0%, #6600aa 100%);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 40px;
+  font-size: 48px;
   font-weight: 700;
   color: #ffffff;
   user-select: none;
@@ -37,26 +36,51 @@
 
 .userInfo {
   flex: 1;
+  display: flex;
+  flex-direction: column;
 }
 
-.userInfo h2 {
-  font-size: 24px;
+.username {
+  font-size: 48px;
   font-weight: 700;
-  color: #1a1a1a;
-  margin: 0 0 8px 0;
+  color: #000000;
+  margin: 0;
+  line-height: 1.2;
 }
 
-.userInfo p {
-  font-size: 16px;
-  color: #6b7280;
-  margin: 4px 0;
+@media (max-width: 1024px) {
+  .userProfile {
+    padding: 40px 0 0 0;
+    margin-bottom: 48px;
+  }
+
+  .avatarWrapper {
+    width: 100px;
+    height: 100px;
+  }
+
+  .avatar,
+  .avatarPlaceholder {
+    width: 100px;
+    height: 100px;
+  }
+
+  .avatarPlaceholder {
+    font-size: 40px;
+  }
+
+  .username {
+    font-size: 36px;
+  }
 }
 
 @media (max-width: 768px) {
   .userProfile {
     flex-direction: column;
     text-align: center;
-    padding: 20px;
+    padding: 32px 0 0 0;
+    margin-bottom: 32px;
+    gap: 16px;
   }
 
   .avatarWrapper {
@@ -64,17 +88,17 @@
     height: 80px;
   }
 
+  .avatar,
   .avatarPlaceholder {
     width: 80px;
     height: 80px;
+  }
+
+  .avatarPlaceholder {
     font-size: 32px;
   }
 
-  .userInfo h2 {
-    font-size: 20px;
-  }
-
-  .userInfo p {
-    font-size: 14px;
+  .username {
+    font-size: 28px;
   }
 }
