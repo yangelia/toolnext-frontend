@@ -65,5 +65,12 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/", "/tools/:path*", "/auth/:path*"],
+  matcher: [
+    "/",
+    "/tools", // ✅ ДОДАНО: тепер /tools працює!
+    "/tools/:path*",
+    "/auth/:path*",
+    "/profile", // ✅ ДОДАНО: для профілю
+    "/profile/:path*",
+  ],
 };
