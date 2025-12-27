@@ -19,133 +19,33 @@
   margin: 0;
 }
 
-.card {
-  background: #ffffff;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-
-.card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
-}
-
-.imageLink {
-  display: block;
-  text-decoration: none;
-}
-
-.imageWrapper {
+/* обёртка одной карточки */
+.item {
   position: relative;
-  width: 100%;
-  padding-top: 75%;
-  background: #f3f4f6;
-  overflow: hidden;
 }
 
-.image {
-  object-fit: cover;
-  transition: transform 0.3s;
-}
-
-.card:hover .image {
-  transform: scale(1.05);
-}
-
-.content {
-  padding: 20px;
-}
-
-.rating {
-  display: flex;
-  gap: 2px;
-  margin-bottom: 12px;
-}
-
-.star,
-.starFilled {
-  font-size: 18px;
-  color: #e0e0e0;
-}
-
-.starFilled {
-  color: #ffc107;
-}
-
-.titleLink {
-  text-decoration: none;
-  color: inherit;
-}
-
-.title {
-  font-size: 16px;
-  font-weight: 600;
-  color: #1a1a1a;
-  margin: 0 0 8px 0;
-  line-height: 1.4;
-  max-height: 3.6em;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  word-wrap: break-word;
-}
-
-.titleLink:hover .title {
-  color: #8808cc;
-}
-
-.price {
-  font-size: 16px;
-  font-weight: 700;
-  color: #000000;
-  margin: 0 0 16px 0;
-}
-
-.actions {
-  display: flex;
-  gap: 8px;
-  align-items: center;
-}
-
-.detailsButton {
-  flex: 1;
-  padding: 10px 16px;
-  font-size: 14px;
-  font-weight: 600;
-  color: #ffffff;
-  background: #8808cc;
-  border: 1px solid #8808cc;
-  border-radius: 6px;
-  text-align: center;
-  text-decoration: none;
-  transition: all 0.2s;
-}
-
-.detailsButton:hover {
-  background: #6600aa;
-  border-color: #6600aa;
-}
-
-.detailsButton:active {
-  background: #8808cc;
-  border-color: #8808cc;
-}
-
+/* кнопка редактирования поверх карточки */
 .editButton {
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  z-index: 5;
+
   display: flex;
   align-items: center;
   justify-content: center;
+
   width: 44px;
   height: 44px;
-  padding: 0;
-  background: transparent;
+
+  background: #ffffff;
   border: 1.5px solid #d1d5db;
   border-radius: 6px;
+
   color: #6b7280;
   text-decoration: none;
+
   transition: all 0.2s;
-  flex-shrink: 0;
 }
 
 .editButton:hover {
@@ -175,25 +75,6 @@
   .sectionTitle {
     font-size: 32px;
     margin-bottom: 32px;
-  }
-
-  .content {
-    padding: 16px;
-  }
-
-  .title {
-    font-size: 16px;
-    margin-bottom: 10px;
-  }
-
-  .price {
-    font-size: 14px;
-    margin-bottom: 12px;
-  }
-
-  .detailsButton {
-    font-size: 13px;
-    padding: 8px 12px;
   }
 
   .editButton {
