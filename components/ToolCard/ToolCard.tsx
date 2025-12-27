@@ -1,6 +1,6 @@
-import React from "react";
+// toolnext-frontend\components\ToolCard\ToolCard.tsx
+
 import Link from "next/link";
-import Image from "next/image";
 import type { ToolBasic } from "@/types/tool";
 import css from "./ToolCard.module.css";
 
@@ -8,55 +8,69 @@ interface ToolCardProps {
   tool: ToolBasic;
 }
 
-export default function ToolCard({ tool }: ToolCardProps) {
-  const imageUrl = tool.image || "/images/placeholder-tool.jpg";
+// Рендер зірочок
+// додатковий комент
 
-  // ✅ Додано тип React.ReactElement[]
-  const stars: React.ReactElement[] = [];
+const roundRating = (rating: number) => {
+  if (rating >= 0 && rating <= 1.2) return 1;
+  if (rating >= 1.3 && rating <= 1.7) return 1.5;
+  if (rating >= 2.3 && rating <= 2.7) return 2.5;
+  if (rating >= 3.3 && rating <= 3.7) return 3.5;
+  if (rating >= 4.3 && rating <= 4.5) return 4.5;
+  return Math.round(rating);
+};
 
-  for (let i = 0; i < 5; i++) {
+const renderStars = (rating: number) => {
+  const roundedRating = roundRating(rating);
+  const stars = [];
+
+  for (let i = 1; i <= 5; i++) {
+    let iconId = "icon-star";
+
+    if (i <= roundedRating) {
+      iconId = "icon-star-filled";
+    } else if (i - 0.5 === roundedRating) {
+      iconId = "icon-star_half";
+    }
+
     stars.push(
       <svg
         key={i}
         className={css.star}
         width="24"
         height="24"
-        viewBox="0 0 24 24"
-        fill={i < Math.floor(tool.rating) ? "#FFC107" : "#E0E0E0"}
+        aria-hidden="true"
       >
-        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+        <use href={`/icons/sprite.svg#${iconId}`} />
       </svg>
     );
   }
 
+  return stars;
+};
+
+export default function ToolCard({ tool }: ToolCardProps) {
   return (
     <li className={css.card}>
-      <Link href={`/tools/${tool._id}`} className={css.imageLink}>
-        <div className={css.imageWrapper}>
-          <Image
-            src={imageUrl}
-            alt={tool.name}
-            fill
-            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-            className={css.image}
-          />
-        </div>
-      </Link>
+      <img
+        src={tool.images[0]}
+        alt={tool.name}
+        className={css.image}
+        loading="lazy"
+      />
 
       <div className={css.content}>
-        <div className={css.rating}>{stars}</div>
+        <div className={css.starRating}>{renderStars(tool.rating)}</div>
 
-        <Link href={`/tools/${tool._id}`} className={css.titleLink}>
-          <h3 className={css.title}>{tool.name}</h3>
-        </Link>
+        <h4 className={css.name}>{tool.name}</h4>
 
-        <p className={css.category}>{tool.category.title}</p>
+        <div className={css.footer}>
+          <span className={css.price}>{tool.pricePerDay} грн/день</span>
 
-        <p className={css.price}>{tool.pricePerDay} грн/день</p>
-
-        <Link href={`/tools/${tool._id}`} className={css.detailsButton}>
-          Детальніше
-        </Link>
+          <Link href={`/tools/${tool._id}`} className={css.link}>
+            Детальніше
+          </Link>
+        </div>
       </div>
     </li>
   );
