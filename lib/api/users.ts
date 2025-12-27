@@ -29,9 +29,12 @@ export interface GetUserToolsParams {
 
 export interface UserToolsData {
   tools: ToolBasic[];
-  totalTools: number;
-  page: number;
-  totalPages: number;
+  pagination: {
+    page: number;
+    limit: number;
+    totalPages: number;
+    totalTools: number;
+  };
 }
 
 export async function getUserTools(
