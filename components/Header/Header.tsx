@@ -24,7 +24,7 @@ export default async function Header() {
 
         <div className={css.actions}>
           {isAuth && (
-            <Link href="/tools/create" className={css.publishBtn}>
+            <Link href="/tools/new" className={css.publishBtn}>
               Опублікувати оголошення
             </Link>
           )}

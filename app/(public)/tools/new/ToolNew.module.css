@@ -1,0 +1,40 @@
+.page {
+  padding: 48px 20px 72px 20px;
+  box-sizing: border-box;
+  max-width: 375px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.title {
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  color: #000;
+  margin-bottom: 48px;
+}
+
+@media (min-width: 768px) {
+  .page {
+    padding: 48px 32px 72px 32px;
+    max-width: 768px;
+  }
+
+  .title {
+    margin-left: 32px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .page {
+    padding: 48px 64px 72px 64px;
+    max-width: 1440px;
+  }
+
+  .title {
+    margin-left: 0;
+    font-size: 56px;
+  }
+}

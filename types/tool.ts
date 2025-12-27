@@ -49,3 +49,18 @@ export interface ToolDetails {
   createdAt: string;
   updatedAt: string;
 }
+
+export type SpecPair = {
+  key: string;
+  value: string;
+};
+
+export type ToolDraft = {
+  name: string;
+  pricePerDay: string;
+  category: string;
+  rentalTerms: string;
+  description: string;
+  specifications: SpecPair[];
+  image?: File | null;
+};
