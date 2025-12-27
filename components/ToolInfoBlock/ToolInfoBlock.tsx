@@ -34,55 +34,50 @@ export default function ToolInfoBlock({ tool }: ToolInfoBlockProps) {
 
   return (
     <section className={css.toolInfo}>
-      <div className={css.container}>
-        <h1 className={css.title}>{tool.name}</h1>
-        <p className={css.price}>{tool.pricePerDay} грн / день</p>
+      <h1 className={css.toolTitle}>{tool.name}</h1>
+      <p className={css.toolPrice}>{tool.pricePerDay} грн / день</p>
 
-        <div className={css.toolOwner}>
-          <Image
-            src={ownerAvatar}
-            alt={ownerName}
-            width={48}
-            height={48}
-            className={css.ownerAvatar}
-          />
-
-          <div className={css.ownerInfo}>
-            <p className={css.ownerName}>{ownerName}</p>
-
-            <Link href={`/users/${tool.owner}`} className={css.ownerLink}>
-              Переглянути профіль
-            </Link>
-          </div>
-        </div>
-
-        <p className={css.description}>{tool.description}</p>
-
-        <div className={css.toolSpec}>
-          <ul className={css.specifications}>
-            {Object.entries(tool.specifications).map(([key, value]) => (
-              <li key={key}>
-                <strong>{key}:</strong> {value}
-              </li>
-            ))}
-          </ul>
-
-          {tool.rentalTerms && (
-            <p className={css.rentalTerms}>
-              <strong>Умови оренди:</strong> {tool.rentalTerms}
-            </p>
-          )}
-        </div>
-
-        <button className={css.bookBut} onClick={handleBookClick}>
-          Забронювати
-        </button>
-
-        <AuthRequiredModal
-          isOpen={isAuthModalOpen}
-          onClose={() => setIsAuthModalOpen(false)}
+      <div className={css.toolOwner}>
+        <Image
+          src={ownerAvatar}
+          alt={ownerName}
+          width={80}
+          height={80}
+          className={css.ownerAvatar}
         />
+
+        <div className={css.ownerInfo}>
+          <p className={css.ownerName}>{ownerName}</p>
+          <Link href={`/users/${tool.owner}`}>Переглянути профіль</Link>
+        </div>
       </div>
+
+      <p className={css.toolDescr}>{tool.description}</p>
+
+      <div className={css.toolSpec}>
+        <ul>
+          {Object.entries(tool.specifications).map(([key, value]) => (
+            <li key={key}>
+              <strong className={css.toolSpecTitle}>{key}:</strong> {value}
+            </li>
+          ))}
+        </ul>
+
+        {tool.rentalTerms && (
+          <p>
+            <strong>Умови оренди:</strong> {tool.rentalTerms}
+          </p>
+        )}
+      </div>
+
+      <button className={css.toolBut} onClick={handleBookClick}>
+        Забронювати
+      </button>
+
+      <AuthRequiredModal
+        isOpen={isAuthModalOpen}
+        onClose={() => setIsAuthModalOpen(false)}
+      />
     </section>
   );
 }
