@@ -1,5 +1,5 @@
 import Link from "next/link";
-import styles from "./BookingConfirmation.module.css";
+import styles from "./BookingConfirmationPage.module.css";
 
 export default function BookingConfirmationPage() {
   return (
