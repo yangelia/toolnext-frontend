@@ -4,6 +4,7 @@ import Link from "next/link";
 import type { ToolBasic } from "@/types/tool";
 import css from "./ToolCard.module.css";
 import type { ReactElement } from "react";
+import Image from "next/image";
 
 interface ToolCardProps {
   tool: ToolBasic;
@@ -54,7 +55,7 @@ export default function ToolCard({
 }: ToolCardProps) {
   return (
     <li className={css.card}>
-      <img
+      {/* <img
         src={
           tool.images[0] ??
           "/images/default-avatar.jpg"
@@ -62,6 +63,18 @@ export default function ToolCard({
         alt={tool.name}
         className={css.image}
         loading="lazy"
+      /> */}
+      <Image
+        src={
+          tool.images[0] ??
+          "/images/default-avatar.jpg"
+        }
+        alt={tool.name}
+        width={304}
+        height={374}
+        className={css.image}
+        priority={false}
+        placeholder="empty"
       />
 
       <div className={css.content}>
