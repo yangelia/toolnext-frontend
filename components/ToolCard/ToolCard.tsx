@@ -39,7 +39,9 @@ const renderStars = (rating: number) => {
         height="24"
         aria-hidden="true"
       >
-        <use href={`/icons/sprite.svg#${iconId}`} />
+        <use
+          href={`/icons/sprite.svg#${iconId}`}
+        />
       </svg>
     );
   }
@@ -47,25 +49,37 @@ const renderStars = (rating: number) => {
   return stars;
 };
 
-export default function ToolCard({ tool }: ToolCardProps) {
+export default function ToolCard({
+  tool,
+}: ToolCardProps) {
   return (
     <li className={css.card}>
       <img
-        src={tool.image}
+        src={
+          tool.images[0] ??
+          "/images/default-avatar.jpg"
+        }
         alt={tool.name}
         className={css.image}
         loading="lazy"
       />
 
       <div className={css.content}>
-        <div className={css.starRating}>{renderStars(tool.rating)}</div>
+        <div className={css.starRating}>
+          {renderStars(tool.rating)}
+        </div>
 
         <h4 className={css.name}>{tool.name}</h4>
 
         <div className={css.footer}>
-          <span className={css.price}>{tool.pricePerDay} грн/день</span>
+          <span className={css.price}>
+            {tool.pricePerDay} грн/день
+          </span>
 
-          <Link href={`/tools/${tool._id}`} className={css.link}>
+          <Link
+            href={`/tools/${tool._id}`}
+            className={css.link}
+          >
             Детальніше
           </Link>
         </div>

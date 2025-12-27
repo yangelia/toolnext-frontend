@@ -1,3 +1,8 @@
+// types/tool.ts
+
+import type { Category } from "./category";
+import type { User, UserPublic } from "./user";
+
 export interface Feedback {
   _id: string;
   name: string;
@@ -12,11 +17,11 @@ export interface BookedDate {
 
 export interface ToolBasic {
   _id: string;
-  owner: string;
+  owner: User | UserPublic;
   name: string;
   pricePerDay: number;
   rating: number;
-  image: string;
+  images: string[];
   category: string;
 }
 
@@ -30,8 +35,8 @@ export interface ToolsResponse {
 
 export interface ToolDetails {
   _id: string;
-  owner: string;
-  category: string;
+  owner: User | UserPublic;
+  category: Category;
 
   name: string;
   description: string;
@@ -58,9 +63,9 @@ export type SpecPair = {
 export type ToolDraft = {
   name: string;
   pricePerDay: string;
-  category: string;
+  category: Category;
   rentalTerms: string;
   description: string;
   specifications: SpecPair[];
-  image?: File | null;
+  images?: File | null;
 };
