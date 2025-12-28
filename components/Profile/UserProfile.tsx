@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { UserPublic, User } from "@/types/user";
+import type { UserPublic, User } from "@/types/user";
 import css from "./UserProfile.module.css";
 
 interface UserProfileProps {
@@ -7,21 +7,22 @@ interface UserProfileProps {
   isOwner?: boolean;
 }
 
-export default function UserProfile({
-  user,
-  isOwner = false,
-}: UserProfileProps) {
-  // Защита: если username вдруг пустой/undefined — не падаем на charAt
-  const username = user?.username ?? "Користувач";
-  const avatarLetter = username.charAt(0).toUpperCase();
+export default function UserProfile({ user }: UserProfileProps) {
+  const displayName = user.username ?? user.name ?? "Користувач";
+
+  const avatarSrc =
+    (user.avatar && user.avatar.trim() ? user.avatar : null) ??
+    (user.avatarUrl && user.avatarUrl.trim() ? user.avatarUrl : null);
+
+  const avatarLetter = displayName.charAt(0).toUpperCase();
 
   return (
     <div className={css.userProfile}>
       <div className={css.avatarWrapper}>
-        {user?.avatar ? (
+        {avatarSrc ? (
           <Image
-            src={user.avatar}
-            alt={username}
+            src={avatarSrc}
+            alt={displayName}
             width={120}
             height={120}
             className={css.avatar}
@@ -32,7 +33,7 @@ export default function UserProfile({
       </div>
 
       <div className={css.userInfo}>
-        <h1 className={css.username}>{username}</h1>
+        <h1 className={css.username}>{displayName}</h1>
       </div>
     </div>
   );
