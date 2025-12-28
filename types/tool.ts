@@ -75,9 +75,9 @@ export type SpecPair = {
 export type ToolDraft = {
   name: string;
   pricePerDay: string;
-  category: string;
+  category: Category;
   rentalTerms: string;
   description: string;
   specifications: SpecPair[];
-  image?: File | null;
+  images?: File | null;
 };
