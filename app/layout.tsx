@@ -1,6 +1,7 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
 import TanStackProvider from "@/components/TanStackProvider/TanStackProvider";
+import { AuthProvider } from "@/components/AuthProvider/AuthProvider";
 
 const inter = Inter({
   subsets: ["latin", "cyrillic"],
@@ -17,7 +18,9 @@ export default function RootLayout({
   return (
     <html lang="uk">
       <body className={inter.variable}>
-        <TanStackProvider>{children}</TanStackProvider>
+        <AuthProvider>
+          <TanStackProvider>{children}</TanStackProvider>
+        </AuthProvider>
       </body>
     </html>
   );
