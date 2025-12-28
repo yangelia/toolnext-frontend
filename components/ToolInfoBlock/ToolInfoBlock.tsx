@@ -32,8 +32,10 @@ export default function ToolInfoBlock({ tool }: ToolInfoBlockProps) {
   const owner =
     tool.owner && typeof tool.owner === "object" ? tool.owner : null;
 
-  const ownerName = owner?.username ?? "Користувач";
-  const ownerAvatar = owner?.avatar ?? "/images/default-avatar.jpg";
+  const ownerName = tool.owner.username ?? tool.owner.name ?? "Користувач";
+
+  const ownerAvatar =
+    tool.owner.avatar ?? tool.owner.avatarUrl ?? "/images/default-avatar.jpg";
 
   return (
     <section className={css.toolInfo}>
