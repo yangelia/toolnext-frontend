@@ -22,6 +22,7 @@ import OverlayLoader from "../OverlayLoader/OverlayLoader";
 import CategorySelect from "../CategorySelect/CategorySelect";
 import toast from "react-hot-toast";
 import { getErrorMessage } from "@/lib/utils/getErrorMessage";
+import { dataUrlToFile } from "@/lib/utils/dataUrlToFile";
 
 export type CategoryOption = {
   _id: string;
@@ -104,7 +105,14 @@ export default function AddEditToolForm({
     fd.append("rentalTerms", values.rentalTerms || "");
     fd.append("description", values.description || "");
     fd.append("specifications", JSON.stringify(specsRecord));
-    if (values.image) fd.append(IMAGE_FIELD, values.image);
+    const img = values.image;
+
+    if (img instanceof File) {
+      fd.append(IMAGE_FIELD, img);
+    } else if (typeof img === "string" && img.startsWith("data:")) {
+      const file = await dataUrlToFile(img, "tool-image");
+      fd.append(IMAGE_FIELD, file);
+    }
 
     try {
       await onSubmit(fd);

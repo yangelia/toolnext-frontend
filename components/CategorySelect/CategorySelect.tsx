@@ -23,7 +23,10 @@ export default function CategorySelect<
   return (
     <Select.Root
       value={value}
-      onValueChange={(v) => setFieldValue(name, v)}
+      onValueChange={(v) => {
+        if (!v) return;
+        setFieldValue(name, v);
+      }}
       onOpenChange={(open) => {
         if (!open) setFieldTouched(name, true, true);
       }}
