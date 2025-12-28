@@ -11,14 +11,12 @@
   display: grid;
   grid-template-columns: 1fr;
 }
-
 .formSection {
   padding: 87px 20px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: relative;
 }
 .title {
   font-size: 30px;
@@ -26,19 +24,6 @@
   color: #000000;
   margin-bottom: 32px;
   line-height: 120%;
-}
-.logo {
-  position: absolute;
-  width: 92px;
-  height: 20px;
-  top: 29px;
-  left: 25px;
-  display: flex;
-  align-items: center;
-  z-index: 10;
-}
-.logo:hover {
-  opacity: 0.8;
 }
 .form {
   width: 100%;
@@ -68,7 +53,6 @@
   font-size: 16px;
   line-height: 150%;
   transition: border-color 0.2s ease;
-  width: 100%;
 }
 .input:focus {
   border-color: #8808cc;
@@ -124,32 +108,12 @@
   margin-left: 4px;
   font-weight: 500;
 }
-
-.copy {
-  position: absolute;
-  bottom: 24px;
-  left: 20px;
-  font-size: 14px;
-  font-weight: 400;
-  color: #000000;
-  line-height: 150%;
-  opacity: 0.8;
-}
-
 .imageSection {
   display: none;
 }
 @media (min-width: 778) {
   .formSection {
     padding: 90px 32px;
-  }
-  .logo {
-    top: 26px;
-    left: 32px;
-  }
-  .copy {
-    bottom: 32px;
-    left: 32px;
   }
 }
 @media (min-width: 1024px) {
@@ -162,22 +126,14 @@
 
     text-align: left;
   }
-  .logo {
-    top: 26px;
-    left: 64px;
-    width: 124px;
-  }
+
   .title {
     font-weight: 700;
     font-size: 42px;
     line-height: 120%;
     margin-bottom: 40px;
   }
-  .copy {
-    bottom: 40px; /* Точне позиціонування для великих екранів */
-    left: 40px;
-    font-size: 16px;
-  }
+
   .imageSection {
     display: block; /* Показуємо зображення */
     position: relative;
