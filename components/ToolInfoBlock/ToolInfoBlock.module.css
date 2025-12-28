@@ -81,6 +81,29 @@
   color: #000;
 }
 
+.ownerLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+  gap: 8px;
+  border: 2px solid #000;
+  border-radius: 6px;
+  background-color: transparent;
+  padding: 8px 20px;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 1.5;
+  width: 192px;
+  height: 37px;
+  cursor: pointer;
+  outline: none;
+  text-decoration: none;
+  color: #000;
+  transition: color 250ms ease-in-out, background-color 250ms ease-in-out,
+    border-color 250ms ease-in-out;
+}
+
 @media (min-width: 768px) {
   .toolBut {
     max-width: 704px;
