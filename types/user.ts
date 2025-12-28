@@ -11,8 +11,9 @@ export interface User {
 
 export interface UserPublic {
   _id: string;
-  username: string;
-  avatar: string;
+  username?: string; // ← optional
+  name?: string; // ← добавили
+  avatar?: string;
   email: string;
   createdAt: string;
 }
