@@ -1,24 +1,22 @@
-// components/Profile/UserProfile.tsx
 import Image from "next/image";
 import css from "./UserProfile.module.css";
 import { UserPublic, User } from "@/types/user";
 
 interface UserProfileProps {
   user: UserPublic | User;
-  isOwner?: boolean;
 }
 
 export default function UserProfile({ user }: UserProfileProps) {
   const username = user.username || "Користувач";
   const avatarLetter = username.charAt(0).toUpperCase();
-  const avatarSrc = user.avatar && user.avatar.length > 0 ? user.avatar : null;
+  const avatar = user.avatar || null;
 
   return (
     <div className={css.userProfile}>
       <div className={css.avatarWrapper}>
-        {avatarSrc ? (
+        {avatar ? (
           <Image
-            src={avatarSrc}
+            src={avatar}
             alt={username}
             width={120}
             height={120}
