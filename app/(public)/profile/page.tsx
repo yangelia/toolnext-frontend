@@ -26,6 +26,7 @@ async function getCurrentUserData(): Promise<User | null> {
 }
 export default async function ProfilePage() {
   const user = await getCurrentUserData();
+  console.log("PROFILE USER OBJECT (PAGE):", user);
   if (!user) {
     redirect("/auth/login");
   }

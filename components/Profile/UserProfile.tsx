@@ -4,10 +4,15 @@ import { UserPublic, User } from "@/types/user";
 
 interface UserProfileProps {
   user: UserPublic | User;
+  isOwner?: boolean;
 }
 
 export default function UserProfile({ user }: UserProfileProps) {
-  const username = user.username || "Користувач";
+  const username =
+    typeof user === "object" && user.username && user.username.trim() !== ""
+      ? user.username
+      : "Користувач";
+
   const avatarLetter = username.charAt(0).toUpperCase();
   const avatar = user.avatar || null;
 
