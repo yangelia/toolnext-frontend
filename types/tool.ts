@@ -1,7 +1,19 @@
 // types/tool.ts
 
 import type { Category } from "./category";
-import type { User, UserPublic } from "./user";
+
+/**
+ * Специальный тип владельца инструмента.
+ * Это НЕ полноценный User и НЕ UserPublic,
+ * а view-модель, которая отражает реальный API.
+ */
+export type ToolOwner = {
+  _id: string;
+  username?: string;
+  name?: string;
+  avatar?: string;
+  avatarUrl?: string;
+};
 
 export interface Feedback {
   _id: string;
@@ -17,7 +29,7 @@ export interface BookedDate {
 
 export interface ToolBasic {
   _id: string;
-  owner: User | UserPublic;
+  owner: ToolOwner;
   name: string;
   pricePerDay: number;
   rating: number;
@@ -35,7 +47,7 @@ export interface ToolsResponse {
 
 export interface ToolDetails {
   _id: string;
-  owner: User | UserPublic;
+  owner: ToolOwner;
   category: Category;
 
   name: string;
