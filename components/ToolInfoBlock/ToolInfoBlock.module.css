@@ -1,34 +1,13 @@
-.toolBut {
-  width: 100%;
-  max-width: 335px;
-
-  background-color: #8808cc;
-  border: 1px solid #8808cc;
-  color: #ffffff;
-  border-radius: 6px;
-  padding: 10px;
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 150%;
-  text-decoration: none;
-}
-
-.toolBut:hover {
-  background-color: #ffffff;
-  border: 2px solid #8808cc;
-  color: #000;
-}
-
-.toolTitle {
+.title {
   font-weight: 700;
   font-size: 32px;
   line-height: 1.2;
   letter-spacing: -0.01em;
   color: #000;
-  margin-bottom: 8px;
+  margin: 0 0 8px;
 }
 
-.toolPrice {
+.price {
   font-weight: 700;
   font-size: 20px;
   line-height: 1.4;
@@ -37,40 +16,20 @@
   margin-bottom: 24px;
 }
 
-.toolDescr {
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 1.5;
-  color: #000;
-  margin-bottom: 24px;
-}
-
-.toolSpec {
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 1.5;
-  color: #000;
-  margin-bottom: 24px;
-}
-
-.toolSpecTitle {
-  font-weight: 700;
-}
-
 .toolOwner {
   display: flex;
   margin-bottom: 24px;
-}
-
-.ownerInfo {
-  flex: 1;
-  min-width: 0;
 }
 
 .ownerAvatar {
   width: 80px;
   border-radius: 100%;
   margin-right: 16px;
+}
+
+.ownerInfo {
+  flex: 1;
+  min-width: 0;
 }
 
 .ownerName {
@@ -104,8 +63,58 @@
     border-color 250ms ease-in-out;
 }
 
+.ownerLink:hover {
+  background-color: #e7cdf4;
+}
+
+.description {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #000;
+  margin-bottom: 24px;
+}
+
+.toolSpec {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.5;
+  color: #000;
+  margin-bottom: 24px;
+}
+
+.toolSpecTitle {
+  font-weight: 700;
+}
+
+.bookBut {
+  width: 100%;
+  max-width: 335px;
+
+  background-color: #8808cc;
+  border: 1px solid #8808cc;
+  color: #ffffff;
+  border-radius: 6px;
+  padding: 10px;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 150%;
+  text-decoration: none;
+}
+
+.bookBut:hover {
+  background-color: #ffffff;
+  border: 2px solid #8808cc;
+  color: #000;
+}
+
+.bookBut:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
 @media (min-width: 768px) {
-  .toolBut {
+  .bookBut {
     max-width: 704px;
   }
 }
@@ -115,20 +124,20 @@
     padding-left: 0;
     margin-left: 0;
   }
-  .toolTitle {
+  .title {
     font-size: 40px;
   }
-  .toolPrice {
+  .price {
     font-size: 24px;
   }
-  .toolDescr {
+  .description {
     font-size: 16px;
   }
-  .toolBut,
-  .toolPrice,
+  .bookBut,
+  .price,
   .toolSpec,
-  .toolDescr,
-  .toolTitle {
+  .description,
+  .title {
     max-width: 640px;
   }
 }
