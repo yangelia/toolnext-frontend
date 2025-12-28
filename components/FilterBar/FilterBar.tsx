@@ -25,21 +25,12 @@ export default function FilterBar({
           className={css.select}
           value={selected ?? "All"}
           onChange={(e) =>
-            onChange(
-              e.target.value === "All"
-                ? null
-                : e.target.value
-            )
+            onChange(e.target.value === "All" ? null : e.target.value)
           }
         >
-          <option value="All">
-            Усі категорії
-          </option>
+          <option value="All">Всі категорії</option>
           {categories.map((cat) => (
-            <option
-              key={cat._id}
-              value={cat._id}
-            >
+            <option key={cat._id} value={cat._id}>
               {cat.title}
             </option>
           ))}

@@ -144,4 +144,9 @@
   .toolTitle {
     max-width: 640px;
   }
+  .ownerLink {
+    width: 214px;
+    font-size: 16px;
+    height: 40px;
+  }
 }
