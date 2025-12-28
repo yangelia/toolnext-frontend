@@ -83,15 +83,6 @@ export default function RegisterPage() {
     <section className={styles.container}>
       <div className={styles.page}>
         <div className={styles.formSection}>
-          <Link href="/" className={styles.logo} aria-label="ToolNext home">
-            <Image
-              src="/images/Tool-Next.svg"
-              alt="ToolNext"
-              width={92}
-              height={20}
-              priority
-            />
-          </Link>
           <h1 className={styles.title}>Реєстрація</h1>
 
           <Formik
@@ -202,7 +193,6 @@ export default function RegisterPage() {
             <span>Вже маєте акаунт?</span>
             <Link href="/auth/login">Вхід</Link>
           </div>
-          <p className={styles.copy}>© {new Date().getFullYear()} ToolNext.</p>
         </div>
         <div className={styles.imageSection} aria-hidden={true}>
           <Image
