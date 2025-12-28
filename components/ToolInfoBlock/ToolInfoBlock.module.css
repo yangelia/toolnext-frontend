@@ -1,4 +1,4 @@
-.title {
+.toolTitle {
   font-weight: 700;
   font-size: 32px;
   line-height: 1.2;
@@ -7,7 +7,7 @@
   margin: 0 0 8px;
 }
 
-.price {
+.toolPrice {
   font-weight: 700;
   font-size: 20px;
   line-height: 1.4;
@@ -24,6 +24,10 @@
 .ownerAvatar {
   width: 80px;
   border-radius: 100%;
+  margin-right: 16px;
+}
+
+.ownerAvatarFallback {
   margin-right: 16px;
 }
 
@@ -67,7 +71,7 @@
   background-color: #e7cdf4;
 }
 
-.description {
+.toolDescr {
   font-weight: 400;
   font-size: 14px;
   line-height: 1.5;
@@ -87,7 +91,7 @@
   font-weight: 700;
 }
 
-.bookBut {
+.toolBut {
   width: 100%;
   max-width: 335px;
 
@@ -102,19 +106,19 @@
   text-decoration: none;
 }
 
-.bookBut:hover {
+.toolBut:hover {
   background-color: #ffffff;
   border: 2px solid #8808cc;
   color: #000;
 }
 
-.bookBut:disabled {
+.toolBut:disabled {
   opacity: 0.4;
   cursor: not-allowed;
 }
 
 @media (min-width: 768px) {
-  .bookBut {
+  .toolBut {
     max-width: 704px;
   }
 }
@@ -124,20 +128,20 @@
     padding-left: 0;
     margin-left: 0;
   }
-  .title {
+  .toolTitle {
     font-size: 40px;
   }
-  .price {
+  .toolPrice {
     font-size: 24px;
   }
-  .description {
+  .toolDescr {
     font-size: 16px;
   }
-  .bookBut,
-  .price,
+  .toolBut,
+  .toolPrice,
   .toolSpec,
-  .description,
-  .title {
+  .toolDescr,
+  .toolTitle {
     max-width: 640px;
   }
 }
