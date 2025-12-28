@@ -112,7 +112,7 @@
 
 @media (min-width: 768px) {
   .container {
-    max-width: 768px;
+    max-width: 704px;
     padding: 0 32px;
   }
 
@@ -121,8 +121,7 @@
   }
 
   .divider {
-    max-width: none;
-    width: 704px;
+    max-width: 704px;
   }
 }
 
@@ -132,7 +131,7 @@
   }
 
   .container {
-    max-width: 1440px;
+    max-width: 1312px;
     padding: 0 64px;
   }
 
@@ -163,7 +162,7 @@
   }
 
   .divider {
-    width: 1312px;
+    max-width: none;
   }
 
   .copy {
