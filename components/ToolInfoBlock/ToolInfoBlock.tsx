@@ -17,18 +17,11 @@ interface ToolInfoBlockProps {
 
 export default function ToolInfoBlock({ tool }: ToolInfoBlockProps) {
   const router = useRouter();
-
-  const { isAuthenticated, loading } = useAuthStore((state) => ({
-    isAuthenticated: state.isAuthenticated,
-    loading: state.loading,
-  }));
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
   const handleBookClick = () => {
-    // ⬅️ КЛЮЧЕВО: ждём, пока auth инициализируется
-    if (loading) return;
-
     if (isAuthenticated) {
       router.push(`/tools/${tool._id}/booking`);
     } else {
@@ -36,12 +29,13 @@ export default function ToolInfoBlock({ tool }: ToolInfoBlockProps) {
     }
   };
 
-  // owner приходит из populate → объект
   const owner =
     tool.owner && typeof tool.owner === "object" ? tool.owner : null;
 
-  const ownerName = owner?.username ?? "Користувач";
-  const ownerAvatar = owner?.avatar ?? "/images/default-avatar.jpg";
+  const ownerName = tool.owner.username ?? tool.owner.name ?? "Користувач";
+
+  const ownerAvatar =
+    tool.owner.avatar ?? tool.owner.avatarUrl ?? "/images/default-avatar.jpg";
 
   return (
     <section className={css.toolInfo}>
@@ -62,7 +56,7 @@ export default function ToolInfoBlock({ tool }: ToolInfoBlockProps) {
           <p className={css.ownerName}>{ownerName}</p>
 
           {owner?._id && (
-            <Link href={`/users/${owner._id}`}>Переглянути профіль</Link>
+            <Link href={`/profile/${owner._id}`}>Переглянути профіль</Link>
           )}
         </div>
       </div>
@@ -85,11 +79,7 @@ export default function ToolInfoBlock({ tool }: ToolInfoBlockProps) {
         )}
       </div>
 
-      <button
-        className={css.toolBut}
-        onClick={handleBookClick}
-        disabled={loading}
-      >
+      <button className={css.toolBut} onClick={handleBookClick}>
         Забронювати
       </button>
 
