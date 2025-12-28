@@ -15,16 +15,11 @@ interface ToolInfoBlockProps {
   tool: ToolDetails;
 }
 
-export default function ToolInfoBlock({
-  tool,
-}: ToolInfoBlockProps) {
+export default function ToolInfoBlock({ tool }: ToolInfoBlockProps) {
   const router = useRouter();
-  const isAuthenticated = useAuthStore(
-    (state) => state.isAuthenticated
-  );
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
-  const [isAuthModalOpen, setIsAuthModalOpen] =
-    useState(false);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
   const handleBookClick = () => {
     if (isAuthenticated) {
@@ -34,18 +29,19 @@ export default function ToolInfoBlock({
     }
   };
 
-  const ownerName = "Користувач";
+  const owner =
+    tool.owner && typeof tool.owner === "object" ? tool.owner : null;
+
+  const ownerName = tool.owner.username ?? tool.owner.name ?? "Користувач";
+
   const ownerAvatar =
-    "/images/default-avatar.jpg";
+    tool.owner.avatar ?? tool.owner.avatarUrl ?? "/images/default-avatar.jpg";
 
   return (
     <section className={css.toolInfo}>
-      <h1 className={css.toolTitle}>
-        {tool.name}
-      </h1>
-      <p className={css.toolPrice}>
-        {tool.pricePerDay} грн / день
-      </p>
+      <h1 className={css.toolTitle}>{tool.name}</h1>
+
+      <p className={css.toolPrice}>{tool.pricePerDay} грн / день</p>
 
       <div className={css.toolOwner}>
         <Image
@@ -57,47 +53,33 @@ export default function ToolInfoBlock({
         />
 
         <div className={css.ownerInfo}>
-          <p className={css.ownerName}>
-            {ownerName}
-          </p>
-          <Link href={`/users/${tool.owner._id}`}>
-            Переглянути профіль
-          </Link>
+          <p className={css.ownerName}>{ownerName}</p>
+
+          {owner?._id && (
+            <Link href={`/profile/${owner._id}`}>Переглянути профіль</Link>
+          )}
         </div>
       </div>
 
-      <p className={css.toolDescr}>
-        {tool.description}
-      </p>
+      <p className={css.toolDescr}>{tool.description}</p>
 
       <div className={css.toolSpec}>
         <ul>
-          {Object.entries(
-            tool.specifications
-          ).map(([key, value]) => (
+          {Object.entries(tool.specifications).map(([key, value]) => (
             <li key={key}>
-              <strong
-                className={css.toolSpecTitle}
-              >
-                {key}:
-              </strong>{" "}
-              {value}
+              <strong className={css.toolSpecTitle}>{key}:</strong> {value}
             </li>
           ))}
         </ul>
 
         {tool.rentalTerms && (
           <p>
-            <strong>Умови оренди:</strong>{" "}
-            {tool.rentalTerms}
+            <strong>Умови оренди:</strong> {tool.rentalTerms}
           </p>
         )}
       </div>
 
-      <button
-        className={css.toolBut}
-        onClick={handleBookClick}
-      >
+      <button className={css.toolBut} onClick={handleBookClick}>
         Забронювати
       </button>
 
