@@ -1,3 +1,14 @@
+.container {
+    font-family: "Work Sans", sans-serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+    color: #000000;
+    max-width: 375px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 .sectionFeedback {
     padding: 64px 20px;
 }
@@ -11,10 +22,12 @@
 
 .feedbackSwiper {
     margin-top: 80px;
-    display: flex;
     flex-direction: column;
     gap: 48px;
     width: 100%;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 48px;
 }
 
 .feedbackControls {
@@ -147,6 +160,10 @@
 }
 
 @media only screen and (min-width: 768px) {
+    .container {
+        max-width: 768px;
+    }
+
     .sectionFeedback {
         padding: 64px 32px;
     }
@@ -154,9 +171,22 @@
     .feedbackText {
         max-width: 336px;
     }
+
+    .feedbackSwiper {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 @media only screen and (min-width: 1440px) {
+    .container {
+        max-width: 1440px;
+
+    }
+
+    .feedbackSwiper {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
     .sectionFeedback {
         padding: 112px 64px;
     }

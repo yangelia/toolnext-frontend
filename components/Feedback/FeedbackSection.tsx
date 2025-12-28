@@ -63,8 +63,8 @@ const FeedbackSection: React.FC = () => {
   }, [feedbacks]);
 
   return (
-    <section className={styles.sectionFeedback}>
-      <div className={styles.container}>
+    <section className={styles.container}>
+      <div className={styles.sectionFeedback}>
         <h2 className={styles.feedbackName}>Останні відгуки</h2>
         
         <div className={`swiper ${styles.feedbackSwiper}`} ref={swiperContainerRef}>
