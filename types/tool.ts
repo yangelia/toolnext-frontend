@@ -17,7 +17,7 @@ export interface BookedDate {
 
 export interface ToolBasic {
   _id: string;
-  owner: User | UserPublic;
+  owner: string;
   name: string;
   pricePerDay: number;
   rating: number;
@@ -63,9 +63,9 @@ export type SpecPair = {
 export type ToolDraft = {
   name: string;
   pricePerDay: string;
-  category: Category;
+  category: string;
   rentalTerms: string;
   description: string;
   specifications: SpecPair[];
-  images?: File | null;
+  image?: File | null;
 };

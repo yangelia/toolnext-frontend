@@ -1,4 +1,24 @@
+основна логіка (популярні інструменти головна сторінка та сторінка інструментів)
+
 https://github.com/yangelia/toolnext-frontend/pull/16
 https://github.com/yangelia/toolnext-frontend/pull/21
 
+
+форматування
+
+https://github.com/yangelia/toolnext-frontend/pull/26
+
+
+фіксаця багів та взаємодія з іншими частинами
+
+https://github.com/yangelia/toolnext-frontend/pull/30
+https://github.com/yangelia/toolnext-frontend/pull/55
+https://github.com/yangelia/toolnext-frontend/pull/56
+https://github.com/yangelia/toolnext-frontend/pull/57
+
+
 pullrequests-list.txt
+
+NEXT_PUBLIC_API_URL=http://localhost:3000 
+
+
