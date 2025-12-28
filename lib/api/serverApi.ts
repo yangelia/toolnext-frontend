@@ -6,7 +6,12 @@ import { User } from "@/types/user";
 import { cookies } from "next/headers";
 import { cache } from "react";
 
-export const getServerCurrentUser = cache(async (): Promise<User | null> => {
+export type HeaderUser = {
+  name: string;
+  avatarUrl: string;
+};
+
+export const getServerCurrentUser = cache(async () => {
   try {
     const cookieStore = await cookies();
 
@@ -14,19 +19,30 @@ export const getServerCurrentUser = cache(async (): Promise<User | null> => {
       headers: { Cookie: cookieStore.toString() },
     });
 
-    return res.data?.data?.user ?? null;
+    const u = res.data?.data?.user; // очікую щось типу: { _id, username, avatar, email, ... }
+
+    if (!u) return null;
+
+    return {
+      name: u.username ?? u.name ?? "Користувач",
+      avatarUrl: u.avatar ?? u.avatarUrl ?? "",
+    };
   } catch {
     return null;
   }
 });
 
 export const checkServerSession = async () => {
+  // Дістаємо поточні cookie
   const cookieStore = await cookies();
-  return api.get("/auth/session", {
+  const res = await api.get("/auth/session", {
     headers: {
+      // передаємо кукі далі
       Cookie: cookieStore.toString(),
     },
   });
+  // Повертаємо повний респонс, щоб middleware мав доступ до нових cookie
+  return res;
 };
 
 export async function getToolByIdServer(id: string) {
