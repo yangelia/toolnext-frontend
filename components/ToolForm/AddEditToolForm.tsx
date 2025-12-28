@@ -1,6 +1,13 @@
 "use client";
 
-import { Formik, Form, Field, ErrorMessage, FieldArray } from "formik";
+import {
+  Formik,
+  Form,
+  Field,
+  ErrorMessage,
+  FieldArray,
+  FormikHelpers,
+} from "formik";
 import styles from "./AddEditToolForm.module.css";
 import { ToolDraft } from "@/types/tool";
 import { useMemo } from "react";
@@ -13,6 +20,8 @@ import {
 } from "@/lib/validation/toolValidation";
 import OverlayLoader from "../OverlayLoader/OverlayLoader";
 import CategorySelect from "../CategorySelect/CategorySelect";
+import toast from "react-hot-toast";
+import { getErrorMessage } from "@/lib/utils/getErrorMessage";
 
 export type CategoryOption = {
   _id: string;
@@ -76,7 +85,10 @@ export default function AddEditToolForm({
   const isCreate = submitLabel.toLowerCase().includes("створ") || !tool;
   const validationSchema = isCreate ? toolCreateSchema : toolEditSchema;
 
-  const handleSubmit = async (values: ToolDraft) => {
+  const handleSubmit = async (
+    values: ToolDraft,
+    helpers: FormikHelpers<ToolDraft>
+  ) => {
     const specsRecord = values.specifications
       .map((p) => ({ key: p.key.trim(), value: p.value.trim() }))
       .filter((p) => p.key.length > 0)
@@ -94,7 +106,13 @@ export default function AddEditToolForm({
     fd.append("specifications", JSON.stringify(specsRecord));
     if (values.image) fd.append(IMAGE_FIELD, values.image);
 
-    await onSubmit(fd);
+    try {
+      await onSubmit(fd);
+    } catch (err) {
+      toast.error(getErrorMessage(err));
+    } finally {
+      helpers.setSubmitting(false);
+    }
   };
 
   return (
@@ -102,6 +120,8 @@ export default function AddEditToolForm({
       initialValues={initialValue}
       validationSchema={validationSchema}
       onSubmit={handleSubmit}
+      validateOnChange={false}
+      validateOnBlur={true}
     >
       {({ values, isSubmitting }) => {
         const isBusy = isSubmitting || Boolean(busy);
@@ -148,14 +168,6 @@ export default function AddEditToolForm({
 
             <label className={styles.field}>
               <span className={styles.label}>Категорія</span>
-              {/* <Field as="select" name="category" className={styles.select}>
-                <option value="">Категорія</option>
-                {categories.map((c) => (
-                  <option key={c._id} value={c._id}>
-                    {c.title}
-                  </option>
-                ))}
-              </Field> */}
               <CategorySelect<ToolDraft>
                 name="category"
                 placeholder="Категорія"
