@@ -29,15 +29,11 @@ export default function ToolInfoBlock({ tool }: ToolInfoBlockProps) {
     }
   };
 
-  // ✅ НОВОЕ: безопасно получаем ownerId
-  const ownerId =
-    tool.owner && typeof tool.owner === "object" && "_id" in tool.owner
-      ? tool.owner._id
-      : null;
+  const owner =
+    tool.owner && typeof tool.owner === "object" ? tool.owner : null;
 
-  // ⬇️ ОСТАВЛЯЕМ КАК БЫЛО
-  const ownerName = "Користувач";
-  const ownerAvatar = "/images/default-avatar.jpg";
+  const ownerName = owner?.username ?? "Користувач";
+  const ownerAvatar = owner?.avatar ?? "/images/default-avatar.jpg";
 
   return (
     <section className={css.toolInfo}>
@@ -57,9 +53,8 @@ export default function ToolInfoBlock({ tool }: ToolInfoBlockProps) {
         <div className={css.ownerInfo}>
           <p className={css.ownerName}>{ownerName}</p>
 
-          {/* ✅ ИСПРАВЛЕНИЕ ЗДЕСЬ */}
-          {ownerId && (
-            <Link href={`/users/${ownerId}`}>Переглянути профіль</Link>
+          {owner?._id && (
+            <Link href={`/users/${owner._id}`}>Переглянути профіль</Link>
           )}
         </div>
       </div>
