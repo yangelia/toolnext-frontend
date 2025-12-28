@@ -1,21 +1,23 @@
+/* components\ToolGrid\ToolGrid.module.css */
+
 .grid {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 64px 32px;
-    list-style: none;
-    padding: 0;
+  display: grid;
+  list-style: none;
+  grid-template-columns: repeat(1, 335px);
+  gap: 64px 32px;
+  justify-content: center;
 }
 
 /* ===== Tablet: 768px+ ===== */
 @media (min-width: 768px) {
-    .grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
+  .grid {
+    grid-template-columns: repeat(2, 336px);
+  }
 }
 
 /* ===== Desktop: 1440px+ ===== */
 @media (min-width: 1440px) {
-    .grid {
-        grid-template-columns: repeat(4, 1fr);
-    }
+  .grid {
+    grid-template-columns: repeat(4, 304px);
+  }
 }
