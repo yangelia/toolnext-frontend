@@ -56,7 +56,7 @@ export default function ToolInfoBlock({ tool }: ToolInfoBlockProps) {
           <p className={css.ownerName}>{ownerName}</p>
 
           {owner?._id && (
-            <Link href={`/users/${owner._id}`}>Переглянути профіль</Link>
+            <Link href={`/profile/${owner._id}`}>Переглянути профіль</Link>
           )}
         </div>
       </div>
