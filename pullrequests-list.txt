@@ -19,6 +19,5 @@ https://github.com/yangelia/toolnext-frontend/pull/57
 
 pullrequests-list.txt
 
-NEXT_PUBLIC_API_URL=http://localhost:3000 
 
 

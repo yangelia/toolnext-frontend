@@ -2,7 +2,7 @@
 
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import ToolGrid from "@/components/ToolGrid/ToolGrid";
 import FilterBar from "@/components/FilterBar/FilterBar";
@@ -18,8 +18,6 @@ export default function ToolsClient({
   categories,
 }: ToolsClientProps) {
   const searchParams = useSearchParams();
-  const searchFromUrl =
-    searchParams.get("search") ?? "";
 
   const {
     tools,
@@ -33,20 +31,29 @@ export default function ToolsClient({
     loadTools,
   } = useToolsStore();
 
-  // 🔹 1. Синхронізація search зі стору з URL
-  useEffect(() => {
-    if (searchFromUrl !== search) {
-      setSearch(searchFromUrl);
-      loadTools(true);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [searchFromUrl]);
+  const [mounted, setMounted] = useState(false);
 
-  // 🔹 2. Завантаження при зміні категорії
+  // mount guard
   useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // ініціалізація search з URL
+  useEffect(() => {
+    const urlSearch =
+      searchParams.get("search") ?? "";
+    setSearch(urlSearch);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // завантаження даних
+  useEffect(() => {
+    if (!mounted) return;
     loadTools(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [category]);
+  }, [category, search, mounted]);
+
+  if (!mounted) return null;
 
   const handleLoadMore = () => {
     if (page < totalPages) {
@@ -54,11 +61,9 @@ export default function ToolsClient({
     }
   };
 
-  // 🔹 3. Скидання фільтрів і пошуку
   const handleResetFilters = () => {
-    setCategory(null); // скидати категорію
-    setSearch(""); // скидати пошук
-    loadTools(true); // перезавантажити першу сторінку
+    setCategory(null);
+    setSearch("");
   };
 
   return (
@@ -71,7 +76,7 @@ export default function ToolsClient({
             catId === "All" ? null : catId
           )
         }
-        onReset={handleResetFilters} // передаємо функцію скидання
+        onReset={handleResetFilters}
       />
 
       {isLoading && <p>Завантаження...</p>}

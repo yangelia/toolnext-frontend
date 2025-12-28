@@ -33,7 +33,7 @@ export default function FilterBar({
           }
         >
           <option value="All">
-            Усі категорії
+            Всі категорії
           </option>
           {categories.map((cat) => (
             <option

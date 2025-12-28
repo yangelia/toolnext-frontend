@@ -1,3 +1,5 @@
+// components\ToolCard\ToolCard.tsx
+
 "use client";
 
 import Link from "next/link";
@@ -55,27 +57,19 @@ export default function ToolCard({
 }: ToolCardProps) {
   return (
     <li className={css.card}>
-      {/* <img
-        src={
-          tool.images[0] ??
-          "/images/default-avatar.jpg"
-        }
-        alt={tool.name}
-        className={css.image}
-        loading="lazy"
-      /> */}
-      <Image
-        src={
-          tool.images[0] ??
-          "/images/default-avatar.jpg"
-        }
-        alt={tool.name}
-        width={304}
-        height={374}
-        className={css.image}
-        priority={false}
-        placeholder="empty"
-      />
+      <div className={css.imageWrapper}>
+        <Image
+          src={
+            tool.images[0] ??
+            "/images/placeholder-image.png"
+          }
+          alt={tool.name}
+          className={css.image}
+          priority={false}
+          placeholder="empty"
+          fill
+        />
+      </div>
 
       <div className={css.content}>
         <div className={css.starRating}>
