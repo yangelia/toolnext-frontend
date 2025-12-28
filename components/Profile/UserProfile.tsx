@@ -1,6 +1,7 @@
+// components/Profile/UserProfile.tsx
 import Image from "next/image";
-import type { UserPublic, User } from "@/types/user";
 import css from "./UserProfile.module.css";
+import { UserPublic, User } from "@/types/user";
 
 interface UserProfileProps {
   user: UserPublic | User;
@@ -8,13 +9,9 @@ interface UserProfileProps {
 }
 
 export default function UserProfile({ user }: UserProfileProps) {
-  const displayName = user.username ?? user.name ?? "Користувач";
-
-  const avatarSrc =
-    (user.avatar && user.avatar.trim() ? user.avatar : null) ??
-    (user.avatarUrl && user.avatarUrl.trim() ? user.avatarUrl : null);
-
-  const avatarLetter = displayName.charAt(0).toUpperCase();
+  const username = user.username || "Користувач";
+  const avatarLetter = username.charAt(0).toUpperCase();
+  const avatarSrc = user.avatar && user.avatar.length > 0 ? user.avatar : null;
 
   return (
     <div className={css.userProfile}>
@@ -22,7 +19,7 @@ export default function UserProfile({ user }: UserProfileProps) {
         {avatarSrc ? (
           <Image
             src={avatarSrc}
-            alt={displayName}
+            alt={username}
             width={120}
             height={120}
             className={css.avatar}
@@ -33,7 +30,7 @@ export default function UserProfile({ user }: UserProfileProps) {
       </div>
 
       <div className={css.userInfo}>
-        <h1 className={css.username}>{displayName}</h1>
+        <h1 className={css.username}>{username}</h1>
       </div>
     </div>
   );
