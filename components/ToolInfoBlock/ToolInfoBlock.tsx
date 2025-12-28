@@ -29,13 +29,17 @@ export default function ToolInfoBlock({ tool }: ToolInfoBlockProps) {
     }
   };
 
-  const owner =
-    tool.owner && typeof tool.owner === "object" ? tool.owner : null;
+  // === OWNER NORMALIZATION ===
+  const owner = typeof tool.owner === "object" ? tool.owner : null;
 
-  const ownerName = tool.owner.username ?? tool.owner.name ?? "Користувач";
+  const ownerName = owner?.username || owner?.name || "Користувач";
 
   const ownerAvatar =
-    tool.owner.avatar ?? tool.owner.avatarUrl ?? "/images/default-avatar.jpg";
+    owner?.avatar && owner.avatar.trim() !== ""
+      ? owner.avatar
+      : owner?.avatarUrl && owner.avatarUrl.trim() !== ""
+      ? owner.avatarUrl
+      : null;
 
   return (
     <section className={css.toolInfo}>
@@ -44,13 +48,19 @@ export default function ToolInfoBlock({ tool }: ToolInfoBlockProps) {
       <p className={css.toolPrice}>{tool.pricePerDay} грн / день</p>
 
       <div className={css.toolOwner}>
-        <Image
-          src={ownerAvatar}
-          alt={ownerName}
-          width={80}
-          height={80}
-          className={css.ownerAvatar}
-        />
+        {ownerAvatar ? (
+          <Image
+            src={ownerAvatar}
+            alt={ownerName}
+            width={80}
+            height={80}
+            className={css.ownerAvatar}
+          />
+        ) : (
+          <div className={css.ownerAvatarFallback}>
+            {ownerName.charAt(0).toUpperCase()}
+          </div>
+        )}
 
         <div className={css.ownerInfo}>
           <p className={css.ownerName}>{ownerName}</p>

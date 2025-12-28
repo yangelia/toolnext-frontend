@@ -7,14 +7,18 @@ interface UserProfileProps {
   isOwner?: boolean;
 }
 
-export default function UserProfile({ user }: UserProfileProps) {
-  const username = user.username || "Користувач";
+export default function UserProfile({
+  user,
+  isOwner = false,
+}: UserProfileProps) {
+  // Защита: если username вдруг пустой/undefined — не падаем на charAt
+  const username = user?.username ?? "Користувач";
   const avatarLetter = username.charAt(0).toUpperCase();
 
   return (
     <div className={css.userProfile}>
       <div className={css.avatarWrapper}>
-        {user.avatar ? (
+        {user?.avatar ? (
           <Image
             src={user.avatar}
             alt={username}
