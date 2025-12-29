@@ -1,69 +1,123 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import Link from "next/link";
 import css from "./Header.module.css";
-import HeaderNav from "./HeaderNav";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
+import Modal from "@/components/Modal/Modal";
+import LogoutConfirm from "@/components/LogoutConfirm/LogoutConfirm";
+import { logout } from "@/lib/api/clientApi";
+import { useState } from "react";
 
 type User = {
   name: string;
   avatarUrl: string;
 };
 
-interface HeaderMenuProps {
+interface HeaderNavProps {
   isAuth: boolean;
   user?: User | null;
+  onClose: () => void;
 }
 
-export default function HeaderMenu({ isAuth, user }: HeaderMenuProps) {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+const HeaderNav = ({ isAuth, user, onClose }: HeaderNavProps) => {
+  const [isLogoutOpen, setIsLogoutOpen] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
+  const router = useRouter();
 
-  const iconId = isMenuOpen ? "icon-close" : "icon-menu";
-  const closeMenu = () => setIsMenuOpen(false);
+  const openLogoutModal = () => setIsLogoutOpen(true);
+  const closeLogoutModal = () => setIsLogoutOpen(false);
 
-  useEffect(() => {
-    const onKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") closeMenu();
-    };
+  const name = user?.name ?? "Користувач";
+  const avatarLetter = name.charAt(0).toUpperCase();
 
-    if (isMenuOpen) {
-      document.addEventListener("keydown", onKeyDown);
-      document.body.style.overflow = "hidden";
+  const confirmLogout = async () => {
+    setIsLoggingOut(true);
+    try {
+      await logout();
+    } finally {
+      setIsLoggingOut(false);
+      closeLogoutModal();
+      onClose();
+      router.refresh();
     }
-
-    return () => {
-      document.removeEventListener("keydown", onKeyDown);
-      document.body.style.overflow = "";
-    };
-  }, [isMenuOpen]);
+  };
 
   return (
     <>
-      <button
-        className={css.menuBtn}
-        type="button"
-        aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-        aria-expanded={isMenuOpen}
-        aria-controls="mobile-menu"
-        onClick={() => setIsMenuOpen((v) => !v)}
-      >
-        <svg className={css.menuIcon} width="24" height="24" aria-hidden="true">
-          <use href={`/icons/sprite.svg#${iconId}`} />
-        </svg>
-      </button>
+      <nav className={css.nav}>
+        <Link className={css.navLink} href="/" onClick={onClose}>
+          Головна
+        </Link>
+        <Link className={css.navLink} href="/tools" onClick={onClose}>
+          Інструменти
+        </Link>
 
-      {isMenuOpen && (
-        <div className={css.backdrop} onClick={closeMenu}>
-          <div
-            id="mobile-menu"
-            className={css.menuPanel}
-            role="dialog"
-            aria-modal="true"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <HeaderNav isAuth={isAuth} user={user} onClose={closeMenu} />
-          </div>
-        </div>
+        {!isAuth ? (
+          <>
+            <Link className={css.navLink} href="/auth/login" onClick={onClose}>
+              Увійти
+            </Link>
+
+            <Link
+              className={css.primaryBtn}
+              href="/auth/register"
+              onClick={onClose}
+            >
+              Зареєструватися
+            </Link>
+          </>
+        ) : (
+          <>
+            <Link className={css.navLink} href="/profile" onClick={onClose}>
+              Мій профіль
+            </Link>
+
+            <div className={css.userRow}>
+              <div className={css.userLeft}>
+                <div className={css.avatar}>
+                  {user?.avatarUrl ? (
+                    <Image
+                      src={user.avatarUrl}
+                      alt={name}
+                      width={32}
+                      height={32}
+                      className={css.avatar}
+                    />
+                  ) : (
+                    <div className={css.avatarPlaceholder}>{avatarLetter}</div>
+                  )}
+                </div>
+                <p className={css.userName}>{name}</p>
+              </div>
+
+              <span className={css.userDivider} />
+
+              <button
+                className={css.logoutBtn}
+                aria-label="Logout"
+                onClick={openLogoutModal}
+              >
+                <svg width="24" height="24" aria-hidden="true">
+                  <use href="/icons/sprite.svg#icon-logout" />
+                </svg>
+              </button>
+            </div>
+          </>
+        )}
+      </nav>
+
+      {isLogoutOpen && (
+        <Modal onClose={closeLogoutModal}>
+          <LogoutConfirm
+            onCancel={closeLogoutModal}
+            onConfirm={confirmLogout}
+            isLoading={isLoggingOut}
+          />
+        </Modal>
       )}
     </>
   );
-}
+};
+
+export default HeaderNav;

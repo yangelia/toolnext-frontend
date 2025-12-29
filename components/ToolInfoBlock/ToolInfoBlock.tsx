@@ -18,9 +18,6 @@ interface ToolInfoBlockProps {
 export default function ToolInfoBlock({ tool }: ToolInfoBlockProps) {
   const router = useRouter();
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
-  console.log("AUTH STATE:", {
-    isAuthenticated,
-  });
 
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
@@ -34,9 +31,7 @@ export default function ToolInfoBlock({ tool }: ToolInfoBlockProps) {
 
   // === OWNER NORMALIZATION ===
   const owner = typeof tool.owner === "object" ? tool.owner : null;
-
   const ownerName = owner?.username || owner?.name || "Користувач";
-
   const avatarLetter = ownerName.charAt(0).toUpperCase();
 
   const ownerAvatar =
@@ -47,61 +42,63 @@ export default function ToolInfoBlock({ tool }: ToolInfoBlockProps) {
       : null;
 
   return (
-    <section className={css.toolInfo}>
-      <h1 className={css.toolTitle}>{tool.name}</h1>
+    <section className={css.toolContainer}>
+      <div className={css.toolInfo}>
+        <h1 className={css.toolTitle}>{tool.name}</h1>
 
-      <p className={css.toolPrice}>{tool.pricePerDay} грн / день</p>
+        <p className={css.toolPrice}>{tool.pricePerDay} грн / день</p>
 
-      <div className={css.toolOwner}>
-        {ownerAvatar ? (
-          <Image
-            src={ownerAvatar}
-            alt={ownerName}
-            width={80}
-            height={80}
-            className={css.ownerAvatar}
-          />
-        ) : (
-          <div className={css.ownerAvatarFallback}>{avatarLetter}</div>
-        )}
+        <div className={css.toolOwner}>
+          {ownerAvatar ? (
+            <Image
+              src={ownerAvatar}
+              alt={ownerName}
+              width={80}
+              height={80}
+              className={css.ownerAvatar}
+            />
+          ) : (
+            <div className={css.ownerAvatarFallback}>{avatarLetter}</div>
+          )}
 
-        <div className={css.ownerInfo}>
-          <p className={css.ownerName}>{ownerName}</p>
+          <div className={css.ownerInfo}>
+            <p className={css.ownerName}>{ownerName}</p>
 
-          {owner?._id && (
-            <Link className={css.ownerLink} href={`/profile/${owner._id}`}>
-              Переглянути профіль
-            </Link>
+            {owner?._id && (
+              <Link className={css.ownerLink} href={`/profile/${owner._id}`}>
+                Переглянути профіль
+              </Link>
+            )}
+          </div>
+        </div>
+
+        <p className={css.toolDescr}>{tool.description}</p>
+
+        <div className={css.toolSpec}>
+          <ul>
+            {Object.entries(tool.specifications).map(([key, value]) => (
+              <li key={key}>
+                <strong className={css.toolSpecTitle}>{key}:</strong> {value}
+              </li>
+            ))}
+          </ul>
+
+          {tool.rentalTerms && (
+            <p>
+              <strong>Умови оренди:</strong> {tool.rentalTerms}
+            </p>
           )}
         </div>
+
+        <button className={css.toolBut} onClick={handleBookClick}>
+          Забронювати
+        </button>
+
+        <AuthRequiredModal
+          isOpen={isAuthModalOpen}
+          onClose={() => setIsAuthModalOpen(false)}
+        />
       </div>
-
-      <p className={css.toolDescr}>{tool.description}</p>
-
-      <div className={css.toolSpec}>
-        <ul>
-          {Object.entries(tool.specifications).map(([key, value]) => (
-            <li key={key}>
-              <strong className={css.toolSpecTitle}>{key}:</strong> {value}
-            </li>
-          ))}
-        </ul>
-
-        {tool.rentalTerms && (
-          <p>
-            <strong>Умови оренди:</strong> {tool.rentalTerms}
-          </p>
-        )}
-      </div>
-
-      <button className={css.toolBut} onClick={handleBookClick}>
-        Забронювати
-      </button>
-
-      <AuthRequiredModal
-        isOpen={isAuthModalOpen}
-        onClose={() => setIsAuthModalOpen(false)}
-      />
     </section>
   );
 }

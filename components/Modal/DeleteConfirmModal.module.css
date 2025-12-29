@@ -1,0 +1,91 @@
+/* components/Modal/DeleteConfirmModal.module.css */
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 32px;
+}
+
+.title {
+  font-family: "Inter", sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.3;
+  color: #000000;
+  margin: 0;
+  text-align: center;
+}
+
+.buttons {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+}
+
+.cancelButton,
+.deleteButton {
+  flex: 1;
+  height: 56px;
+  border-radius: 8px;
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 2px solid transparent;
+}
+
+.cancelButton {
+  background-color: transparent;
+  border-color: #d1d5db;
+  color: #000000;
+}
+
+.cancelButton:hover:not(:disabled) {
+  background-color: #f3f4f6;
+  border-color: #9ca3af;
+}
+
+.cancelButton:active:not(:disabled) {
+  background-color: #e5e7eb;
+}
+
+.deleteButton {
+  background-color: #dc2626;
+  border-color: #dc2626;
+  color: #ffffff;
+}
+
+.deleteButton:hover:not(:disabled) {
+  background-color: #b91c1c;
+  border-color: #b91c1c;
+}
+
+.deleteButton:active:not(:disabled) {
+  background-color: #991b1b;
+}
+
+.cancelButton:disabled,
+.deleteButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 640px) {
+  .title {
+    font-size: 20px;
+  }
+
+  .buttons {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .cancelButton,
+  .deleteButton {
+    height: 48px;
+    font-size: 14px;
+  }
+}

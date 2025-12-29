@@ -28,9 +28,7 @@ const HeaderDesktopNav = ({ isAuth, user }: HeaderDesktopProps) => {
   const closeLogoutModal = () => setIsLogoutOpen(false);
 
   const name = user?.name ?? "Користувач";
-  const avatarUrl = user?.avatarUrl?.trim()
-    ? user.avatarUrl
-    : "/images/default-avatar.jpg";
+  const avatarLetter = name.charAt(0).toUpperCase();
 
   const confirmLogout = async () => {
     setIsLoggingOut(true);
@@ -73,9 +71,17 @@ const HeaderDesktopNav = ({ isAuth, user }: HeaderDesktopProps) => {
             </Link>
 
             <div className={css.userDesktop}>
-              <div className={css.avatarDesktop}>
-                <Image src={avatarUrl} alt={name} width={32} height={32} />
-              </div>
+              {user?.avatarUrl ? (
+                <Image
+                  src={user.avatarUrl}
+                  alt={name}
+                  width={32}
+                  height={32}
+                  className={css.avatar}
+                />
+              ) : (
+                <div className={css.avatarPlaceholder}>{avatarLetter}</div>
+              )}
 
               <span className={css.userNameDesktop}>{name}</span>
 

@@ -175,24 +175,6 @@
   gap: 8px;
 }
 
-/* .avatar {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  overflow: hidden;
-  background: #ddd;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.avatarPlaceholder {
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: #bbb;
-} */
-
 .avatar {
   width: 32px;
   height: 32px;
@@ -204,6 +186,20 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.avatarPlaceholder {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #8808cc 0%, #6600aa 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 700;
+  color: #ffffff;
+  user-select: none;
 }
 
 .userName {
@@ -224,6 +220,10 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  border-radius: 6px;
+  border: 1px solid transparent;
+  transition: background-color 150ms ease, border-color 150ms ease,
+    color 150ms ease;
 }
 
 @media (min-width: 768px) {
@@ -379,16 +379,16 @@
   .registerBtn:focus-visible,
   .publishBtnDesktop:hover,
   .publishBtnDesktop:focus-visible {
-    background-color: #e7cdf4;
-    border-color: #000;
+    background-color: transparent;
+    background-color: transparent;
     color: #000;
   }
 
   .registerBtn:active,
   .publishBtnDesktop:active {
-    background-color: #8808cc;
+    background-color: #e7cdf4;
     border-color: #8808cc;
-    color: #fff;
+    color: #000;
   }
 
   .registerBtn:focus,
@@ -440,4 +440,19 @@
     background: #000;
     flex-shrink: 0;
   }
+}
+
+.logoutBtn:hover,
+.logoutBtnDesktop:hover,
+.logoutBtn:focus-visible,
+.logoutBtnDesktop:focus-visible {
+  background-color: #f3e6f9;
+  border: 1px solid #000;
+}
+
+.logoutBtnDesktop:active,
+.logoutBtn:active {
+  background-color: transparent;
+  border: 1px solid transparent;
+  fill: #8808cc;
 }
