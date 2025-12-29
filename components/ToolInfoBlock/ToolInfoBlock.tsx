@@ -18,6 +18,9 @@ interface ToolInfoBlockProps {
 export default function ToolInfoBlock({ tool }: ToolInfoBlockProps) {
   const router = useRouter();
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  console.log("AUTH STATE:", {
+    isAuthenticated,
+  });
 
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
@@ -33,6 +36,8 @@ export default function ToolInfoBlock({ tool }: ToolInfoBlockProps) {
   const owner = typeof tool.owner === "object" ? tool.owner : null;
 
   const ownerName = owner?.username || owner?.name || "Користувач";
+
+  const avatarLetter = ownerName.charAt(0).toUpperCase();
 
   const ownerAvatar =
     owner?.avatar && owner.avatar.trim() !== ""
@@ -57,16 +62,16 @@ export default function ToolInfoBlock({ tool }: ToolInfoBlockProps) {
             className={css.ownerAvatar}
           />
         ) : (
-          <div className={css.ownerAvatarFallback}>
-            {ownerName.charAt(0).toUpperCase()}
-          </div>
+          <div className={css.ownerAvatarFallback}>{avatarLetter}</div>
         )}
 
         <div className={css.ownerInfo}>
           <p className={css.ownerName}>{ownerName}</p>
 
           {owner?._id && (
-            <Link href={`/profile/${owner._id}`}>Переглянути профіль</Link>
+            <Link className={css.ownerLink} href={`/profile/${owner._id}`}>
+              Переглянути профіль
+            </Link>
           )}
         </div>
       </div>

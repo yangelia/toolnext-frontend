@@ -1,17 +1,17 @@
 "use client";
 
-import React, { useEffect, useState, useRef } from 'react';
-import axios from 'axios';
-import Swiper from 'swiper';
-import { Navigation, Pagination } from 'swiper/modules';
+import React, { useEffect, useState, useRef } from "react";
+import axios from "axios";
+import Swiper from "swiper";
+import { Navigation, Pagination } from "swiper/modules";
 
-import FeedbackCard from './FeedbackCard';
+import FeedbackCard from "./FeedbackCard";
 
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
-import styles from './FeedbackSection.module.css';
+import styles from "./FeedbackSection.module.css";
 
 interface Feedback {
   _id: string;
@@ -25,8 +25,9 @@ const FeedbackSection: React.FC = () => {
   const swiperContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    axios.get('http://localhost:3000/feedbacks')
-      .then(res => {
+    axios
+      .get("http://localhost:3000/feedbacks")
+      .then((res) => {
         const data = Array.isArray(res.data) ? res.data : res.data.feedbacks;
         if (Array.isArray(data)) {
           setFeedbacks(data);
@@ -34,7 +35,7 @@ const FeedbackSection: React.FC = () => {
           console.error("Отримані дані не є масивом:", res.data);
         }
       })
-      .catch(err => console.error("Помилка запиту:", err));
+      .catch((err) => console.error("Помилка запиту:", err));
   }, []);
 
   useEffect(() => {
@@ -56,7 +57,7 @@ const FeedbackSection: React.FC = () => {
         breakpoints: {
           768: { slidesPerView: 2, spaceBetween: 24 },
           1024: { slidesPerView: 3, spaceBetween: 24 },
-        }
+        },
       });
       return () => swiper.destroy();
     }
@@ -66,21 +67,41 @@ const FeedbackSection: React.FC = () => {
     <section className={styles.container}>
       <div className={styles.sectionFeedback}>
         <h2 className={styles.feedbackName}>Останні відгуки</h2>
-        
-        <div className={`swiper ${styles.feedbackSwiper}`} ref={swiperContainerRef}>
+
+        <div
+          className={`swiper ${styles.feedbackSwiper}`}
+          ref={swiperContainerRef}
+        >
           <div className="swiper-wrapper">
-            {Array.isArray(feedbacks) && feedbacks.map((item) => (
-              <div className="swiper-slide" key={item._id}>
-                <FeedbackCard name={item.name} description={item.description} rate={item.rate}/>
-              </div>
-            ))}
+            {Array.isArray(feedbacks) &&
+              feedbacks.map((item) => (
+                <div className="swiper-slide" key={item._id}>
+                  <FeedbackCard
+                    name={item.name}
+                    description={item.description}
+                    rate={item.rate}
+                  />
+                </div>
+              ))}
           </div>
-          
+
           <div className={styles.feedbackControls}>
-            <div className={`swiper-pagination ${styles.feedbackPagination}`}></div>
+            <div
+              className={`swiper-pagination ${styles.feedbackPagination}`}
+            ></div>
             <div className={styles.feedbackNavButtons}>
-              <button className={`${styles.navBtn} ${styles.prevBtn}`} aria-label="Previous">←</button>
-              <button className={`${styles.navBtn} ${styles.nextBtn}`} aria-label="Next">→</button>
+              <button
+                className={`${styles.navBtn} ${styles.prevBtn}`}
+                aria-label="Previous"
+              >
+                ←
+              </button>
+              <button
+                className={`${styles.navBtn} ${styles.nextBtn}`}
+                aria-label="Next"
+              >
+                →
+              </button>
             </div>
           </div>
         </div>

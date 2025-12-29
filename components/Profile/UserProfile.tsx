@@ -1,15 +1,47 @@
+// components/Profile/UserProfile.tsx
+
 import Image from "next/image";
-import css from "./UserProfile.module.css";
 import { UserPublic, User } from "@/types/user";
+import css from "./UserProfile.module.css";
 
 interface UserProfileProps {
   user: UserPublic | User;
+  isOwner?: boolean;
 }
 
-export default function UserProfile({ user }: UserProfileProps) {
-  const username = user.username || "Користувач";
+// Helper type для підтримки обох версій API
+type UserWithAllFields = {
+  _id: string;
+  email: string;
+  createdAt: string;
+  name?: string;
+  avatarUrl?: string;
+  username?: string;
+  avatar?: string;
+};
+
+export default function UserProfile({
+  user,
+  isOwner = false,
+}: UserProfileProps) {
+  const userWithAllFields = user as UserWithAllFields;
+
+  // ✅ Підтримка обох варіантів полів
+  const username =
+    userWithAllFields.username ||
+    userWithAllFields.name ||
+    userWithAllFields.email ||
+    "Користувач";
+
   const avatarLetter = username.charAt(0).toUpperCase();
-  const avatar = user.avatar || null;
+
+  // ✅ Підтримка обох варіантів аватара
+  const avatar =
+    userWithAllFields.avatar && userWithAllFields.avatar.trim() !== ""
+      ? userWithAllFields.avatar
+      : userWithAllFields.avatarUrl && userWithAllFields.avatarUrl.trim() !== ""
+      ? userWithAllFields.avatarUrl
+      : null;
 
   return (
     <div className={css.userProfile}>

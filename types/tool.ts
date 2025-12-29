@@ -79,5 +79,5 @@ export type ToolDraft = {
   rentalTerms: string;
   description: string;
   specifications: SpecPair[];
-  image?: File | null;
+  image: File | string | null;
 };

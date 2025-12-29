@@ -1,3 +1,4 @@
+// app/(public)/profile/page.tsx
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import UserProfile from "@/components/Profile/UserProfile";
@@ -26,6 +27,7 @@ async function getCurrentUserData(): Promise<User | null> {
 }
 export default async function ProfilePage() {
   const user = await getCurrentUserData();
+  console.log("PROFILE USER OBJECT (PAGE):", user);
   if (!user) {
     redirect("/auth/login");
   }
