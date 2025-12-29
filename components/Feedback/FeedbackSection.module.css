@@ -113,7 +113,20 @@
 }
 
 .navBtn:hover {
-  background-color: #d1d1d1;
+  background-color: #e7cdf4;
+}
+
+.navBtn:active {
+  background-color: #8808cc;
+  border-color: #8808cc;
+  color: #ffffff;
+}
+
+.navBtn:disabled {
+  color: #b3b3b3;
+  border-color: #b3b3b3;
+  background-color: transparent;
+  cursor: not-allowed;
 }
 
 .prevBtn {
