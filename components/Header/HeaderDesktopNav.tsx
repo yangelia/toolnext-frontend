@@ -28,7 +28,6 @@ const HeaderDesktopNav = ({ isAuth, user }: HeaderDesktopProps) => {
   const closeLogoutModal = () => setIsLogoutOpen(false);
 
   const name = user?.name ?? "Користувач";
-  console.log(user);
   const avatarLetter = name.charAt(0).toUpperCase();
 
   const confirmLogout = async () => {

@@ -7,7 +7,6 @@ import { getServerCurrentUser } from "@/lib/api/serverApi";
 
 export default async function Header() {
   const user = await getServerCurrentUser();
-  console.log("Header user:", user);
   const isAuth = Boolean(user);
 
   return (
