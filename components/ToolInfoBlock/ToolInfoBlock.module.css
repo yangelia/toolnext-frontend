@@ -150,3 +150,20 @@
     height: 40px;
   }
 }
+
+.ownerAvatarFallback {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #e7cdf4;
+  color: #000;
+
+  font-size: 32px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
