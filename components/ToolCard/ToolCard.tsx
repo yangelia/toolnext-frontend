@@ -41,7 +41,6 @@ const renderStars = (rating: number) => {
         height="24"
         aria-hidden="true"
       >
-        {/* ВИПРАВЛЕНО: Додано зворотні лапки */}
         <use href={`/icons/sprite.svg#${iconId}`} />
       </svg>
     );
@@ -73,7 +72,6 @@ export default function ToolCard({ tool, isOwner = false }: ToolCardProps) {
           {isOwner ? (
             <div className={css.controls}>
               <Link
-                // ВИПРАВЛЕНО: Додано зворотні лапки
                 href={`/tools/${tool._id}/edit`}
                 className={css.editButton}
               >
@@ -96,7 +94,6 @@ export default function ToolCard({ tool, isOwner = false }: ToolCardProps) {
             </div>
           ) : (
             <Link
-              // ВИПРАВЛЕНО: Додано зворотні лапки
               href={`/tools/${tool._id}`}
               className={css.link}
             >

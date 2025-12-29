@@ -14,22 +14,34 @@ const PLACEHOLDER = "/images/placeholder-image.png";
 const MAX_IMAGE_SIZE = 1 * 1024 * 1024; // 1MB
 const ALLOWED_TYPES = ["image/jpeg", "image/png"];
 
+function fileToDataUrl(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(String(reader.result));
+    reader.onerror = () => reject(new Error("Не вдалося прочитати файл"));
+    reader.readAsDataURL(file);
+  });
+}
+
 export default function ImageTool({ initialImageUrl }: Props) {
   const { values, setFieldValue } = useFormikContext<ToolDraft>();
   const [error, setError] = useState("");
   const inputId = useId();
 
   const previewUrl = useMemo(() => {
-    if (values.image) return URL.createObjectURL(values.image);
+    const img = values.image;
+
+    if (img instanceof File) return URL.createObjectURL(img); // на всяк випадок
+    if (typeof img === "string" && img.length > 0) return img; // ✅ dataURL з draft
     return initialImageUrl || PLACEHOLDER;
   }, [values.image, initialImageUrl]);
 
   useEffect(() => {
-    if (!values.image) return;
+    if (!(values.image instanceof File)) return;
     return () => URL.revokeObjectURL(previewUrl);
   }, [values.image, previewUrl]);
 
-  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     setError("");
 
@@ -47,8 +59,14 @@ export default function ImageTool({ initialImageUrl }: Props) {
       return;
     }
 
-    setFieldValue("image", file);
-    e.target.value = ""; // щоб можна було вибрати той самий файл повторно
+    try {
+      const dataUrl = await fileToDataUrl(file);
+      setFieldValue("image", dataUrl);
+    } catch {
+      setError("Не вдалося завантажити фото. Спробуйте інше.");
+    } finally {
+      e.target.value = "";
+    }
   };
 
   const handleClear = () => {

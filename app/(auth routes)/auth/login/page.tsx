@@ -50,6 +50,15 @@ export default function LoginPage() {
     <section className={styles.container}>
       <div className={styles.page}>
         <div className={styles.formSection}>
+          <Link href="/" className={styles.logo} aria-label="ToolNext home">
+            <Image
+              src="/images/Tool-Next.svg"
+              alt="ToolNext"
+              width={92}
+              height={20}
+              priority
+            />
+          </Link>
           <div>
             <h1 className={styles.title}>Вхід</h1>
           </div>
@@ -69,9 +78,9 @@ export default function LoginPage() {
                     name="email"
                     placeholder="Ваша пошта"
                     className={`${styles.input}
-                        ${
-                          errors.email && touched.email ? styles.inputError : ""
-                        }`}
+                       ${
+                         errors.email && touched.email ? styles.inputError : ""
+                       }`}
                   />
                   <ErrorMessage
                     name="email"
@@ -87,11 +96,11 @@ export default function LoginPage() {
                     name="password"
                     placeholder="Ваш пароль"
                     className={`${styles.input}
-                        ${
-                          errors.password && touched.password
-                            ? styles.inputError
-                            : ""
-                        }`}
+                       ${
+                         errors.password && touched.password
+                           ? styles.inputError
+                           : ""
+                       }`}
                   />
                   <ErrorMessage
                     name="password"
@@ -117,6 +126,7 @@ export default function LoginPage() {
             <span>Не маєте аккаунту?</span>
             <Link href="/auth/register">Реєстрація</Link>
           </div>
+          <p className={styles.copy}>© {new Date().getFullYear()} ToolNext</p>
         </div>
 
         <div className={styles.imageSection} aria-hidden={true}>
