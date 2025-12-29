@@ -19,13 +19,13 @@ export const getServerCurrentUser = cache(async () => {
       headers: { Cookie: cookieStore.toString() },
     });
 
-    const u = res.data?.data?.user; // очікую щось типу: { _id, username, avatar, email, ... }
+    const u = res.data?.data?.user;
 
     if (!u) return null;
 
     return {
-      name: u.username ?? u.name ?? "Користувач",
-      avatarUrl: u.avatar ?? u.avatarUrl ?? "",
+      name: u.name ?? "Користувач",
+      avatarUrl: u.avatarUrl ?? "",
     };
   } catch {
     return null;
