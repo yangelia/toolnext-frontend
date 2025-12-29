@@ -52,14 +52,19 @@ const renderStars = (rating: number) => {
 export default function ToolCard({ tool, isOwner = false }: ToolCardProps) {
   return (
     <li className={css.card}>
-      <Image
-        src={tool.images[0] ?? "/images/default-avatar.jpg"}
-        alt={tool.name}
-        width={304}
-        height={374}
-        className={css.image}
-        placeholder="empty"
-      />
+      <div className={css.imageWrapper}>
+        <Image
+          src={
+            tool.images[0] ??
+            "/images/placeholder-image.png"
+          }
+          alt={tool.name}
+          className={css.image}
+          priority={false}
+          placeholder="empty"
+          fill
+        />
+      </div>
 
       <div className={css.content}>
         <div className={css.starRating}>{renderStars(tool.rating)}</div>
