@@ -9,10 +9,15 @@ function mergeInitialWithDraft(
   initial: ToolDraft,
   draft: Partial<ToolDraft>
 ): ToolDraft {
+  const safeDraftImage =
+    typeof draft.image === "string" || draft.image === null
+      ? draft.image
+      : undefined;
+
   return {
     ...initial,
     ...draft,
-    image: initial.image ?? null,
+    image: safeDraftImage ?? initial.image ?? null,
     specifications: draft.specifications ?? initial.specifications,
   };
 }
@@ -57,9 +62,14 @@ const ToolDraftSync = ({ toolId, initialValues }: Props) => {
     if (!appliedRef.current) return;
 
     const t = setTimeout(() => {
-      const { image, ...draftSafe } = values;
-      void image;
-      patchDraft(draftSafe);
+      const { image, ...rest } = values;
+      const safeImage =
+        typeof image === "string" || image === null ? image : undefined;
+
+      patchDraft({
+        ...rest,
+        ...(safeImage !== undefined ? { image: safeImage } : {}),
+      });
     }, 300);
 
     return () => clearTimeout(t);
