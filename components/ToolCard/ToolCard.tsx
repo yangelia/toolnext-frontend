@@ -6,11 +6,14 @@ import type { ReactElement } from "react";
 import type { ToolBasic } from "@/types/tool";
 import css from "./ToolCard.module.css";
 
+// Інтерфейс пропсів компонента ToolCard
 interface ToolCardProps {
   tool: ToolBasic;
   isOwner?: boolean;
+  onDelete?: () => void; // ⚠️ ВАЖЛИВО: функція для видалення інструменту
 }
 
+// Функція для округлення рейтингу до найближчого валідного значення
 const roundRating = (rating: number) => {
   if (rating >= 0 && rating <= 1.2) return 1;
   if (rating >= 1.3 && rating <= 1.7) return 1.5;
@@ -20,6 +23,7 @@ const roundRating = (rating: number) => {
   return Math.round(rating);
 };
 
+// Функція для рендерингу зірок рейтингу
 const renderStars = (rating: number) => {
   const roundedRating = roundRating(rating);
   const stars: ReactElement[] = [];
@@ -41,6 +45,7 @@ const renderStars = (rating: number) => {
         height="24"
         aria-hidden="true"
       >
+        {/* ⚠️ ВАЖЛИВО: Template literal з backticks ` */}
         <use href={`/icons/sprite.svg#${iconId}`} />
       </svg>
     );
@@ -49,19 +54,31 @@ const renderStars = (rating: number) => {
   return stars;
 };
 
-export default function ToolCard({ tool, isOwner = false }: ToolCardProps) {
+// Основний компонент картки інструменту
+export default function ToolCard({
+  tool,
+  isOwner = false,
+  onDelete,
+}: ToolCardProps) {
+  // Обробник кліку по кнопці видалення
+  const handleDeleteClick = (e: React.MouseEvent) => {
+    e.preventDefault(); // Запобігаємо дефолтній поведінці
+    e.stopPropagation(); // Зупиняємо спливання події (щоб не спрацював handleCardClick)
+    if (onDelete) {
+      onDelete(); // Викликаємо callback функцію видалення
+    }
+  };
+
   return (
     <li className={css.card}>
-      <div className={css.imageWrapper}>
-        <Image
-          src={tool.images[0] ?? "/images/placeholder-image.png"}
-          alt={tool.name}
-          className={css.image}
-          priority={false}
-          placeholder="empty"
-          fill
-        />
-      </div>
+      <Image
+        src={tool.images[0] ?? "/images/default-avatar.jpg"}
+        alt={tool.name}
+        width={304}
+        height={374}
+        className={css.image}
+        placeholder="empty"
+      />
 
       <div className={css.content}>
         <div className={css.starRating}>{renderStars(tool.rating)}</div>
@@ -72,15 +89,19 @@ export default function ToolCard({ tool, isOwner = false }: ToolCardProps) {
           <span className={css.price}>{tool.pricePerDay} грн/день</span>
 
           {isOwner ? (
+            // Кнопки для власника інструменту
             <div className={css.controls}>
+              {/* ⚠️ ВАЖЛИВО: Template literal з backticks ` */}
               <Link href={`/tools/${tool._id}/edit`} className={css.editButton}>
                 Редагувати
               </Link>
 
+              {/* Кнопка видалення з іконкою корзини */}
               <button
                 type="button"
                 className={css.deleteButton}
                 aria-label="Видалити"
+                onClick={handleDeleteClick}
               >
                 <svg width="24" height="24" className={css.trashIcon}>
                   <use href="/icons/sprite.svg#icon-delete" />
@@ -88,6 +109,8 @@ export default function ToolCard({ tool, isOwner = false }: ToolCardProps) {
               </button>
             </div>
           ) : (
+            // Кнопка "Детальніше" для гостей
+            /* ⚠️ ВАЖЛИВО: Template literal з backticks ` */
             <Link href={`/tools/${tool._id}`} className={css.link}>
               Детальніше
             </Link>
