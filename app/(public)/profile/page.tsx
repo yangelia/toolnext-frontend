@@ -1,3 +1,4 @@
+// app/(public)/profile/page.tsx
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import UserProfile from "@/components/Profile/UserProfile";

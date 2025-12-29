@@ -89,3 +89,48 @@
 .star {
   fill: currentColor;
 }
+
+.controls {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+}
+
+.editButton {
+  flex-grow: 1;
+  height: 48px;
+  border: 2px solid #000;
+  border-radius: 6px;
+  background-color: transparent;
+  font-weight: 500;
+  font-size: 16px;
+  cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.editButton:hover {
+  background-color: #e7cdf4;
+}
+
+.deleteButton {
+  width: 48px;
+  height: 48px;
+  border: 2px solid #000;
+  border-radius: 6px;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.deleteButton:hover {
+  background-color: #e7cdf4;
+  border-color: #8808cc;
+}
+
+.trashIcon {
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.5px;
+}
