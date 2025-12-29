@@ -1,3 +1,11 @@
+/* === NEW: page container === */
+.toolContainer {
+  max-width: 375px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 20px;
+}
+
 .toolTitle {
   font-weight: 700;
   font-size: 32px;
@@ -28,7 +36,21 @@
 }
 
 .ownerAvatarFallback {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
   margin-right: 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background-color: #e7cdf4;
+  color: #000;
+
+  font-size: 32px;
+  font-weight: 600;
+  text-transform: uppercase;
 }
 
 .ownerInfo {
@@ -48,21 +70,22 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-direction: row;
   gap: 8px;
+
   border: 2px solid #000;
   border-radius: 6px;
   background-color: transparent;
+
   padding: 8px 20px;
+  width: 192px;
+  height: 37px;
+
   font-weight: 500;
   font-size: 14px;
   line-height: 1.5;
-  width: 192px;
-  height: 37px;
-  cursor: pointer;
-  outline: none;
-  text-decoration: none;
   color: #000;
+  text-decoration: none;
+
   transition: color 250ms ease-in-out, background-color 250ms ease-in-out,
     border-color 250ms ease-in-out;
 }
@@ -99,11 +122,11 @@
   border: 1px solid #8808cc;
   color: #ffffff;
   border-radius: 6px;
+
   padding: 10px;
   font-size: 14px;
   font-weight: 500;
   line-height: 150%;
-  text-decoration: none;
 }
 
 .toolBut:hover {
@@ -117,26 +140,37 @@
   cursor: not-allowed;
 }
 
+/* === tablet === */
 @media (min-width: 768px) {
+  .toolContainer {
+    max-width: 768px;
+    padding: 0 32px;
+  }
+
   .toolBut {
     max-width: 704px;
   }
 }
 
+/* === desktop === */
 @media (min-width: 1440px) {
-  .toolInfo {
-    padding-left: 0;
-    margin-left: 0;
+  .toolContainer {
+    max-width: 1440px;
+    padding: 0 64px;
   }
+
   .toolTitle {
     font-size: 40px;
   }
+
   .toolPrice {
     font-size: 24px;
   }
+
   .toolDescr {
     font-size: 16px;
   }
+
   .toolBut,
   .toolPrice,
   .toolSpec,
@@ -144,26 +178,10 @@
   .toolTitle {
     max-width: 640px;
   }
+
   .ownerLink {
     width: 214px;
     font-size: 16px;
     height: 40px;
   }
-}
-
-.ownerAvatarFallback {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  background-color: #e7cdf4;
-  color: #000;
-
-  font-size: 32px;
-  font-weight: 600;
-  text-transform: uppercase;
 }
