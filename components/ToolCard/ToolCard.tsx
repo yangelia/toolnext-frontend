@@ -2,9 +2,16 @@
 
 import Link from "next/link";
 import Image from "next/image";
-import type { ReactElement } from "react";
+import { useState, type ReactElement } from "react";
 import type { ToolBasic } from "@/types/tool";
 import css from "./ToolCard.module.css";
+import { deleteTool } from "@/lib/api/clientApi";
+
+import Modal from "../Modal/Modal";
+import DeleteConfirm from "../DeleteConfirm/DeleteConfirm";
+import { useRouter } from "next/navigation";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 interface ToolCardProps {
   tool: ToolBasic;
@@ -50,6 +57,35 @@ const renderStars = (rating: number) => {
 };
 
 export default function ToolCard({ tool, isOwner = false }: ToolCardProps) {
+  const router = useRouter();
+
+  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  const openDeleteModal = () => setIsDeleteOpen(true);
+  const closeDeleteModal = () => {
+    if (isDeleting) return;
+    setIsDeleteOpen(false);
+  };
+
+  const confirmDelete = async () => {
+    try {
+      setIsDeleting(true);
+      await deleteTool(tool._id);
+
+      setIsDeleteOpen(false);
+      toast.success("Оголошення видалено");
+      router.push("/profile");
+    } catch (e) {
+      const msg = axios.isAxiosError(e)
+        ? e.response?.data?.message || "Не вдалося видалити оголошення."
+        : "Не вдалося видалити оголошення.";
+
+      toast.error(msg);
+    } finally {
+      setIsDeleting(false);
+    }
+  };
   return (
     <li className={css.card}>
       <Image
@@ -79,8 +115,15 @@ export default function ToolCard({ tool, isOwner = false }: ToolCardProps) {
                 type="button"
                 className={css.deleteButton}
                 aria-label="Видалити"
+                onClick={openDeleteModal}
+                disabled={isDeleting}
               >
-                <svg width="24" height="24" className={css.trashIcon}>
+                <svg
+                  width="24"
+                  height="24"
+                  className={css.trashIcon}
+                  aria-hidden="true"
+                >
                   <use href="/icons/sprite.svg#icon-delete" />
                 </svg>
               </button>
@@ -92,6 +135,16 @@ export default function ToolCard({ tool, isOwner = false }: ToolCardProps) {
           )}
         </div>
       </div>
+
+      {isDeleteOpen && (
+        <Modal onClose={closeDeleteModal}>
+          <DeleteConfirm
+            onCancel={closeDeleteModal}
+            onConfirm={confirmDelete}
+            isLoading={isDeleting}
+          />
+        </Modal>
+      )}
     </li>
   );
 }

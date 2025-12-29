@@ -42,3 +42,7 @@ export async function updateTool(id: string, formData: FormData) {
   const res = await api.patch(`/tools/${id}`, formData);
   return res.data;
 }
+
+export const deleteTool = async (id: string) => {
+  await axios.delete(`/api/tools/${id}`);
+};

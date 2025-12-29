@@ -1,0 +1,42 @@
+.wrap {
+  padding: 24px 28px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+  margin: 0 0 20px;
+}
+
+.actions {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+}
+
+.cancelBtn,
+.deleteBtn {
+  min-width: 140px;
+  height: 40px;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.cancelBtn {
+  background: #fff;
+  border: 1px solid #bdbdbd;
+}
+
+.deleteBtn {
+  background: #e53935;
+  border: 1px solid #e53935;
+  color: #fff;
+}
+
+.cancelBtn:disabled,
+.deleteBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
