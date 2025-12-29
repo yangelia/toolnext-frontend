@@ -1,4 +1,5 @@
 // app/(public)/profile/page.tsx
+
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 import UserProfile from "@/components/Profile/UserProfile";
@@ -9,6 +10,8 @@ import { User } from "@/types/user";
 import { ToolBasic } from "@/types/tool";
 import { api } from "@/lib/api/api";
 import css from "./page.module.css";
+
+export const dynamic = "force-dynamic";
 
 async function getCurrentUserData(): Promise<User | null> {
   try {
