@@ -29,7 +29,7 @@ export default async function Header() {
             </Link>
           )}
 
-          <HeaderMenu isAuth={isAuth} user={user} />
+          <HeaderMenu isAuth={false} user={null} />
         </div>
 
         <HeaderDesktopNav isAuth={isAuth} user={user} />

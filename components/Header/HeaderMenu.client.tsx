@@ -17,13 +17,16 @@ type User = {
 interface HeaderNavProps {
   isAuth: boolean;
   user?: User | null;
-  onClose: () => void;
+  onClose?: () => void; // ✅ СДЕЛАЛИ ОПЦИОНАЛЬНЫМ
 }
 
-const HeaderNav = ({ isAuth, user, onClose }: HeaderNavProps) => {
+export default function HeaderNav({ isAuth, user, onClose }: HeaderNavProps) {
   const [isLogoutOpen, setIsLogoutOpen] = useState(false);
   const [isLoggingOut, setIsLoggingOut] = useState(false);
   const router = useRouter();
+
+  // ✅ безопасный обработчик
+  const safeOnClose = onClose ?? (() => {});
 
   const openLogoutModal = () => setIsLogoutOpen(true);
   const closeLogoutModal = () => setIsLogoutOpen(false);
@@ -38,7 +41,7 @@ const HeaderNav = ({ isAuth, user, onClose }: HeaderNavProps) => {
     } finally {
       setIsLoggingOut(false);
       closeLogoutModal();
-      onClose();
+      safeOnClose();
       router.refresh();
     }
   };
@@ -46,30 +49,35 @@ const HeaderNav = ({ isAuth, user, onClose }: HeaderNavProps) => {
   return (
     <>
       <nav className={css.nav}>
-        <Link className={css.navLink} href="/" onClick={onClose}>
+        <Link className={css.navLink} href="/" onClick={safeOnClose}>
           Головна
         </Link>
-        <Link className={css.navLink} href="/tools" onClick={onClose}>
+
+        <Link className={css.navLink} href="/tools" onClick={safeOnClose}>
           Інструменти
         </Link>
 
         {!isAuth ? (
           <>
-            <Link className={css.navLink} href="/auth/login" onClick={onClose}>
+            <Link
+              className={css.navLink}
+              href="/auth/login"
+              onClick={safeOnClose}
+            >
               Увійти
             </Link>
 
             <Link
               className={css.primaryBtn}
               href="/auth/register"
-              onClick={onClose}
+              onClick={safeOnClose}
             >
               Зареєструватися
             </Link>
           </>
         ) : (
           <>
-            <Link className={css.navLink} href="/profile" onClick={onClose}>
+            <Link className={css.navLink} href="/profile" onClick={safeOnClose}>
               Мій профіль
             </Link>
 
@@ -88,6 +96,7 @@ const HeaderNav = ({ isAuth, user, onClose }: HeaderNavProps) => {
                     <div className={css.avatarPlaceholder}>{avatarLetter}</div>
                   )}
                 </div>
+
                 <p className={css.userName}>{name}</p>
               </div>
 
@@ -118,6 +127,4 @@ const HeaderNav = ({ isAuth, user, onClose }: HeaderNavProps) => {
       )}
     </>
   );
-};
-
-export default HeaderNav;
+}
