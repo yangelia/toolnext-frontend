@@ -29,9 +29,7 @@ const HeaderNav = ({ isAuth, user, onClose }: HeaderNavProps) => {
   const closeLogoutModal = () => setIsLogoutOpen(false);
 
   const name = user?.name ?? "Користувач";
-  const avatarUrl = user?.avatarUrl?.trim()
-    ? user.avatarUrl
-    : "/images/default-avatar.jpg";
+  const avatarLetter = name.charAt(0).toUpperCase();
 
   const confirmLogout = async () => {
     setIsLoggingOut(true);
@@ -78,7 +76,17 @@ const HeaderNav = ({ isAuth, user, onClose }: HeaderNavProps) => {
             <div className={css.userRow}>
               <div className={css.userLeft}>
                 <div className={css.avatar}>
-                  <Image src={avatarUrl} alt={name} width={32} height={32} />
+                  {user?.avatarUrl ? (
+                    <Image
+                      src={user.avatarUrl}
+                      alt={name}
+                      width={32}
+                      height={32}
+                      className={css.avatar}
+                    />
+                  ) : (
+                    <div className={css.avatarPlaceholder}>{avatarLetter}</div>
+                  )}
                 </div>
                 <p className={css.userName}>{name}</p>
               </div>
