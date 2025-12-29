@@ -19,10 +19,7 @@ export default function UserToolsGrid({ tools, isOwner }: UserToolsGridProps) {
 
       <ul className={css.grid}>
         {tools.map((tool) => (
-          <li key={tool._id} className={css.item}>
-            {/* Передаємо isOwner, щоб ToolCard знав, який набір кнопок показати */}
-            <ToolCard tool={tool} isOwner={isOwner} />
-          </li>
+          <ToolCard key={tool._id} tool={tool} isOwner={isOwner} />
         ))}
       </ul>
     </section>
