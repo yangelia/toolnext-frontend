@@ -1,13 +1,14 @@
-"use client";
+'use client';
 
-import Link from "next/link";
-import type { ToolBasic } from "@/types/tool";
-import css from "./ToolCard.module.css";
-import type { ReactElement } from "react";
-import Image from "next/image";
+import Link from 'next/link';
+import Image from 'next/image';
+import type { ReactElement } from 'react';
+import type { ToolBasic } from '@/types/tool';
+import css from './ToolCard.module.css';
 
 interface ToolCardProps {
   tool: ToolBasic;
+  isOwner?: boolean;
 }
 
 const roundRating = (rating: number) => {
@@ -24,12 +25,12 @@ const renderStars = (rating: number) => {
   const stars: ReactElement[] = [];
 
   for (let i = 1; i <= 5; i++) {
-    let iconId = "icon-star";
+    let iconId = 'icon-star';
 
     if (i <= roundedRating) {
-      iconId = "icon-star-filled";
+      iconId = 'icon-star-filled';
     } else if (i - 0.5 === roundedRating) {
-      iconId = "icon-star_half";
+      iconId = 'icon-star_half';
     }
 
     stars.push(
@@ -40,9 +41,8 @@ const renderStars = (rating: number) => {
         height="24"
         aria-hidden="true"
       >
-        <use
-          href={`/icons/sprite.svg#${iconId}`}
-        />
+        {/* ВИПРАВЛЕНО: Додано зворотні лапки */}
+        <use href={`/icons/sprite.svg#${iconId}`} />
       </svg>
     );
   }
@@ -50,51 +50,59 @@ const renderStars = (rating: number) => {
   return stars;
 };
 
-export default function ToolCard({
-  tool,
-}: ToolCardProps) {
+export default function ToolCard({ tool, isOwner = false }: ToolCardProps) {
   return (
     <li className={css.card}>
-      {/* <img
-        src={
-          tool.images[0] ??
-          "/images/default-avatar.jpg"
-        }
-        alt={tool.name}
-        className={css.image}
-        loading="lazy"
-      /> */}
       <Image
-        src={
-          tool.images[0] ??
-          "/images/default-avatar.jpg"
-        }
+        src={tool.images[0] ?? '/images/default-avatar.jpg'}
         alt={tool.name}
         width={304}
         height={374}
         className={css.image}
-        priority={false}
         placeholder="empty"
       />
 
       <div className={css.content}>
-        <div className={css.starRating}>
-          {renderStars(tool.rating)}
-        </div>
+        <div className={css.starRating}>{renderStars(tool.rating)}</div>
 
         <h4 className={css.name}>{tool.name}</h4>
 
         <div className={css.footer}>
-          <span className={css.price}>
-            {tool.pricePerDay} грн/день
-          </span>
+          <span className={css.price}>{tool.pricePerDay} грн/день</span>
 
-          <Link
-            href={`/tools/${tool._id}`}
-            className={css.link}
-          >
-            Детальніше
-          </Link>
+          {isOwner ? (
+            <div className={css.controls}>
+              <Link
+                // ВИПРАВЛЕНО: Додано зворотні лапки
+                href={`/tools/${tool._id}/edit`}
+                className={css.editButton}
+              >
+                Редагувати
+              </Link>
+
+              <button
+                type="button"
+                className={css.deleteButton}
+                aria-label="Видалити"
+              >
+                <svg
+                  width="24"
+                  height="24"
+                  className={css.trashIcon}
+                >
+                  <use href="/icons/sprite.svg#icon-delete" />
+                </svg>
+              </button>
+            </div>
+          ) : (
+            <Link
+              // ВИПРАВЛЕНО: Додано зворотні лапки
+              href={`/tools/${tool._id}`}
+              className={css.link}
+            >
+              Детальніше
+            </Link>
+          )}
         </div>
       </div>
     </li>

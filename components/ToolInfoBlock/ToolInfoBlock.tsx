@@ -1,15 +1,16 @@
-"use client";
+// components/ToolInfoBlock/ToolInfoBlock.tsx
+'use client';
 
-import { useRouter } from "next/navigation";
-import Image from "next/image";
-import Link from "next/link";
-import { useState } from "react";
+import { useRouter } from 'next/navigation';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useState } from 'react';
 
-import { ToolDetails } from "@/types/tool";
-import { useAuthStore } from "@/lib/store/authStore";
-import AuthRequiredModal from "@/components/AuthRequiredModal/AuthRequiredModal";
+import { ToolDetails } from '@/types/tool';
+import { useAuthStore } from '@/lib/store/authStore';
+import AuthRequiredModal from '@/components/AuthRequiredModal/AuthRequiredModal';
 
-import css from "./ToolInfoBlock.module.css";
+import css from './ToolInfoBlock.module.css';
 
 interface ToolInfoBlockProps {
   tool: ToolDetails;
@@ -30,14 +31,14 @@ export default function ToolInfoBlock({ tool }: ToolInfoBlockProps) {
   };
 
   // === OWNER NORMALIZATION ===
-  const owner = typeof tool.owner === "object" ? tool.owner : null;
+  const owner = typeof tool.owner === 'object' ? tool.owner : null;
 
-  const ownerName = owner?.username || owner?.name || "Користувач";
+  const ownerName = owner?.username || owner?.name || 'Користувач';
 
   const ownerAvatar =
-    owner?.avatar && owner.avatar.trim() !== ""
+    owner?.avatar && owner.avatar.trim() !== ''
       ? owner.avatar
-      : owner?.avatarUrl && owner.avatarUrl.trim() !== ""
+      : owner?.avatarUrl && owner.avatarUrl.trim() !== ''
       ? owner.avatarUrl
       : null;
 
@@ -74,13 +75,17 @@ export default function ToolInfoBlock({ tool }: ToolInfoBlockProps) {
       <p className={css.toolDescr}>{tool.description}</p>
 
       <div className={css.toolSpec}>
-        <ul>
-          {Object.entries(tool.specifications).map(([key, value]) => (
-            <li key={key}>
-              <strong className={css.toolSpecTitle}>{key}:</strong> {value}
-            </li>
-          ))}
-        </ul>
+        {tool.specifications && Object.keys(tool.specifications).length > 0 ? (
+          <ul>
+            {Object.entries(tool.specifications).map(([key, value]) => (
+              <li key={key}>
+                <strong className={css.toolSpecTitle}>{key}:</strong> {value}
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>Специфікації відсутні</p>
+        )}
 
         {tool.rentalTerms && (
           <p>
@@ -89,7 +94,10 @@ export default function ToolInfoBlock({ tool }: ToolInfoBlockProps) {
         )}
       </div>
 
-      <button className={css.toolBut} onClick={handleBookClick}>
+      <button
+        className={css.toolBut}
+        onClick={handleBookClick}
+      >
         Забронювати
       </button>
 
